@@ -107,16 +107,14 @@ function mediora_enqueue_scripts() {
 	wp_enqueue_script( 'mediora-main', MEDIORA_URI . '/assets/js/theme-main.js', array( 'swiper-bundle' ), MEDIORA_VERSION, true );
 
 	// Localize script data for AJAX booking and interactions
-	wp_localize_script(
-		'mediora-main',
-		'MEDIORA',
-		array(
-			'ajaxUrl' => admin_url( 'admin-ajax.php' ),
-			'nonce'   => wp_create_nonce( 'mediora_booking_nonce' ),
-			'thanks'  => esc_html__( 'Cảm ơn bạn! MEDIORA sẽ liên hệ tư vấn trong thời gian sớm nhất.', 'mediora-clinic' ),
-			'error'   => esc_html__( 'Gửi chưa thành công, vui lòng thử lại hoặc gọi hotline trực tiếp.', 'mediora-clinic' ),
-		)
+	$localized_data = array(
+		'ajaxUrl' => admin_url( 'admin-ajax.php' ),
+		'nonce'   => wp_create_nonce( 'mediora_booking_nonce' ),
+		'thanks'  => esc_html__( 'Cảm ơn bạn! Bác sĩ chuyên khoa MEDIORA sẽ liên hệ tư vấn trong thời gian sớm nhất.', 'mediora-clinic' ),
+		'error'   => esc_html__( 'Gửi chưa thành công, vui lòng thử lại hoặc gọi hotline trực tiếp.', 'mediora-clinic' ),
 	);
+	wp_localize_script( 'mediora-main', 'medioraData', $localized_data );
+	wp_localize_script( 'mediora-main', 'MEDIORA', $localized_data );
 }
 add_action( 'wp_enqueue_scripts', 'mediora_enqueue_scripts' );
 
@@ -203,11 +201,12 @@ if ( ! function_exists( 'mediora_fallback_menu' ) ) {
 /**
  * Include helper files and modules.
  */
+require_once MEDIORA_DIR . '/inc/ajax-booking.php';
+
 $mediora_includes = array(
 	'/inc/template-tags.php',
 	'/inc/customizer.php',
 	'/inc/post-types.php',
-	'/inc/ajax-booking.php',
 );
 
 foreach ( $mediora_includes as $file ) {

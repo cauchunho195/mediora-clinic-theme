@@ -151,32 +151,21 @@ $social_mess   = mediora_get_option( 'social_messenger', 'https://m.me/pkcktmmed
 	<!-- Global Consultation Booking Modal -->
 	<div class="modal fade" id="popupConsult" tabindex="-1" aria-labelledby="popupConsultLabel" aria-hidden="true">
 		<div class="modal-dialog modal-dialog-centered">
-			<div class="modal-content consult-form position-relative">
-				<button type="button" class="btn-close btn-close-white position-absolute top-0 end-0 m-3" data-bs-dismiss="modal" aria-label="<?php esc_attr_e( 'Đóng', 'mediora-clinic' ); ?>"></button>
+			<div class="modal-content modal-booking-dialog position-relative">
+				<button type="button" class="btn-close btn-close-white position-absolute top-0 end-0 m-3 z-3" data-bs-dismiss="modal" aria-label="<?php esc_attr_e( 'Đóng', 'mediora-clinic' ); ?>"></button>
 				
-				<div class="consult-form__title text-center">
-					<h3 id="popupConsultLabel" class="gold-text">
-						<?php esc_html_e( 'Đăng Ký Tư Vấn Cùng Bác Sĩ', 'mediora-clinic' ); ?>
-					</h3>
-					<p>
-						<?php esc_html_e( 'Để lại thông tin, bác sĩ chuyên khoa MEDIORA sẽ liên hệ bảo mật trong 15 phút.', 'mediora-clinic' ); ?>
-					</p>
-				</div>
-
-				<form class="js-booking-form" method="post" action="#">
-					<div class="field">
-						<input type="text" name="name" class="form-control" placeholder="<?php esc_attr_e( 'Họ và tên của bạn *', 'mediora-clinic' ); ?>" required>
-					</div>
-					<div class="field">
-						<input type="tel" name="phone" class="form-control" placeholder="<?php esc_attr_e( 'Số điện thoại liên hệ *', 'mediora-clinic' ); ?>" required>
-					</div>
-					<div class="field">
-						<input type="text" name="service" class="form-control" placeholder="<?php esc_attr_e( 'Dịch vụ quan tâm (VD: Căng da GMISS, Nâng mũi, ...)', 'mediora-clinic' ); ?>">
-					</div>
-					<button type="submit" class="btn-consult btn-gold-pill w-100 mt-2">
-						<span><?php esc_html_e( 'Đăng Ký Ngay', 'mediora-clinic' ); ?></span>
-					</button>
-				</form>
+				<?php
+				get_template_part(
+					'template-parts/booking-form',
+					null,
+					array(
+						'source'         => 'modal-popup',
+						'show_title_img' => false,
+						'title_text'     => __( 'Đăng Ký Tư Vấn Cùng Bác Sĩ', 'mediora-clinic' ),
+						'subtitle_text'  => __( 'Để lại thông tin, bác sĩ chuyên khoa MEDIORA sẽ liên hệ bảo mật trong 15 phút.', 'mediora-clinic' ),
+					)
+				);
+				?>
 			</div>
 		</div>
 	</div>

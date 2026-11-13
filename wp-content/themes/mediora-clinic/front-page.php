@@ -211,56 +211,14 @@ $intro_text          = mediora_get_option( 'intro_text', $intro_text_default );
 		<!-- Cột phải: Tiêu đề nghệ thuật & Form tư vấn trực tuyến -->
 		<div class="col-12 col-lg-4 register-side d-flex align-items-center justify-content-center">
 			<?php
-			if ( locate_template( 'template-parts/booking-form.php' ) ) {
-				get_template_part( 'template-parts/booking-form' );
-			} else {
-				?>
-				<form class="consult-form js-booking-form needs-validation has-title" method="post" action="<?php echo esc_url( admin_url( 'admin-ajax.php' ) ); ?>" novalidate>
-					<h2 class="consult-form__title">
-						<img src="<?php echo esc_url( $theme_uri . '/assets/imgs/dang-ky-nhan-uu-dai.png' ); ?>" alt="<?php esc_attr_e( 'Đăng ký nhận ưu đãi', 'mediora-clinic' ); ?>" width="204" height="110" loading="lazy">
-					</h2>
-
-					<div class="consult-form__fields">
-						<div class="field">
-							<label class="visually-hidden" for="reg-name"><?php esc_html_e( 'Họ và tên', 'mediora-clinic' ); ?></label>
-							<input type="text" class="form-control" id="reg-name" name="name" placeholder="<?php esc_attr_e( 'Họ và tên của bạn', 'mediora-clinic' ); ?>" required autocomplete="name" maxlength="80">
-							<div class="invalid-feedback"><?php esc_html_e( 'Vui lòng nhập họ và tên của bạn.', 'mediora-clinic' ); ?></div>
-						</div>
-
-						<div class="field">
-							<label class="visually-hidden" for="reg-phone"><?php esc_html_e( 'Số điện thoại', 'mediora-clinic' ); ?></label>
-							<input type="tel" class="form-control" id="reg-phone" name="phone" placeholder="<?php esc_attr_e( 'Số điện thoại liên hệ', 'mediora-clinic' ); ?>" required pattern="^(0|\+84)[0-9]{9,11}$" inputmode="tel" autocomplete="tel" maxlength="15">
-							<div class="invalid-feedback"><?php esc_html_e( 'Số điện thoại chưa đúng (VD: 0945334832).', 'mediora-clinic' ); ?></div>
-						</div>
-
-						<div class="field">
-							<label class="visually-hidden" for="reg-need"><?php esc_html_e( 'Tình trạng hoặc nhu cầu làm đẹp', 'mediora-clinic' ); ?></label>
-							<input type="text" class="form-control" id="reg-need" name="need" placeholder="<?php esc_attr_e( 'Tình trạng lão hóa / Nhu cầu của bạn', 'mediora-clinic' ); ?>" maxlength="250">
-						</div>
-
-						<div class="field">
-							<label class="visually-hidden" for="reg-time"><?php esc_html_e( 'Thời gian liên hệ phù hợp', 'mediora-clinic' ); ?></label>
-							<input type="text" class="form-control" id="reg-time" name="time" placeholder="<?php esc_attr_e( 'Thời gian tiện nghe máy nhất', 'mediora-clinic' ); ?>" maxlength="100">
-						</div>
-					</div>
-
-					<!-- Honeypot chống spam tự động -->
-					<div class="cf-hp" aria-hidden="true" style="display:none;">
-						<label for="reg-website"><?php esc_html_e( 'Website', 'mediora-clinic' ); ?></label>
-						<input type="text" id="reg-website" name="website" tabindex="-1" autocomplete="off">
-					</div>
-					<input type="hidden" name="source" value="landing-register">
-					<input type="hidden" name="action" value="mediora_booking">
-					<input type="hidden" name="nonce" value="<?php echo esc_attr( wp_create_nonce( 'mediora_booking_nonce' ) ); ?>">
-
-					<button type="submit" class="btn btn-receive">
-						<span class="btn-receive__text text-linear"><?php esc_html_e( 'Nhận tư vấn ngay', 'mediora-clinic' ); ?></span>
-						<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-					</button>
-					<p class="form-msg" role="status" aria-live="polite"></p>
-				</form>
-				<?php
-			}
+			get_template_part(
+				'template-parts/booking-form',
+				null,
+				array(
+					'source'         => 'landing-register',
+					'show_title_img' => true,
+				)
+			);
 			?>
 		</div>
 	</div>

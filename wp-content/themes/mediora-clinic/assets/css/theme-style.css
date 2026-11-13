@@ -850,7 +850,8 @@ h1, h2, h3, h4, h5, h6 {
   border-left: 1px solid rgba(212, 175, 55, 0.2);
 }
 
-.consult-form {
+.consult-form,
+.mediora-booking-form {
   width: 100%;
   max-width: 520px;
   background: rgba(17, 24, 34, 0.85);
@@ -859,67 +860,147 @@ h1, h2, h3, h4, h5, h6 {
   padding: 40px 36px;
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
   backdrop-filter: blur(8px);
+  position: relative;
 }
 
-.consult-form__title {
+.modal-booking-dialog {
+  background: rgba(13, 17, 23, 0.95);
+  border: 1px solid rgba(212, 175, 55, 0.4);
+  border-radius: 24px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8), 0 0 30px rgba(212, 175, 55, 0.15);
+  backdrop-filter: blur(16px);
+  padding: 36px 32px;
+}
+
+.modal-backdrop.show {
+  opacity: 0.85;
+  background-color: #05080c;
+  backdrop-filter: blur(6px);
+}
+
+.consult-form__title,
+.mediora-booking-form .consult-form__title {
   text-align: center;
-  margin-bottom: 28px;
+  margin-bottom: 24px;
 }
 
-.consult-form__title h3 {
-  font-size: 24px;
+.consult-form__title h3,
+.mediora-booking-form h3 {
+  font-size: 22px;
   text-transform: uppercase;
   letter-spacing: 0.05em;
   margin-bottom: 8px;
 }
 
-.consult-form__title p {
+.consult-form__title p,
+.mediora-booking-form p {
   color: var(--text-muted);
-  font-size: 15px;
+  font-size: 14px;
   margin: 0;
 }
 
-.consult-form .field {
-  margin-bottom: 18px;
+.consult-form .field,
+.mediora-booking-form .field {
+  margin-bottom: 16px;
   position: relative;
 }
 
-.consult-form .form-control {
+.consult-form .form-control,
+.mediora-booking-form .form-control,
+.wpcf7-form input[type="text"],
+.wpcf7-form input[type="tel"],
+.wpcf7-form input[type="email"],
+.wpcf7-form select,
+.wpcf7-form textarea,
+.wpforms-form input[type="text"],
+.wpforms-form input[type="tel"],
+.wpforms-form input[type="email"],
+.wpforms-form select,
+.wpforms-form textarea {
   width: 100%;
   height: 52px;
   padding: 12px 18px;
   background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 10px;
+  border: 1px solid rgba(212, 175, 55, 0.25);
+  border-radius: 12px;
   color: #ffffff;
   font-family: var(--font-body);
   font-size: 15px;
-  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast), background var(--transition-fast);
 }
 
-.consult-form .form-control:focus {
+.consult-form .form-control:focus,
+.mediora-booking-form .form-control:focus,
+.wpcf7-form input:focus,
+.wpcf7-form select:focus,
+.wpcf7-form textarea:focus,
+.wpforms-form input:focus,
+.wpforms-form select:focus,
+.wpforms-form textarea:focus {
   outline: none;
   border-color: var(--gold-primary);
-  box-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
+  box-shadow: 0 0 12px rgba(212, 175, 55, 0.35);
   background: rgba(255, 255, 255, 0.08);
 }
 
-.consult-form .form-control::placeholder {
+.consult-form .form-control::placeholder,
+.mediora-booking-form .form-control::placeholder,
+.wpcf7-form input::placeholder,
+.wpforms-form input::placeholder {
   color: #8c9ba5;
 }
 
-.btn-receive {
+/* Custom Select Dropdowns */
+.select-luxury,
+select.form-control,
+.wpcf7-form select,
+.wpforms-form select {
+  appearance: none;
+  -webkit-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%23d4af37' d='M1.41 0L6 4.58L10.59 0L12 1.41l-6 6l-6-6z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 18px center;
+  background-size: 12px 8px;
+  padding-right: 42px;
+  cursor: pointer;
+}
+
+.select-luxury option,
+select.form-control option {
+  background: #111822;
+  color: #ffffff;
+  padding: 10px;
+}
+
+/* Textarea */
+.form-control.form-textarea,
+.consult-form textarea,
+.mediora-booking-form textarea,
+.wpcf7-form textarea,
+.wpforms-form textarea {
+  height: auto;
+  min-height: 84px;
+  resize: vertical;
+  line-height: 1.5;
+}
+
+/* Button & Pill Action */
+.btn-receive,
+.btn-consult,
+.btn-gold-pill,
+.wpcf7-submit,
+.wpforms-submit {
   width: 100%;
   height: 52px;
   margin-top: 10px;
-  padding: 0;
-  border-radius: 10px;
+  padding: 0 24px;
+  border-radius: 30px;
   background: var(--gold-gradient);
   border: 1px solid var(--gold-light);
-  color: #1b130c;
+  color: #1b130c !important;
   font-family: var(--font-head);
   font-weight: 700;
-  font-size: 16px;
+  font-size: 15px;
   text-transform: uppercase;
   letter-spacing: 0.05em;
   cursor: pointer;
@@ -928,29 +1009,113 @@ h1, h2, h3, h4, h5, h6 {
   align-items: center;
   justify-content: center;
   gap: 10px;
+  box-shadow: 0 4px 15px rgba(212, 175, 55, 0.25);
+  text-decoration: none;
 }
 
-.btn-receive:hover {
+.btn-receive:hover,
+.btn-consult:hover,
+.btn-gold-pill:hover,
+.wpcf7-submit:hover,
+.wpforms-submit:hover {
   background: var(--gold-gradient-hover);
-  box-shadow: 0 6px 20px rgba(212, 175, 55, 0.4);
+  box-shadow: 0 6px 25px rgba(212, 175, 55, 0.45);
   transform: translateY(-2px);
+  color: #0f0a06 !important;
 }
 
-.btn-receive:disabled {
+.btn-receive:disabled,
+.btn-consult:disabled,
+.btn-gold-pill:disabled,
+.btn-receive.is-disabled {
   opacity: 0.65;
   cursor: not-allowed;
   transform: none;
+  box-shadow: none;
 }
 
+/* Spinner for AJAX Loading */
+.spinner-border {
+  display: none;
+  width: 1.2rem;
+  height: 1.2rem;
+  vertical-align: -0.125em;
+  border: 2px solid currentColor;
+  border-right-color: transparent;
+  border-radius: 50%;
+  animation: mediora-spinner 0.75s linear infinite;
+}
+
+.spinner-border-sm {
+  width: 1rem;
+  height: 1rem;
+  border-width: 2px;
+}
+
+.is-loading .spinner-border {
+  display: inline-block;
+}
+
+@keyframes mediora-spinner {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Feedback Messages */
 .form-msg {
-  margin-top: 14px;
+  display: none;
+  margin-top: 16px;
   font-size: 14px;
   text-align: center;
-  color: #85e396;
+  line-height: 1.5;
+  padding: 12px 18px;
+  border-radius: 10px;
+  transition: all var(--transition-fast);
+}
+
+.form-msg.is-success,
+.form-msg:not(.is-error):not(:empty) {
+  display: block;
+  background: rgba(18, 183, 106, 0.12);
+  border: 1px solid rgba(212, 175, 55, 0.6);
+  color: #f4d068;
+  box-shadow: 0 0 15px rgba(212, 175, 55, 0.2);
 }
 
 .form-msg.is-error {
+  display: block;
+  background: rgba(240, 68, 56, 0.15);
+  border: 1px solid rgba(240, 68, 56, 0.4);
   color: #ff8b7b;
+}
+
+/* CF7 & WPForms Luxury Overrides */
+.wpcf7-form .wpcf7-not-valid-tip,
+.wpforms-error {
+  color: #ff8b7b;
+  font-size: 13px;
+  margin-top: 5px;
+  display: block;
+}
+
+.wpcf7-form .wpcf7-response-output,
+.wpforms-confirmation-container {
+  margin: 16px 0 0 !important;
+  padding: 12px 18px !important;
+  border-radius: 10px !important;
+  font-size: 14px !important;
+  text-align: center !important;
+  border: 1px solid rgba(212, 175, 55, 0.5) !important;
+  background: rgba(18, 183, 106, 0.12) !important;
+  color: #f4d068 !important;
+}
+
+.wpcf7-form.invalid .wpcf7-response-output,
+.wpcf7-form.unaccepted .wpcf7-response-output {
+  border-color: rgba(240, 68, 56, 0.5) !important;
+  background: rgba(240, 68, 56, 0.15) !important;
+  color: #ff8b7b !important;
 }
 
 /* Spam Honeypot */

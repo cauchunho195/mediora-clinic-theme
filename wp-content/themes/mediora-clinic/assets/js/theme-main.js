@@ -17,11 +17,11 @@
 (function () {
   'use strict';
 
-  // Config object from WordPress wp_localize_script
-  const MEDIORA = window.MEDIORA || {
+  // Config object from WordPress wp_localize_script (supports both medioraData and MEDIORA)
+  const medioraConfig = window.medioraData || window.MEDIORA || {
     ajaxUrl: '/wp-admin/admin-ajax.php',
     nonce: '',
-    thanks: 'Cảm ơn bạn! MEDIORA sẽ liên hệ trong thời gian sớm nhất.',
+    thanks: 'Cảm ơn bạn! Bác sĩ chuyên khoa MEDIORA sẽ liên hệ tư vấn trong thời gian sớm nhất.',
     error: 'Gửi chưa thành công, vui lòng kiểm tra lại thông tin hoặc gọi hotline.'
   };
 
@@ -262,7 +262,9 @@
    * 7. Booking Form AJAX Handler
    */
   function initBookingForms() {
-    const forms = document.querySelectorAll('.consult-form, .js-booking-form');
+    const forms = document.querySelectorAll(
+      '.mediora-booking-form, .js-mediora-booking-form, .consult-form:not(.wpcf7-form):not(.wpforms-form), .js-booking-form'
+    );
     if (!forms.length) return;
 
     const setMsg = (form, text, isError) => {
@@ -274,9 +276,11 @@
       }
       msgBox.textContent = text;
       msgBox.classList.toggle('is-error', !!isError);
+      msgBox.classList.toggle('is-success', !isError && !!text);
     };
 
     forms.forEach((form) => {
+      // Clear error status when typing
       form.addEventListener('input', () => {
         const errorMsg = form.querySelector('.form-msg.is-error');
         if (errorMsg) setMsg(form, '');
@@ -286,17 +290,20 @@
         e.preventDefault();
         if (form.classList.contains('is-loading')) return;
 
-        // Clean phone input
+        // Clean & validate phone input
         const phoneInput = form.querySelector('[name=phone], [name=your-phone]');
         if (phoneInput) {
-          phoneInput.value = phoneInput.value.replace(/[\s.\-()]/g, '');
-          if (!/^[0-9]{9,12}$/.test(phoneInput.value)) {
-            setMsg(form, 'Vui lòng nhập số điện thoại hợp lệ (9 - 11 chữ số).', true);
+          const rawPhone = phoneInput.value.trim().replace(/[\s.\-()]/g, '');
+          phoneInput.value = rawPhone;
+          // Vietnamese phone number validation: starts with 0 or +84, 10-11 digits
+          if (!/^(0|\+84)(3|5|7|8|9)[0-9]{8}$/.test(rawPhone) && !/^(0|\+84)[0-9]{9,10}$/.test(rawPhone)) {
+            setMsg(form, 'Vui lòng nhập số điện thoại hợp lệ gồm 10 chữ số (VD: 0945 334 832).', true);
             phoneInput.focus();
             return;
           }
         }
 
+        // Validate full name
         const nameInput = form.querySelector('[name=fullname], [name=your-name], [name=name]');
         if (nameInput && !nameInput.value.trim()) {
           setMsg(form, 'Vui lòng nhập họ và tên của bạn.', true);
@@ -304,19 +311,31 @@
           return;
         }
 
-        const submitBtn = form.querySelector('[type=submit], .btn-receive');
+        const submitBtn = form.querySelector('[type=submit], .btn-receive, .btn-consult');
+        const textSpan = submitBtn ? submitBtn.querySelector('.btn-receive__text, span:not(.spinner-border)') : null;
+        const originalBtnText = textSpan ? textSpan.textContent : '';
+
         const formData = new FormData(form);
 
-        // Append action & nonce
-        formData.append('action', 'mediora_booking');
-        formData.append('nonce', MEDIORA.nonce);
+        // Ensure action & nonce
+        if (!formData.get('action')) {
+          formData.append('action', 'mediora_submit_booking');
+        }
+        if (!formData.get('nonce') && !formData.get('mediora_booking_security')) {
+          formData.append('nonce', medioraConfig.nonce);
+        }
         formData.append('page_url', window.location.href);
 
         form.classList.add('is-loading');
-        if (submitBtn) submitBtn.disabled = true;
+        if (submitBtn) {
+          submitBtn.disabled = true;
+          if (textSpan) {
+            textSpan.textContent = 'Đang gửi thông tin...';
+          }
+        }
         setMsg(form, '');
 
-        fetch(MEDIORA.ajaxUrl, {
+        fetch(medioraConfig.ajaxUrl, {
           method: 'POST',
           body: formData,
           credentials: 'same-origin',
@@ -325,17 +344,33 @@
           .then((result) => {
             if (result && result.success) {
               form.reset();
-              setMsg(form, result.data?.message || MEDIORA.thanks, false);
+              const thanksMsg = result.data?.message || medioraConfig.thanks;
+              setMsg(form, thanksMsg, false);
+
+              // Dispatch custom event for tracking (Google Ads, Facebook Pixel, GA4)
+              try {
+                const event = new CustomEvent('mediora:booking:success', {
+                  detail: { leadId: result.data?.lead_id }
+                });
+                document.dispatchEvent(event);
+              } catch (e) {
+                // Fallback for older browsers
+              }
             } else {
-              throw new Error(result?.data?.message || MEDIORA.error);
+              throw new Error(result?.data?.message || medioraConfig.error);
             }
           })
           .catch((err) => {
-            setMsg(form, err.message || MEDIORA.error, true);
+            setMsg(form, err.message || medioraConfig.error, true);
           })
           .finally(() => {
             form.classList.remove('is-loading');
-            if (submitBtn) submitBtn.disabled = false;
+            if (submitBtn) {
+              submitBtn.disabled = false;
+              if (textSpan && originalBtnText) {
+                textSpan.textContent = originalBtnText;
+              }
+            }
           });
       });
     });
