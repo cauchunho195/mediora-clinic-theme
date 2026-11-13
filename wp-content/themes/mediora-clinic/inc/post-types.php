@@ -51,11 +51,11 @@ function mediora_register_post_types() {
 		'show_in_menu'       => true,
 		'query_var'          => true,
 		'rewrite'            => array(
-			'slug'       => 'dich-vu',
+			'slug'       => 'dich-vu-chi-tiet',
 			'with_front' => false,
 		),
 		'capability_type'    => 'post',
-		'has_archive'        => true,
+		'has_archive'        => false,
 		'hierarchical'       => false,
 		'menu_position'      => 5,
 		'menu_icon'          => 'dashicons-shield',

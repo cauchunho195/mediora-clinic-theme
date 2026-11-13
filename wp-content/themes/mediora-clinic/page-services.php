@@ -24,7 +24,7 @@ $clinic_name = function_exists( 'mediora_get_option' ) ? mediora_get_option( 'cl
 			<h1 id="cy-services-title" class="screen-reader-text"><?php esc_html_e( 'Nâng cơ trẻ hóa bằng sợi sinh học GMISS', 'mediora-clinic' ); ?></h1>
 			
 			<div class="cy-fig ph cy-bg" data-ph="BG3 m1 · 1920×1776" style="--x:0;--y:0;--w:1920;--h:1776;--o:0">
-				<img src="<?php echo esc_url( $assets_uri . '/img-services/bg-journey.jpg' ); ?>" alt="" width="1920" height="1776" fetchpriority="high">
+				<img src="<?php echo esc_url( $assets_uri . '/img-services/bg1.jpg' ); ?>" alt="" width="1920" height="1776" fetchpriority="high">
 			</div>
 
 			<div class="cy-fig ph" data-ph="Maintext · 1058×110" style="--x:431;--y:78;--w:1058;--h:110;--o:1">
@@ -67,7 +67,7 @@ $clinic_name = function_exists( 'mediora_get_option' ) ? mediora_get_option( 'cl
 			<h2 id="cy-process-title" class="screen-reader-text"><?php esc_html_e( 'Quy trình nâng cơ trẻ hóa bằng sợi sinh học GMISS', 'mediora-clinic' ); ?></h2>
 			
 			<div class="cy-fig ph cy-bg" data-ph="BG3 m2 · 1920×1458" style="--x:0;--y:0;--w:1920;--h:1458;--o:0">
-				<img src="<?php echo esc_url( $assets_uri . '/img-services/bg-journey.jpg' ); ?>" alt="" width="1920" height="1458" loading="lazy" decoding="async">
+				<img src="<?php echo esc_url( $assets_uri . '/img-services/bg2.jpg' ); ?>" alt="" width="1920" height="1458" loading="lazy" decoding="async">
 			</div>
 
 			<div class="cy-fig ph" data-ph="NÂNG CƠ TRẺ HÓA BẰNG SỢI SINH HỌC GMISS · 1216×253" style="--x:352;--y:65;--w:1216;--h:253;--o:1">
@@ -158,11 +158,11 @@ $clinic_name = function_exists( 'mediora_get_option' ) ? mediora_get_option( 'cl
 				<p>Mỗi hành trình là một dấu ấn riêng, được xây dựng từ sự thấu hiểu, chuyên môn và giải pháp trẻ hóa cá nhân hóa tại <?php echo esc_html( $clinic_name ); ?>.</p>
 			</div>
 
-			<div class="cy-fig ph" data-ph="Btn tư vấn · 379×73" style="--x:1202;--y:600;--w:379;--h:73;--o:3">
-				<a href="#lien-he">
-					<img src="<?php echo esc_url( $assets_uri . '/img-services/btn-consult.png' ); ?>" alt="<?php esc_attr_e( 'Đăng ký nhận tư vấn', 'mediora-clinic' ); ?>" width="379" height="73" loading="lazy">
-				</a>
-			</div>
+			<span aria-hidden="true" class="cy-rule cy-hide-mb" style="--x:1259;--y:705;--w:266"></span>
+
+			<button class="cy-fig ph cy-btn-consult" data-bs-target="#popupConsult" data-bs-toggle="modal" data-ph="Nhận tư vấn ngay · 365×53" style="--x:1209;--y:755;--w:365;--h:53;--o:3" type="button">
+				<img src="<?php echo esc_url( $assets_uri . '/img-services/btn-consult.png' ); ?>" alt="<?php esc_attr_e( 'Nhận tư vấn ngay', 'mediora-clinic' ); ?>" width="365" height="53" loading="lazy">
+			</button>
 		</div>
 	</section>
 
@@ -184,6 +184,26 @@ $clinic_name = function_exists( 'mediora_get_option' ) ? mediora_get_option( 'cl
 			</div>
 		</div>
 	</section>
+</div>
+
+<!-- 5. MODAL POPUP CONSULT (4 Fields Standard Tech Modal) -->
+<div class="modal fade popup-consult" id="popupConsult" tabindex="-1" aria-hidden="true" aria-label="<?php esc_attr_e( 'Đăng ký nhận tư vấn', 'mediora-clinic' ); ?>">
+	<div class="modal-dialog modal-dialog-centered popup-dialog">
+		<div class="modal-content popup-content tech-glow-popup">
+			<button type="button" class="btn-close btn-close-white popup-close" data-bs-dismiss="modal" aria-label="<?php esc_attr_e( 'Đóng', 'mediora-clinic' ); ?>"></button>
+			<div class="popup-booking-wrapper">
+				<?php
+				get_template_part(
+					'template-parts/booking-form',
+					null,
+					array(
+						'source' => 'popup-services',
+					)
+				);
+				?>
+			</div>
+		</div>
+	</div>
 </div>
 
 <?php

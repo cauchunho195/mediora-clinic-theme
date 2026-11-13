@@ -97,14 +97,22 @@ function mediora_enqueue_scripts() {
 	// Mediora Luxury Theme CSS
 	wp_enqueue_style( 'mediora-style', MEDIORA_URI . '/assets/css/theme-style.css', array( 'bootstrap-grid', 'swiper-bundle' ), MEDIORA_VERSION );
 
+	// Bootstrap 5.3.3 JS Bundle (Carousel, Modal)
+	if ( file_exists( MEDIORA_DIR . '/assets/js/bootstrap.bundle.min.js' ) ) {
+		wp_enqueue_script( 'bootstrap-bundle', MEDIORA_URI . '/assets/js/bootstrap.bundle.min.js', array(), '5.3.3', true );
+	}
+
 	// Subpages layout & dedicated stylesheets
-	if ( file_exists( MEDIORA_DIR . '/assets/css/pages.css' ) ) {
+	$is_services_page = is_page_template( 'page-services.php' ) || is_page( 'dich-vu' ) || is_page( 'dich-vu-2' ) || ( is_singular() && get_page_template_slug() === 'page-services.php' );
+	$is_about_page    = is_page_template( 'page-about.php' ) || is_page( 've-chung-toi' ) || is_page( 'gioi-thieu' ) || ( is_singular() && get_page_template_slug() === 'page-about.php' );
+
+	if ( ( $is_services_page || $is_about_page ) && file_exists( MEDIORA_DIR . '/assets/css/pages.css' ) ) {
 		wp_enqueue_style( 'mediora-pages-base', MEDIORA_URI . '/assets/css/pages.css', array( 'mediora-style' ), MEDIORA_VERSION );
 	}
-	if ( is_page_template( 'page-about.php' ) && file_exists( MEDIORA_DIR . '/assets/css/page-about-us.css' ) ) {
+	if ( $is_about_page && file_exists( MEDIORA_DIR . '/assets/css/page-about-us.css' ) ) {
 		wp_enqueue_style( 'mediora-page-about', MEDIORA_URI . '/assets/css/page-about-us.css', array( 'mediora-pages-base' ), MEDIORA_VERSION );
 	}
-	if ( is_page_template( 'page-services.php' ) && file_exists( MEDIORA_DIR . '/assets/css/page-services.css' ) ) {
+	if ( $is_services_page && file_exists( MEDIORA_DIR . '/assets/css/page-services.css' ) ) {
 		wp_enqueue_style( 'mediora-page-services', MEDIORA_URI . '/assets/css/page-services.css', array( 'mediora-pages-base' ), MEDIORA_VERSION );
 	}
 
@@ -184,3 +192,22 @@ if ( ! function_exists( 'mediora_fallback_menu' ) ) {
 		echo '</ul>';
 	}
 }
+
+/**
+ * Add specialized body classes for subpages styling matching Figma & Mediora specifications.
+ *
+ * @param array $classes Existing body classes.
+ * @return array Modified body classes.
+ */
+function mediora_body_classes( $classes ) {
+	if ( is_page_template( 'page-services.php' ) || is_page( 'dich-vu' ) || is_page( 'dich-vu-2' ) || ( is_singular() && get_page_template_slug() === 'page-services.php' ) ) {
+		$classes[] = 'cy-page';
+		$classes[] = 'cy-page-services';
+	}
+	if ( is_page_template( 'page-about.php' ) || is_page( 've-chung-toi' ) || is_page( 'gioi-thieu' ) || ( is_singular() && get_page_template_slug() === 'page-about.php' ) ) {
+		$classes[] = 'cy-page';
+		$classes[] = 'cy-page-about';
+	}
+	return $classes;
+}
+add_filter( 'body_class', 'mediora_body_classes' );
