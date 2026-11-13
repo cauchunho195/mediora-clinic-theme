@@ -259,3 +259,151 @@ if ( ! function_exists( 'mediora_render_schema' ) ) {
 		echo "\n" . '</script>' . "\n";
 	}
 }
+
+if ( ! function_exists( 'mediora_breadcrumbs' ) ) {
+	/**
+	 * Output luxury breadcrumbs with Schema.org BreadcrumbList markup.
+	 *
+	 * Supports SEO plugins (Rank Math, Yoast) fallback or native Mediora luxury markup.
+	 *
+	 * @return void
+	 */
+	function mediora_breadcrumbs() {
+		if ( is_front_page() ) {
+			return;
+		}
+
+		if ( function_exists( 'yoast_breadcrumb' ) ) {
+			echo '<nav class="mediora-breadcrumbs" aria-label="' . esc_attr__( 'Điều hướng', 'mediora-clinic' ) . '">';
+			yoast_breadcrumb( '<div class="yoast-breadcrumbs-inner">', '</div>' );
+			echo '</nav>';
+			return;
+		}
+
+		if ( function_exists( 'rank_math_the_breadcrumbs' ) ) {
+			echo '<nav class="mediora-breadcrumbs" aria-label="' . esc_attr__( 'Điều hướng', 'mediora-clinic' ) . '">';
+			rank_math_the_breadcrumbs();
+			echo '</nav>';
+			return;
+		}
+
+		$home_url   = home_url( '/' );
+		$home_title = esc_html__( 'Trang chủ', 'mediora-clinic' );
+		$sep        = '<span class="breadcrumb-sep" aria-hidden="true">&bull;</span>';
+		$position   = 1;
+
+		echo '<nav class="mediora-breadcrumbs" aria-label="' . esc_attr__( 'Điều hướng', 'mediora-clinic' ) . '">';
+		echo '<ol class="breadcrumb-list" itemscope itemtype="https://schema.org/BreadcrumbList">';
+
+		// Home item
+		echo '<li class="breadcrumb-item" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">';
+		echo '<a itemprop="item" href="' . esc_url( $home_url ) . '"><span itemprop="name">' . $home_title . '</span></a>';
+		echo '<meta itemprop="position" content="' . $position++ . '">';
+		echo '</li>';
+
+		if ( is_singular( 'service' ) ) {
+			echo $sep;
+			$services_page = get_page_by_path( 'dich-vu' );
+			$services_url  = $services_page ? get_permalink( $services_page->ID ) : get_post_type_archive_link( 'service' );
+			if ( ! $services_url ) {
+				$services_url = home_url( '/dich-vu/' );
+			}
+			echo '<li class="breadcrumb-item" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">';
+			echo '<a itemprop="item" href="' . esc_url( $services_url ) . '"><span itemprop="name">' . esc_html__( 'Dịch vụ', 'mediora-clinic' ) . '</span></a>';
+			echo '<meta itemprop="position" content="' . $position++ . '">';
+			echo '</li>';
+
+			echo $sep;
+			echo '<li class="breadcrumb-item active" aria-current="page" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">';
+			echo '<span itemprop="name">' . esc_html( get_the_title() ) . '</span>';
+			echo '<meta itemprop="position" content="' . $position . '">';
+			echo '</li>';
+		} elseif ( is_singular( 'doctor' ) ) {
+			echo $sep;
+			$about_page = get_page_by_path( 've-chung-toi' );
+			$about_url  = $about_page ? get_permalink( $about_page->ID ) : home_url( '/#bac-si' );
+			echo '<li class="breadcrumb-item" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">';
+			echo '<a itemprop="item" href="' . esc_url( $about_url ) . '"><span itemprop="name">' . esc_html__( 'Bác sĩ', 'mediora-clinic' ) . '</span></a>';
+			echo '<meta itemprop="position" content="' . $position++ . '">';
+			echo '</li>';
+
+			echo $sep;
+			echo '<li class="breadcrumb-item active" aria-current="page" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">';
+			echo '<span itemprop="name">' . esc_html( get_the_title() ) . '</span>';
+			echo '<meta itemprop="position" content="' . $position . '">';
+			echo '</li>';
+		} elseif ( is_single() ) {
+			$categories = get_the_category();
+			if ( ! empty( $categories ) ) {
+				echo $sep;
+				echo '<li class="breadcrumb-item" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">';
+				echo '<a itemprop="item" href="' . esc_url( get_category_link( $categories[0]->term_id ) ) . '"><span itemprop="name">' . esc_html( $categories[0]->name ) . '</span></a>';
+				echo '<meta itemprop="position" content="' . $position++ . '">';
+				echo '</li>';
+			}
+			echo $sep;
+			echo '<li class="breadcrumb-item active" aria-current="page" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">';
+			echo '<span itemprop="name">' . esc_html( wp_trim_words( get_the_title(), 8, '...' ) ) . '</span>';
+			echo '<meta itemprop="position" content="' . $position . '">';
+			echo '</li>';
+		} elseif ( is_page() ) {
+			global $post;
+			if ( $post && $post->post_parent ) {
+				$anc = array_reverse( get_post_ancestors( $post->ID ) );
+				foreach ( $anc as $ancestor ) {
+					echo $sep;
+					echo '<li class="breadcrumb-item" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">';
+					echo '<a itemprop="item" href="' . esc_url( get_permalink( $ancestor ) ) . '"><span itemprop="name">' . esc_html( get_the_title( $ancestor ) ) . '</span></a>';
+					echo '<meta itemprop="position" content="' . $position++ . '">';
+					echo '</li>';
+				}
+			}
+			echo $sep;
+			echo '<li class="breadcrumb-item active" aria-current="page" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">';
+			echo '<span itemprop="name">' . esc_html( get_the_title() ) . '</span>';
+			echo '<meta itemprop="position" content="' . $position . '">';
+			echo '</li>';
+		} elseif ( is_category() ) {
+			echo $sep;
+			echo '<li class="breadcrumb-item active" aria-current="page" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">';
+			echo '<span itemprop="name">' . esc_html( single_cat_title( '', false ) ) . '</span>';
+			echo '<meta itemprop="position" content="' . $position . '">';
+			echo '</li>';
+		} elseif ( is_tax( 'service_category' ) ) {
+			echo $sep;
+			$services_page = get_page_by_path( 'dich-vu' );
+			$services_url  = $services_page ? get_permalink( $services_page->ID ) : home_url( '/dich-vu/' );
+			echo '<li class="breadcrumb-item" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">';
+			echo '<a itemprop="item" href="' . esc_url( $services_url ) . '"><span itemprop="name">' . esc_html__( 'Dịch vụ', 'mediora-clinic' ) . '</span></a>';
+			echo '<meta itemprop="position" content="' . $position++ . '">';
+			echo '</li>';
+
+			echo $sep;
+			echo '<li class="breadcrumb-item active" aria-current="page" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">';
+			echo '<span itemprop="name">' . esc_html( single_term_title( '', false ) ) . '</span>';
+			echo '<meta itemprop="position" content="' . $position . '">';
+			echo '</li>';
+		} elseif ( is_post_type_archive( 'service' ) ) {
+			echo $sep;
+			echo '<li class="breadcrumb-item active" aria-current="page" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">';
+			echo '<span itemprop="name">' . esc_html__( 'Dịch vụ thẩm mỹ', 'mediora-clinic' ) . '</span>';
+			echo '<meta itemprop="position" content="' . $position . '">';
+			echo '</li>';
+		} elseif ( is_archive() ) {
+			echo $sep;
+			echo '<li class="breadcrumb-item active" aria-current="page" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">';
+			echo '<span itemprop="name">' . esc_html( get_the_archive_title() ) . '</span>';
+			echo '<meta itemprop="position" content="' . $position . '">';
+			echo '</li>';
+		} elseif ( is_search() ) {
+			echo $sep;
+			echo '<li class="breadcrumb-item active" aria-current="page" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">';
+			echo '<span itemprop="name">' . sprintf( esc_html__( 'Tìm kiếm: "%s"', 'mediora-clinic' ), get_search_query() ) . '</span>';
+			echo '<meta itemprop="position" content="' . $position . '">';
+			echo '</li>';
+		}
+
+		echo '</ol>';
+		echo '</nav>';
+	}
+}
