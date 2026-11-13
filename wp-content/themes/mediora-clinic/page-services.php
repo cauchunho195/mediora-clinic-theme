@@ -19,7 +19,7 @@ $hotline     = mediora_get_option( 'hotline', '0945.334.832' );
 $hotline_tel = mediora_clean_phone( $hotline );
 ?>
 
-<main id="primary" class="site-main services-page-main">
+<div class="subpage-content services-page-main">
 
 	<!-- 1. Hero Subpage Banner -->
 	<section class="subpage-banner" aria-label="<?php esc_attr_e( 'Dịch vụ thẩm mỹ MEDIORA', 'mediora-clinic' ); ?>">
@@ -301,7 +301,7 @@ $hotline_tel = mediora_clean_phone( $hotline );
 		</div>
 	</section>
 
-</main>
+</div>
 
 <?php
 get_footer();

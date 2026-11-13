@@ -18,7 +18,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 get_header();
 ?>
 
-<main id="primary" class="site-main subpage-main">
+<div class="subpage-content subpage-main">
 	<?php
 	while ( have_posts() ) :
 		the_post();
@@ -67,7 +67,7 @@ get_header();
 		<?php
 	endwhile;
 	?>
-</main>
+</div>
 
 <?php
 get_footer();

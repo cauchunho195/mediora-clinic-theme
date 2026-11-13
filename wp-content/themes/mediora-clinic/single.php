@@ -31,7 +31,7 @@ while ( have_posts() ) :
 	$category_name = ! empty( $categories ) ? $categories[0]->name : esc_html__( 'Kiến Thức Thẩm Mỹ', 'mediora-clinic' );
 	?>
 
-	<main id="primary" class="site-main post-single-main">
+	<div class="subpage-content post-single-main">
 
 		<!-- 1. Post Header & Banner -->
 		<section class="subpage-banner" aria-label="<?php the_title_attribute(); ?>">
@@ -209,7 +209,7 @@ while ( have_posts() ) :
 			</div>
 		</section>
 
-	</main>
+	</div>
 
 	<?php
 endwhile;

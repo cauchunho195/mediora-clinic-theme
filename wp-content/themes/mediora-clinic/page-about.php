@@ -20,7 +20,7 @@ $hotline_tel        = mediora_clean_phone( $hotline );
 $facility_video_url = mediora_get_option( 'facility_video_url', 'https://d1b6kbmv97kzjg.cloudfront.net/wp-content/uploads/2026/11/CSVC.mp4' );
 ?>
 
-<main id="primary" class="site-main about-page-main">
+<div class="subpage-content about-page-main">
 
 	<!-- 1. Hero Subpage Banner -->
 	<section class="subpage-banner" aria-label="<?php esc_attr_e( 'Giới thiệu MEDIORA', 'mediora-clinic' ); ?>">
@@ -330,7 +330,7 @@ $facility_video_url = mediora_get_option( 'facility_video_url', 'https://d1b6kbm
 		</div>
 	</section>
 
-</main>
+</div>
 
 <?php
 get_footer();

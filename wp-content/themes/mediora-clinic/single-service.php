@@ -29,7 +29,7 @@ while ( have_posts() ) :
 	$cat_name = ( ! empty( $terms ) && ! is_wp_error( $terms ) ) ? $terms[0]->name : esc_html__( 'Thẩm Mỹ Chuyên Sâu', 'mediora-clinic' );
 	?>
 
-	<main id="primary" class="site-main service-single-main">
+	<div class="subpage-content service-single-main">
 
 		<!-- 1. Hero Subpage Banner -->
 		<section class="subpage-banner" aria-label="<?php the_title_attribute(); ?>">
@@ -328,7 +328,7 @@ while ( have_posts() ) :
 			</div>
 		</div>
 
-	</main>
+	</div>
 
 	<?php
 endwhile;

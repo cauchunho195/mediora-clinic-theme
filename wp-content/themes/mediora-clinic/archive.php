@@ -17,7 +17,7 @@ get_header();
 $theme_uri = get_template_directory_uri();
 ?>
 
-<main id="primary" class="site-main archive-main">
+<div class="subpage-content archive-main">
 
 	<!-- 1. Archive Hero Subpage Banner -->
 	<section class="subpage-banner" aria-label="<?php esc_attr_e( 'Tiêu đề lưu trữ', 'mediora-clinic' ); ?>">
@@ -125,7 +125,7 @@ $theme_uri = get_template_directory_uri();
 		</div>
 	</section>
 
-</main>
+</div>
 
 <?php
 get_footer();

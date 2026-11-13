@@ -145,7 +145,7 @@ if ( ! function_exists( 'mediora_render_schema' ) ) {
 			'url'                       => esc_url( $home_url ),
 			'logo'                      => esc_url( $logo_url ),
 			'image'                     => esc_url( get_template_directory_uri() . '/assets/imgs/cover.jpg' ),
-			'telephone'                 => $clean_phone ? ( str_starts_with( $clean_phone, '+' ) ? $clean_phone : '+84' . ltrim( $clean_phone, '0' ) ) : '+84945334832',
+			'telephone'                 => $clean_phone ? ( 0 === strpos( $clean_phone, '+' ) ? $clean_phone : '+84' . ltrim( $clean_phone, '0' ) ) : '+84945334832',
 			'priceRange'                => '$$$$',
 			'currenciesAccepted'        => 'VND',
 			'paymentAccepted'           => 'Cash, Credit Card, Bank Transfer',
