@@ -1,0 +1,56 @@
+services:
+  db:
+    image: mariadb:10.11
+    container_name: mediora_db
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: root_mediora_pass
+      MYSQL_DATABASE: mediora_db
+      MYSQL_USER: mediora_user
+      MYSQL_PASSWORD: mediora_password
+    volumes:
+      - db_data:/var/lib/mysql
+    networks:
+      - mediora_net
+
+  wordpress:
+    image: wordpress:latest
+    container_name: mediora_app
+    restart: unless-stopped
+    depends_on:
+      - db
+    ports:
+      - "8088:80"
+    environment:
+      WORDPRESS_DB_HOST: db:3306
+      WORDPRESS_DB_USER: mediora_user
+      WORDPRESS_DB_PASSWORD: mediora_password
+      WORDPRESS_DB_NAME: mediora_db
+      WORDPRESS_DEBUG: 1
+    volumes:
+      - wp_data:/var/www/html
+      - ./wp-content/themes/mediora-clinic:/var/www/html/wp-content/themes/mediora-clinic:rw
+    networks:
+      - mediora_net
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:latest
+    container_name: mediora_phpmyadmin
+    restart: unless-stopped
+    depends_on:
+      - db
+    ports:
+      - "8089:80"
+    environment:
+      PMA_HOST: db
+      PMA_PORT: 3306
+    networks:
+      - mediora_net
+
+volumes:
+  db_data:
+  wp_data:
+
+networks:
+  mediora_net:
+    name: mediora_net
