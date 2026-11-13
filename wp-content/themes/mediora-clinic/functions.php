@@ -142,6 +142,65 @@ function mediora_resource_hints( $urls, $relation_type ) {
 add_filter( 'wp_resource_hints', 'mediora_resource_hints', 10, 2 );
 
 /**
+ * Helper functions & fallbacks.
+ */
+if ( ! function_exists( 'mediora_get_option' ) ) {
+	/**
+	 * Retrieve a theme option / customizer setting with fallback.
+	 *
+	 * @param string $key Setting key.
+	 * @param mixed  $default Default value if setting is empty or not set.
+	 * @return mixed
+	 */
+	function mediora_get_option( $key, $default = '' ) {
+		$value = get_theme_mod( $key, $default );
+		if ( false === $value || '' === $value || null === $value ) {
+			return $default;
+		}
+		return $value;
+	}
+}
+
+if ( ! function_exists( 'mediora_clean_phone' ) ) {
+	/**
+	 * Helper function to sanitize phone numbers for tel: links.
+	 *
+	 * @param string $phone Phone number string.
+	 * @return string
+	 */
+	function mediora_clean_phone( $phone ) {
+		return preg_replace( '/[^0-9+]/', '', $phone );
+	}
+}
+
+if ( ! function_exists( 'mediora_fallback_menu' ) ) {
+	/**
+	 * Fallback static navigation menu if no WordPress menu is assigned.
+	 *
+	 * @param array $args wp_nav_menu args.
+	 * @return void
+	 */
+	function mediora_fallback_menu( $args = array() ) {
+		$menu_class = ! empty( $args['menu_class'] ) ? esc_attr( $args['menu_class'] ) : 'main-nav';
+		$items = array(
+			'#gioi-thieu'     => esc_html__( 'Giới thiệu', 'mediora-clinic' ),
+			'#dich-vu'        => esc_html__( 'Dịch vụ', 'mediora-clinic' ),
+			'#co-so-vat-chat' => esc_html__( 'Cơ sở vật chất', 'mediora-clinic' ),
+			'#bac-si'         => esc_html__( 'Đội ngũ bác sĩ', 'mediora-clinic' ),
+			'#cau-chuyen'     => esc_html__( 'Khách hàng', 'mediora-clinic' ),
+			'#lien-he'        => esc_html__( 'Liên hệ', 'mediora-clinic' ),
+		);
+
+		echo '<ul class="' . $menu_class . '">';
+		foreach ( $items as $anchor => $label ) {
+			$url = is_front_page() ? $anchor : home_url( '/' . $anchor );
+			echo '<li><a class="nav-link" href="' . esc_url( $url ) . '">' . $label . '</a></li>';
+		}
+		echo '</ul>';
+	}
+}
+
+/**
  * Include helper files and modules.
  */
 $mediora_includes = array(
