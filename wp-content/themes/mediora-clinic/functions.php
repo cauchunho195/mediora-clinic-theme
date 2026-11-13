@@ -97,6 +97,17 @@ function mediora_enqueue_scripts() {
 	// Mediora Luxury Theme CSS
 	wp_enqueue_style( 'mediora-style', MEDIORA_URI . '/assets/css/theme-style.css', array( 'bootstrap-grid', 'swiper-bundle' ), MEDIORA_VERSION );
 
+	// Subpages layout & dedicated stylesheets
+	if ( file_exists( MEDIORA_DIR . '/assets/css/pages.css' ) ) {
+		wp_enqueue_style( 'mediora-pages-base', MEDIORA_URI . '/assets/css/pages.css', array( 'mediora-style' ), MEDIORA_VERSION );
+	}
+	if ( is_page_template( 'page-about.php' ) && file_exists( MEDIORA_DIR . '/assets/css/page-about-us.css' ) ) {
+		wp_enqueue_style( 'mediora-page-about', MEDIORA_URI . '/assets/css/page-about-us.css', array( 'mediora-pages-base' ), MEDIORA_VERSION );
+	}
+	if ( is_page_template( 'page-services.php' ) && file_exists( MEDIORA_DIR . '/assets/css/page-services.css' ) ) {
+		wp_enqueue_style( 'mediora-page-services', MEDIORA_URI . '/assets/css/page-services.css', array( 'mediora-pages-base' ), MEDIORA_VERSION );
+	}
+
 	// Main style.css metadata
 	wp_enqueue_style( 'mediora-theme-root', get_stylesheet_uri(), array( 'mediora-style' ), MEDIORA_VERSION );
 
@@ -110,8 +121,8 @@ function mediora_enqueue_scripts() {
 	$localized_data = array(
 		'ajaxUrl' => admin_url( 'admin-ajax.php' ),
 		'nonce'   => wp_create_nonce( 'mediora_booking_nonce' ),
-		'thanks'  => esc_html__( 'Cảm ơn bạn! Bác sĩ chuyên khoa MEDIORA sẽ liên hệ tư vấn trong thời gian sớm nhất.', 'mediora-clinic' ),
-		'error'   => esc_html__( 'Gửi chưa thành công, vui lòng thử lại hoặc gọi hotline trực tiếp.', 'mediora-clinic' ),
+		'thanks'  => esc_html__( 'Cảm ơn bạn! Bác sĩ chuyên khoa Viện Trẻ Hóa Sejang sẽ liên hệ tư vấn trong thời gian sớm nhất.', 'mediora-clinic' ),
+		'error'   => esc_html__( 'Gửi chưa thành công, vui lòng thử lại hoặc gọi hotline 0988.226.951 trực tiếp.', 'mediora-clinic' ),
 	);
 	wp_localize_script( 'mediora-main', 'medioraData', $localized_data );
 	wp_localize_script( 'mediora-main', 'MEDIORA', $localized_data );

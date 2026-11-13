@@ -24,7 +24,7 @@ get_header();
 $theme_uri           = get_template_directory_uri();
 $facility_video_url  = mediora_get_option( 'facility_video_url', 'https://d1b6kbmv97kzjg.cloudfront.net/wp-content/uploads/2026/11/CSVC.mp4' );
 $gmiss_video_url     = mediora_get_option( 'gmiss_video_url', 'https://d1b6kbmv97kzjg.cloudfront.net/wp-content/uploads/2026/11/tvc.mp4' );
-$intro_text_default  = 'Phòng khám Chuyên khoa Thẩm mỹ MEDIORA định hướng phát triển theo tiêu chuẩn thẩm mỹ chuyên nghiệp, kết hợp nền tảng chuyên môn, công nghệ hiện đại và chiến lược cá nhân hóa trong từng chỉ định. Điểm khác biệt của MEDIORA nằm ở tư duy thẩm mỹ tổng thể, quy trình thực hiện chuẩn hóa và sự theo sát xuyên suốt hành trình khách hàng, hướng đến kết quả hài hòa, tự nhiên và phù hợp với đặc điểm riêng của mỗi người.';
+$intro_text_default  = 'Viện Trẻ Hóa Sejang (vientrehoaSejang) định hướng phát triển theo tiêu chuẩn thẩm mỹ chuyên nghiệp, kết hợp nền tảng chuyên môn y khoa, công nghệ hiện đại và chiến lược cá nhân hóa trong từng chỉ định. Điểm khác biệt của Sejang nằm ở tư duy thẩm mỹ tổng thể, quy trình thực hiện chuẩn hóa và sự theo sát xuyên suốt hành trình khách hàng, hướng đến kết quả hài hòa, tự nhiên và tôn vinh vẻ đẹp thanh xuân của mỗi người.';
 $intro_text          = mediora_get_option( 'intro_text', $intro_text_default );
 ?>
 

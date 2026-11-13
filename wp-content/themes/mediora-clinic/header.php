@@ -12,7 +12,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-$hotline     = mediora_get_option( 'hotline', '0945.334.832' );
+$hotline     = mediora_get_option( 'hotline', '0988.226.951' );
 $hotline_tel = mediora_clean_phone( $hotline );
 ?>
 <!doctype html>

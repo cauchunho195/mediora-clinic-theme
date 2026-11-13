@@ -52,7 +52,7 @@ function mediora_customize_register( $wp_customize ) {
 	$wp_customize->add_setting(
 		'clinic_name',
 		array(
-			'default'           => 'Phòng khám Chuyên khoa Thẩm mỹ MEDIORA',
+			'default'           => 'Viện Trẻ Hóa Sejang',
 			'sanitize_callback' => 'sanitize_text_field',
 			'transport'         => 'postMessage',
 		)
@@ -70,7 +70,7 @@ function mediora_customize_register( $wp_customize ) {
 	$wp_customize->add_setting(
 		'hotline',
 		array(
-			'default'           => '0945.334.832',
+			'default'           => '0988.226.951',
 			'sanitize_callback' => 'sanitize_text_field',
 			'transport'         => 'postMessage',
 		)

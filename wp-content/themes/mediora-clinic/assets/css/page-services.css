@@ -1,0 +1,64 @@
+/* =========================================================
+   MEDIORA – Dịch vụ (Figma 5:47)
+   Khung chung: assets/css/pages.css · Ảnh: assets/img-services/
+   ========================================================= */
+
+.cy-services-intro   { background:url(../img-services/bg1.jpg) no-repeat #F4E9DE; }
+.cy-services-process { background:url(../img-services/bg2.jpg) no-repeat #6E4426; }
+.cy-services-journey { background: transparent; }
+
+/* ---------- 2. Quy trình: lớp ảnh như Figma (B4 dưới bác sĩ, các bước còn lại trên) ---------- */
+.cy-services-process .cy-step          { z-index: 3; }
+.cy-services-process .cy-step.is-under { z-index: 1; }
+.cy-services-process .cy-doctor        { z-index: 2; }
+.cy-services-process .cy-podium        { z-index: 2; mix-blend-mode: overlay; }
+.cy-services-process .cy-step > img    { transition: transform .25s ease; }
+.cy-services-process .cy-step:hover > img { transform: translateY(-4px); }
+
+/* ---------- 3. Hành trình: chồng lên mép dưới section 2 (Figma: 39px) ---------- */
+.cy-services-journey {
+  position: relative; z-index: 1;
+  margin-top: calc(min(100vw, 1920px) * -39 / 1920);
+  overflow: visible;
+}
+.cy-services-journey .cy-frame { z-index: 1; pointer-events: none; }
+
+.cy-journey-slider { z-index: 2; }
+.cy-journey-slider .carousel-inner { width: 100%; height: 100%; }
+.cy-journey-slider .carousel-item { height: 100%; }
+.cy-journey-slider .ph { width: 100%; aspect-ratio: 791 / 624; }
+
+/* Mũi tên 48×48 – Figma: trước x=248, sau x=1039, y=472 (so với ảnh x=272, y=184) */
+.cy-arrow {
+  position: absolute; z-index: 3;
+  top: calc(288 * var(--u));
+  width: calc(48 * var(--u)); min-width: 28px; aspect-ratio: 1;
+  padding: 0; border: 0; background: none; line-height: 0;
+  transition: transform .2s ease;
+}
+.cy-arrow img { display: block; width: 100%; height: 100%; }
+.cy-arrow-prev { left: calc(-24 * var(--u)); }
+.cy-arrow-prev img { transform: rotate(180deg); }
+.cy-arrow-next { left: calc(767 * var(--u)); }
+.cy-arrow:hover { transform: scale(1.08); }
+
+/* Gạch trắng 266×3 dưới đoạn mô tả */
+.cy-rule {
+  position: absolute; z-index: 2;
+  left: calc(var(--x) * var(--u)); top: calc(var(--y) * var(--u));
+  width: calc(var(--w) * var(--u)); height: max(1px, calc(3 * var(--u)));
+  background: #fff;
+}
+.cy-btn-consult { z-index: 3; }
+.cy-btn-consult:hover { transform: translateY(-2px); }
+
+@media (max-width: 991.98px) {
+  .cy-services-journey { margin-top: 0; }
+  .cy-services-journey .cy-stage { background: #6E4426; }
+  .cy-services-intro .cy-text { text-align: left; }
+  .cy-arrow { top: 50%; transform: translateY(-50%); width: 40px; }
+  .cy-arrow-prev { left: 4px; }
+  .cy-arrow-next { left: auto; right: 4px; }
+  .cy-arrow:hover { transform: translateY(-50%) scale(1.08); }
+  .cy-services-process .cy-step:hover > img { transform: none; }
+}

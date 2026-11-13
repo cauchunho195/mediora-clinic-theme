@@ -4,3 +4,10 @@ node_modules/
 site_homepage.html
 analyze.js
 inspect_sections.js
+
+*_analysis.txt
+*_dump.html
+*_original_styles.css
+*.py
+*.html
+cy_rules.css

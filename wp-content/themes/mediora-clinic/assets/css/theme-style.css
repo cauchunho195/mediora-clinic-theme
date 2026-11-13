@@ -9,30 +9,36 @@
    1. CSS VARIABLES & THEME TOKENS
    ========================================================= */
 :root {
-  /* Color Palette */
-  --bg-primary: #0b0f14;
-  --bg-secondary: #121820;
-  --bg-card: #18202a;
-  --bg-light: #fbf5ec;
-  --bg-cream: #efe3d1;
+  /* Luxury Sapphire & Royal Blue Brand Palette (vientrehoaSejang) */
+  --bg-primary: #060b14;
+  --bg-secondary: #0a1220;
+  --bg-card: #0f1c32;
+  --bg-light: #f0f6ff;
+  --bg-cream: #dbeafe;
 
-  --gold-primary: #d4af37;
-  --gold-light: #f5d77f;
-  --gold-dark: #aa771c;
-  --gold-gradient: linear-gradient(135deg, #f5d77f 0%, #d4af37 50%, #aa771c 100%);
-  --gold-gradient-hover: linear-gradient(135deg, #fff2b2 0%, #e6c555 50%, #b88628 100%);
-  --gold-border: rgba(212, 175, 55, 0.4);
+  --blue-primary: #0072f5;
+  --blue-light: #38bdf8;
+  --blue-dark: #0047ba;
+  --blue-cyan: #00d2ff;
 
-  --m-brown: #704a2f;
-  --m-brown-2: #6b4226;
-  --m-gold: #c9a46a;
-  --m-gold-light: #f1dfc0;
-  --m-cream: #fbf5ec;
-  --m-text: #3a2618;
+  --gold-primary: #0072f5;
+  --gold-light: #38bdf8;
+  --gold-dark: #0047ba;
+  --gold-gradient: linear-gradient(135deg, #00d2ff 0%, #0072f5 50%, #0047ba 100%);
+  --gold-gradient-hover: linear-gradient(135deg, #38bdf8 0%, #0084ff 50%, #0056e0 100%);
+  --gold-border: rgba(0, 180, 216, 0.5);
+  --blue-glow: 0 0 25px rgba(0, 180, 216, 0.45);
+
+  --m-brown: #081630;
+  --m-brown-2: #050e20;
+  --m-gold: #0072f5;
+  --m-gold-light: #7dd3fc;
+  --m-cream: #f0f8ff;
+  --m-text: #0f172a;
 
   --text-light: #ffffff;
-  --text-muted: #cfd5db;
-  --text-dark: #1b1b1b;
+  --text-muted: #cbd5e1;
+  --text-dark: #0f172a;
 
   /* Typography */
   --font-serif: "Playfair Display", Georgia, serif;
@@ -1766,4 +1772,199 @@ select.form-control option {
   border-color: var(--gold-light);
   color: #1b130c;
   box-shadow: 0 4px 12px rgba(212, 175, 55, 0.35);
+}
+
+
+/* =========================================================
+   TECH GLOW FORM & SIDE DOCK (vientrehoaSejang UI)
+   ========================================================= */
+.tech-form-wrapper {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  max-width: 520px;
+  margin: 0 auto;
+}
+
+.tech-glow-box {
+  position: relative;
+  background: radial-gradient(circle at center, #141f36 0%, #070e1c 100%);
+  border: 2px solid rgba(0, 180, 255, 0.6);
+  box-shadow: 0 0 35px rgba(0, 180, 255, 0.4), inset 0 0 25px rgba(0, 180, 255, 0.15);
+  border-radius: 28px;
+  padding: 38px 42px 42px;
+  overflow: visible;
+}
+
+.tech-corner {
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  border-color: #38bdf8;
+  border-style: solid;
+  pointer-events: none;
+}
+.tech-corner--tl {
+  top: 10px;
+  left: 10px;
+  border-width: 3px 0 0 3px;
+  border-top-left-radius: 8px;
+}
+.tech-corner--tr {
+  top: 10px;
+  right: 10px;
+  border-width: 3px 3px 0 0;
+  border-top-right-radius: 8px;
+}
+.tech-corner--bl {
+  bottom: 10px;
+  left: 10px;
+  border-width: 0 0 3px 3px;
+  border-bottom-left-radius: 8px;
+}
+.tech-corner--br {
+  bottom: 10px;
+  right: 10px;
+  border-width: 0 3px 3px 0;
+  border-bottom-right-radius: 8px;
+}
+
+.tech-meter-left {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  pointer-events: none;
+}
+.tech-meter-left span {
+  display: block;
+  width: 8px;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.6);
+}
+.tech-meter-left span:nth-child(3n) {
+  width: 14px;
+  background: #38bdf8;
+}
+
+.tech-form-title {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: var(--font-head);
+  font-size: 26px;
+  font-weight: 800;
+  color: #e0f2fe;
+  letter-spacing: 1.5px;
+  line-height: 1.25;
+  margin-bottom: 24px;
+}
+.tech-form-subtitle {
+  font-size: 32px;
+  font-weight: 900;
+  letter-spacing: 2px;
+  color: #ffffff;
+  text-shadow: 0 0 15px rgba(56, 189, 248, 0.8);
+}
+
+.tech-field-group {
+  margin-bottom: 14px;
+}
+.tech-input {
+  width: 100%;
+  height: 48px;
+  background: #ffffff !important;
+  color: #0f172a !important;
+  border: 1px solid #e2e8f0 !important;
+  border-radius: 4px !important;
+  padding: 0 16px !important;
+  font-size: 15px !important;
+  font-weight: 500;
+  outline: none !important;
+  transition: box-shadow 0.2s ease, border-color 0.2s ease;
+}
+.tech-input::placeholder {
+  color: #64748b !important;
+  font-weight: 400;
+}
+.tech-input:focus {
+  border-color: #0072f5 !important;
+  box-shadow: 0 0 0 3px rgba(0, 180, 255, 0.45) !important;
+}
+
+.btn-tech-submit {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(180deg, #f0f9ff 0%, #bae6fd 100%);
+  color: #034f8a;
+  font-family: var(--font-head);
+  font-size: 17px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  padding: 12px 42px;
+  border-radius: 999px;
+  border: 1px solid #ffffff;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3), 0 0 20px rgba(56, 189, 248, 0.6);
+  cursor: pointer;
+  transition: all 0.25s ease;
+  min-width: 220px;
+}
+.btn-tech-submit:hover {
+  transform: translateY(-2px);
+  background: linear-gradient(180deg, #ffffff 0%, #e0f2fe 100%);
+  color: #023661;
+  box-shadow: 0 6px 25px rgba(56, 189, 248, 0.9);
+}
+
+.tech-side-dock {
+  position: absolute;
+  right: -32px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: #f8fafc;
+  border: 1px solid rgba(0, 114, 245, 0.3);
+  border-radius: 999px;
+  padding: 14px 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+  z-index: 5;
+}
+.dock-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  background: #0072f5;
+  color: #ffffff;
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+.dock-btn:hover {
+  transform: scale(1.1);
+  background: #00d2ff;
+  color: #060b14;
+}
+.dock-btn--zalo {
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+}
+@media (max-width: 767.98px) {
+  .tech-side-dock {
+    position: static;
+    transform: none;
+    flex-direction: row;
+    justify-content: center;
+    margin: 20px auto 0;
+    width: fit-content;
+    padding: 8px 16px;
+  }
 }

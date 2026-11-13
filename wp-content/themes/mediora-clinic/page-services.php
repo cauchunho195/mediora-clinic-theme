@@ -1,11 +1,10 @@
 <?php
 /**
- * Template Name: Danh Mục Dịch Vụ - Mediora
- *
- * The template for displaying the Services Directory / Catalog page.
+ * Template Name: Dịch Vụ - Sejang
+ * Description: Trang dịch vụ Viện Trẻ Hóa Sejang chuẩn xác theo mẫu phongkhammediora.vn/dich-vu/
  *
  * @package Mediora_Clinic
- * @version 1.0.0
+ * @version 1.1.0
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -14,293 +13,177 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 get_header();
 
-$theme_uri   = get_template_directory_uri();
-$hotline     = mediora_get_option( 'hotline', '0945.334.832' );
-$hotline_tel = mediora_clean_phone( $hotline );
+$assets_uri  = get_template_directory_uri() . '/assets';
+$clinic_name = function_exists( 'mediora_get_option' ) ? mediora_get_option( 'clinic_name', 'Viện Trẻ Hóa Sejang' ) : 'Viện Trẻ Hóa Sejang';
 ?>
 
-<div class="subpage-content services-page-main">
+<div class="subpage-content cy-page-services">
+	<!-- 1. SECTION SERVICES INTRO -->
+	<section class="cy-section cy-services-intro" aria-labelledby="cy-services-title">
+		<div class="cy-stage" style="--sh:1776">
+			<h1 id="cy-services-title" class="screen-reader-text"><?php esc_html_e( 'Nâng cơ trẻ hóa bằng sợi sinh học GMISS', 'mediora-clinic' ); ?></h1>
+			
+			<div class="cy-fig ph cy-bg" data-ph="BG3 m1 · 1920×1776" style="--x:0;--y:0;--w:1920;--h:1776;--o:0">
+				<img src="<?php echo esc_url( $assets_uri . '/img-services/bg-journey.jpg' ); ?>" alt="" width="1920" height="1776" fetchpriority="high">
+			</div>
 
-	<!-- 1. Hero Subpage Banner -->
-	<section class="subpage-banner" aria-label="<?php esc_attr_e( 'Dịch vụ thẩm mỹ MEDIORA', 'mediora-clinic' ); ?>">
-		<div class="wrap text-center">
-			<?php mediora_breadcrumbs(); ?>
-			<span class="mediora-badge-gold mb-3"><?php esc_html_e( 'Danh Mục Dịch Vụ Đỉnh Cao', 'mediora-clinic' ); ?></span>
-			<h1 class="subpage-banner__title gold-text"><?php esc_html_e( 'Giải Pháp Thẩm Mỹ Chuẩn Y Khoa Toàn Diện', 'mediora-clinic' ); ?></h1>
-			<p class="subpage-banner__desc">
-				<?php esc_html_e( 'Khám phá các dịch vụ nâng cơ, trẻ hóa da công nghệ cao và phẫu thuật tạo hình vi phẫu được cá nhân hóa bởi đội ngũ bác sĩ chuyên khoa MEDIORA.', 'mediora-clinic' ); ?>
-			</p>
+			<div class="cy-fig ph" data-ph="Maintext · 1058×110" style="--x:431;--y:78;--w:1058;--h:110;--o:1">
+				<img src="<?php echo esc_url( $assets_uri . '/img-services/maintext.png' ); ?>" alt="Nâng cơ trẻ hóa bằng sợi sinh học GMISS" fetchpriority="high" width="1058" height="110">
+			</div>
+
+			<div class="cy-fig ph cy-hide-mb" data-ph="Mẫu 1 · 619×836" style="--x:0;--y:188;--w:619;--h:836;--o:0">
+				<img src="<?php echo esc_url( $assets_uri . '/img-services/mau-1.png' ); ?>" alt="Khách hàng <?php echo esc_attr( $clinic_name ); ?>" fetchpriority="high" width="619" height="836">
+			</div>
+
+			<div class="cy-fig ph cy-hide-mb" data-ph="Mẫu 2 · 774×853" style="--x:1178;--y:188;--w:774;--h:853;--o:0">
+				<img src="<?php echo esc_url( $assets_uri . '/img-services/mau-2.png' ); ?>" alt="Khách hàng <?php echo esc_attr( $clinic_name ); ?>" fetchpriority="high" width="774" height="853">
+			</div>
+
+			<div class="cy-fig ph" data-ph="Subtext 1 · 735×183" style="--x:592;--y:263;--w:735;--h:183;--o:2">
+				<img src="<?php echo esc_url( $assets_uri . '/img-services/subtext.png' ); ?>" alt="Nâng đỡ đường nét – Tôn vinh vẻ đẹp tự nhiên" width="735" height="183" loading="lazy" decoding="async">
+			</div>
+
+			<div class="cy-text" style="--x:617;--y:468;--w:685;--o:3">
+				<p>Nâng cơ trẻ hóa bằng sợi sinh học GMISS là giải pháp thẩm mỹ hướng đến cải thiện tình trạng mô mềm sa trễ, hỗ trợ nâng đỡ đường nét và cải thiện độ săn chắc của làn da. Tại <?php echo esc_html( $clinic_name ); ?>, mỗi liệu trình được xây dựng dựa trên tình trạng lão hóa, cấu trúc khuôn mặt và nhu cầu riêng của khách hàng, với định hướng trẻ hóa hài hòa, tự nhiên.</p>
+			</div>
+
+			<div class="cy-fig ph" data-ph="NÂNG ĐỠ MÔ MỀM – CẢI THIỆN TÌNH TRẠNG SA TRỄ · 1101×267" style="--x:409;--y:857;--w:1101;--h:267;--o:4">
+				<img src="<?php echo esc_url( $assets_uri . '/img-services/benefit-01.png' ); ?>" alt="Nâng đỡ mô mềm – cải thiện tình trạng sa trễ" width="1101" height="267" loading="lazy" decoding="async">
+			</div>
+
+			<div class="cy-fig ph" data-ph="HỖ TRỢ CẢI THIỆN ĐỘ SĂN CHẮC CỦA DA · 1101×267" style="--x:409;--y:1146;--w:1101;--h:267;--o:5">
+				<img src="<?php echo esc_url( $assets_uri . '/img-services/benefit-02.png' ); ?>" alt="Hỗ trợ cải thiện độ săn chắc của da" width="1101" height="267" loading="lazy" decoding="async">
+			</div>
+
+			<div class="cy-fig ph" data-ph="CÁ NHÂN HÓA GIẢI PHÁP TRẺ HÓA · 1101×267" style="--x:409;--y:1435;--w:1101;--h:267;--o:6">
+				<img src="<?php echo esc_url( $assets_uri . '/img-services/benefit-03.png' ); ?>" alt="Cá nhân hóa giải pháp trẻ hóa" width="1101" height="267" loading="lazy" decoding="async">
+			</div>
 		</div>
 	</section>
 
-	<!-- 2. Services Grid Section -->
-	<section class="services-list-section py-5">
-		<div class="wrap">
-			<?php
-			// Query all services from CPT service
-			$service_query = new WP_Query(
-				array(
-					'post_type'      => 'service',
-					'posts_per_page' => 12,
-					'post_status'    => 'publish',
-					'orderby'        => 'menu_order title',
-					'order'          => 'ASC',
-				)
-			);
+	<!-- 2. SECTION SERVICES PROCESS (6 Steps & Doctor Podium) -->
+	<section class="cy-section cy-services-process" aria-labelledby="cy-process-title">
+		<div class="cy-stage" style="--sh:1458">
+			<h2 id="cy-process-title" class="screen-reader-text"><?php esc_html_e( 'Quy trình nâng cơ trẻ hóa bằng sợi sinh học GMISS', 'mediora-clinic' ); ?></h2>
+			
+			<div class="cy-fig ph cy-bg" data-ph="BG3 m2 · 1920×1458" style="--x:0;--y:0;--w:1920;--h:1458;--o:0">
+				<img src="<?php echo esc_url( $assets_uri . '/img-services/bg-journey.jpg' ); ?>" alt="" width="1920" height="1458" loading="lazy" decoding="async">
+			</div>
 
-			if ( $service_query->have_posts() ) :
-				?>
-				<div class="row g-4">
-					<?php
-					while ( $service_query->have_posts() ) :
-						$service_query->the_post();
-						$terms = get_the_terms( get_the_ID(), 'service_category' );
-						$cat_name = ( ! empty( $terms ) && ! is_wp_error( $terms ) ) ? $terms[0]->name : esc_html__( 'Thẩm Mỹ Chuyên Sâu', 'mediora-clinic' );
-						?>
-						<div class="col-12 col-md-6 col-lg-4">
-							<article id="post-<?php the_ID(); ?>" <?php post_class( 'mediora-card h-100 d-flex flex-column p-0 overflow-hidden' ); ?>>
-								<div class="service-card__thumb position-relative" style="aspect-ratio:16/10; overflow:hidden;">
-									<a href="<?php the_permalink(); ?>" tabindex="-1" aria-hidden="true">
-										<?php if ( has_post_thumbnail() ) : ?>
-											<?php the_post_thumbnail( 'medium_large', array( 'class' => 'w-100 h-100 object-fit-cover' ) ); ?>
-										<?php else : ?>
-											<img src="<?php echo esc_url( $theme_uri . '/assets/imgs/cover.jpg' ); ?>" alt="<?php the_title_attribute(); ?>" class="w-100 h-100 object-fit-cover" loading="lazy">
-										<?php endif; ?>
-									</a>
-									<span class="position-absolute top-0 start-0 m-3 mediora-badge-gold" style="backdrop-filter:blur(6px); background:rgba(18,24,32,0.85);">
-										<?php echo esc_html( $cat_name ); ?>
-									</span>
-								</div>
+			<div class="cy-fig ph" data-ph="NÂNG CƠ TRẺ HÓA BẰNG SỢI SINH HỌC GMISS · 1216×253" style="--x:352;--y:65;--w:1216;--h:253;--o:1">
+				<img src="<?php echo esc_url( $assets_uri . '/img-services/process-title.png' ); ?>" alt="Quy trình nâng cơ trẻ hóa bằng sợi sinh học GMISS" width="1216" height="253" loading="lazy" decoding="async">
+			</div>
 
-								<div class="service-card__body p-4 d-flex flex-column flex-grow-1">
-									<h2 class="h5 mb-2">
-										<a href="<?php the_permalink(); ?>" class="text-white text-decoration-none">
-											<?php the_title(); ?>
-										</a>
-									</h2>
-									<div class="service-card__excerpt text-muted mb-4" style="font-size:14px; line-height:1.6; display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical; overflow:hidden;">
-										<?php the_excerpt(); ?>
-									</div>
-									<div class="service-card__actions mt-auto pt-3 border-top d-flex gap-2 justify-content-between align-items-center" style="border-color:rgba(255,255,255,0.08) !important;">
-										<a href="<?php the_permalink(); ?>" class="btn-read-more" style="color:var(--gold-primary); font-weight:600; font-size:14px; text-transform:uppercase;">
-											<?php esc_html_e( 'Xem chi tiết &rarr;', 'mediora-clinic' ); ?>
-										</a>
-										<a href="<?php echo esc_url( home_url( '/lien-he/' ) ); ?>" class="btn btn-consult btn-gold-pill" data-bs-toggle="modal" data-bs-target="#popupConsult" style="font-size:12px; padding:6px 16px;">
-											<?php esc_html_e( 'Đăng ký', 'mediora-clinic' ); ?>
-										</a>
-									</div>
-								</div>
-							</article>
+			<div class="cy-fig ph cy-doctor" data-ph="podium BS · 722×881" style="--x:573;--y:409;--w:722;--h:881;--o:2">
+				<img src="<?php echo esc_url( $assets_uri . '/img-services/podium-bs.png' ); ?>" alt="Bác sĩ chuyên khoa tạo hình thẩm mỹ – <?php echo esc_attr( $clinic_name ); ?>" width="722" height="881" loading="lazy" decoding="async">
+			</div>
+
+			<div class="cy-fig ph cy-step" data-ph="B1 · 626×391" style="--x:141;--y:337;--w:626;--h:391;--o:3">
+				<img src="<?php echo esc_url( $assets_uri . '/img-services/step-01.png' ); ?>" alt="Bước 1: Thăm khám chuyên sâu cùng bác sĩ chuyên khoa tạo hình thẩm mỹ" width="626" height="391" loading="lazy" decoding="async">
+			</div>
+
+			<div class="cy-fig ph cy-step" data-ph="B2 · 626×391" style="--x:29;--y:677;--w:626;--h:391;--o:4">
+				<img src="<?php echo esc_url( $assets_uri . '/img-services/step-02.png' ); ?>" alt="Bước 2: Soi da các lớp, xác định mức độ lão hóa theo cấp độ tuổi và đưa ra phác đồ cá nhân hóa" width="626" height="391" loading="lazy" decoding="async">
+			</div>
+
+			<div class="cy-fig ph cy-step" data-ph="B3 · 626×391" style="--x:141;--y:1012;--w:626;--h:391;--o:5">
+				<img src="<?php echo esc_url( $assets_uri . '/img-services/step-03.png' ); ?>" alt="Bước 3: Bác sĩ đo vẽ, đánh dấu chính xác vị trí cần can thiệp" width="626" height="391" loading="lazy" decoding="async">
+			</div>
+
+			<div class="cy-fig ph cy-step is-under" data-ph="B4 · 626×391" style="--x:1127;--y:337;--w:626;--h:391;--o:6">
+				<img src="<?php echo esc_url( $assets_uri . '/img-services/step-04.png' ); ?>" alt="Bước 4: Làm sạch, sát khuẩn vùng can thiệp vô trùng 1 chiều" width="626" height="391" loading="lazy" decoding="async">
+			</div>
+
+			<div class="cy-fig ph cy-step" data-ph="B5 · 626×391" style="--x:1265;--y:677;--w:626;--h:391;--o:7">
+				<img src="<?php echo esc_url( $assets_uri . '/img-services/step-05.png' ); ?>" alt="Bước 5: Bác sĩ tiến hành sử dụng sợi GMISS nâng kéo toàn bộ vùng cơ" width="626" height="391" loading="lazy" decoding="async">
+			</div>
+
+			<div class="cy-fig ph cy-step" data-ph="B6 · 626×391" style="--x:1127;--y:1012;--w:626;--h:391;--o:8">
+				<img src="<?php echo esc_url( $assets_uri . '/img-services/step-06.png' ); ?>" alt="Bước 6: Khách hàng nghe dặn dò từ bác sĩ và theo dõi hậu phẫu" width="626" height="391" loading="lazy" decoding="async">
+			</div>
+		</div>
+	</section>
+
+	<!-- 3. SECTION CUSTOMER JOURNEY (Slider) -->
+	<section class="cy-section cy-services-journey" aria-labelledby="cy-journey-title">
+		<div class="cy-stage" style="--sh:1038">
+			<h2 id="cy-journey-title" class="screen-reader-text"><?php esc_html_e( 'Mỗi khách hàng một hành trình trẻ hóa riêng', 'mediora-clinic' ); ?></h2>
+			
+			<div class="cy-fig ph cy-bg" data-ph="BG3 m3 · 1920×1000" style="--x:0;--y:38;--w:1920;--h:1000;--o:0">
+				<img src="<?php echo esc_url( $assets_uri . '/img-services/bg-journey.jpg' ); ?>" alt="" width="1920" height="1000" loading="lazy" decoding="async">
+			</div>
+
+			<div class="cy-fig ph cy-frame cy-hide-mb" data-ph="Frame line · 1732×997" style="--x:94;--y:0;--w:1732;--h:997;--o:0">
+				<img src="<?php echo esc_url( $assets_uri . '/img-services/frame-line.png' ); ?>" alt="" width="1732" height="997" loading="lazy" decoding="async">
+			</div>
+
+			<!-- Customer Transformation Slider -->
+			<div class="cy-box cy-journey-slider carousel slide" id="journeyCarousel" data-bs-ride="carousel" style="--x:272;--y:184;--w:791;--h:624;--o:4">
+				<div class="carousel-inner">
+					<div class="carousel-item active">
+						<div class="ph" data-ph="Mẫu Ngân Quỳnh · 791×624">
+							<img src="<?php echo esc_url( $assets_uri . '/img-services/ba-ngan-quynh.png' ); ?>" alt="Trước và sau trẻ hóa – nghệ sĩ Ngân Quỳnh" width="791" height="624" loading="lazy">
 						</div>
-					<?php endwhile; wp_reset_postdata(); ?>
-				</div>
-			<?php else : ?>
-				<!-- Showcase curated services grid fallback -->
-				<div class="row g-4">
-					<!-- Service 1: GMISS -->
-					<div class="col-12 col-md-6 col-lg-3">
-						<article class="mediora-card h-100 d-flex flex-column p-0 overflow-hidden">
-							<div class="service-card__thumb position-relative" style="aspect-ratio:16/10; overflow:hidden;">
-								<img src="<?php echo esc_url( $theme_uri . '/assets/imgs/21.png' ); ?>" alt="<?php esc_attr_e( 'Nâng cơ trẻ hóa GMISS', 'mediora-clinic' ); ?>" class="w-100 h-100 object-fit-cover" loading="lazy">
-								<span class="position-absolute top-0 start-0 m-3 mediora-badge-gold" style="backdrop-filter:blur(6px); background:rgba(18,24,32,0.85);">
-									<?php esc_html_e( 'Độc Quyền MEDIORA', 'mediora-clinic' ); ?>
-								</span>
-							</div>
-							<div class="service-card__body p-4 d-flex flex-column flex-grow-1">
-								<h2 class="h5 mb-2 text-white"><?php esc_html_e( 'Nâng Cơ Trẻ Hóa GMISS', 'mediora-clinic' ); ?></h2>
-								<p class="text-muted mb-4" style="font-size:14px; line-height:1.6;">
-									<?php esc_html_e( 'Công nghệ nâng cơ bằng sợi sinh học đa tầng độc quyền, kéo căng vùng da chùng nhão, kiến tạo đường viền hàm sắc nét không phẫu thuật.', 'mediora-clinic' ); ?>
-								</p>
-								<div class="mt-auto pt-3 border-top d-flex gap-2 justify-content-between align-items-center" style="border-color:rgba(255,255,255,0.08) !important;">
-									<a href="<?php echo esc_url( home_url( '/#dich-vu' ) ); ?>" class="btn-read-more" style="color:var(--gold-primary); font-weight:600; font-size:13px; text-transform:uppercase;">
-										<?php esc_html_e( 'Xem chi tiết &rarr;', 'mediora-clinic' ); ?>
-									</a>
-									<a href="#lien-he" class="btn btn-consult btn-gold-pill" data-bs-toggle="modal" data-bs-target="#popupConsult" style="font-size:12px; padding:6px 14px;">
-										<?php esc_html_e( 'Đăng ký', 'mediora-clinic' ); ?>
-									</a>
-								</div>
-							</div>
-						</article>
 					</div>
-
-					<!-- Service 2: Phẫu Thuật Tạo Hình -->
-					<div class="col-12 col-md-6 col-lg-3">
-						<article class="mediora-card h-100 d-flex flex-column p-0 overflow-hidden">
-							<div class="service-card__thumb position-relative" style="aspect-ratio:16/10; overflow:hidden;">
-								<img src="<?php echo esc_url( $theme_uri . '/assets/imgs/cover.jpg' ); ?>" alt="<?php esc_attr_e( 'Phẫu thuật tạo hình thẩm mỹ', 'mediora-clinic' ); ?>" class="w-100 h-100 object-fit-cover" loading="lazy">
-								<span class="position-absolute top-0 start-0 m-3 mediora-badge-gold" style="backdrop-filter:blur(6px); background:rgba(18,24,32,0.85);">
-									<?php esc_html_e( 'Tạo Hình Thẩm Mỹ', 'mediora-clinic' ); ?>
-								</span>
-							</div>
-							<div class="service-card__body p-4 d-flex flex-column flex-grow-1">
-								<h2 class="h5 mb-2 text-white"><?php esc_html_e( 'Phẫu Thuật Tạo Hình Vi Phẫu', 'mediora-clinic' ); ?></h2>
-								<p class="text-muted mb-4" style="font-size:14px; line-height:1.6;">
-									<?php esc_html_e( 'Tạo hình mắt hai mí tự nhiên, nâng mũi cấu trúc sụn sinh học, thu gọn cánh mũi và định hình khuôn mặt V-Line thanh tú.', 'mediora-clinic' ); ?>
-								</p>
-								<div class="mt-auto pt-3 border-top d-flex gap-2 justify-content-between align-items-center" style="border-color:rgba(255,255,255,0.08) !important;">
-									<a href="<?php echo esc_url( home_url( '/lien-he/' ) ); ?>" class="btn-read-more" style="color:var(--gold-primary); font-weight:600; font-size:13px; text-transform:uppercase;">
-										<?php esc_html_e( 'Xem chi tiết &rarr;', 'mediora-clinic' ); ?>
-									</a>
-									<a href="#lien-he" class="btn btn-consult btn-gold-pill" data-bs-toggle="modal" data-bs-target="#popupConsult" style="font-size:12px; padding:6px 14px;">
-										<?php esc_html_e( 'Đăng ký', 'mediora-clinic' ); ?>
-									</a>
-								</div>
-							</div>
-						</article>
+					<div class="carousel-item">
+						<div class="ph" data-ph="Mẫu Thảo · 791×624">
+							<img src="<?php echo esc_url( $assets_uri . '/img-services/ba-thao.png' ); ?>" alt="Trước và sau trẻ hóa – chị Thảo" width="791" height="624" loading="lazy">
+						</div>
 					</div>
-
-					<!-- Service 3: Thẩm Mỹ Nội Khoa -->
-					<div class="col-12 col-md-6 col-lg-3">
-						<article class="mediora-card h-100 d-flex flex-column p-0 overflow-hidden">
-							<div class="service-card__thumb position-relative" style="aspect-ratio:16/10; overflow:hidden;">
-								<img src="<?php echo esc_url( $theme_uri . '/assets/imgs/bg_video.png' ); ?>" alt="<?php esc_attr_e( 'Thẩm mỹ nội khoa công nghệ cao', 'mediora-clinic' ); ?>" class="w-100 h-100 object-fit-cover" loading="lazy">
-								<span class="position-absolute top-0 start-0 m-3 mediora-badge-gold" style="backdrop-filter:blur(6px); background:rgba(18,24,32,0.85);">
-									<?php esc_html_e( 'Nội Khoa Công Nghệ Cao', 'mediora-clinic' ); ?>
-								</span>
-							</div>
-							<div class="service-card__body p-4 d-flex flex-column flex-grow-1">
-								<h2 class="h5 mb-2 text-white"><?php esc_html_e( 'Trẻ Hóa Da Tầng Sâu', 'mediora-clinic' ); ?></h2>
-								<p class="text-muted mb-4" style="font-size:14px; line-height:1.6;">
-									<?php esc_html_e( 'Cấy vi điểm tinh chất sinh học, xóa nhăn rãnh cười, phục hồi thể tích thái dương và làm đầy má hóp an toàn chuẩn y tế.', 'mediora-clinic' ); ?>
-								</p>
-								<div class="mt-auto pt-3 border-top d-flex gap-2 justify-content-between align-items-center" style="border-color:rgba(255,255,255,0.08) !important;">
-									<a href="<?php echo esc_url( home_url( '/lien-he/' ) ); ?>" class="btn-read-more" style="color:var(--gold-primary); font-weight:600; font-size:13px; text-transform:uppercase;">
-										<?php esc_html_e( 'Xem chi tiết &rarr;', 'mediora-clinic' ); ?>
-									</a>
-									<a href="#lien-he" class="btn btn-consult btn-gold-pill" data-bs-toggle="modal" data-bs-target="#popupConsult" style="font-size:12px; padding:6px 14px;">
-										<?php esc_html_e( 'Đăng ký', 'mediora-clinic' ); ?>
-									</a>
-								</div>
-							</div>
-						</article>
+					<div class="carousel-item">
+						<div class="ph" data-ph="Mẫu Hiền Phạm · 791×624">
+							<img src="<?php echo esc_url( $assets_uri . '/imgs/kh-hien-pham.png' ); ?>" alt="Trước và sau trẻ hóa – chị Hiền Phạm" width="791" height="624" loading="lazy">
+						</div>
 					</div>
-
-					<!-- Service 4: Chăm Sóc Da Chuyên Sâu -->
-					<div class="col-12 col-md-6 col-lg-3">
-						<article class="mediora-card h-100 d-flex flex-column p-0 overflow-hidden">
-							<div class="service-card__thumb position-relative" style="aspect-ratio:16/10; overflow:hidden;">
-								<img src="<?php echo esc_url( $theme_uri . '/assets/imgs/m1-3-1.png' ); ?>" alt="<?php esc_attr_e( 'Trị liệu phục hồi da chuyên sâu', 'mediora-clinic' ); ?>" class="w-100 h-100 object-fit-cover" loading="lazy">
-								<span class="position-absolute top-0 start-0 m-3 mediora-badge-gold" style="backdrop-filter:blur(6px); background:rgba(18,24,32,0.85);">
-									<?php esc_html_e( 'Phục Hồi Chuyên Sâu', 'mediora-clinic' ); ?>
-								</span>
-							</div>
-							<div class="service-card__body p-4 d-flex flex-column flex-grow-1">
-								<h2 class="h5 mb-2 text-white"><?php esc_html_e( 'Tái Sinh Cấu Trúc Da', 'mediora-clinic' ); ?></h2>
-								<p class="text-muted mb-4" style="font-size:14px; line-height:1.6;">
-									<?php esc_html_e( 'Liệu pháp phục hồi màng bảo vệ da, điều trị nám tàn nhang đa tầng, trẻ hóa sáng bóng căng mọng chuẩn làn da thủy tinh.', 'mediora-clinic' ); ?>
-								</p>
-								<div class="mt-auto pt-3 border-top d-flex gap-2 justify-content-between align-items-center" style="border-color:rgba(255,255,255,0.08) !important;">
-									<a href="<?php echo esc_url( home_url( '/lien-he/' ) ); ?>" class="btn-read-more" style="color:var(--gold-primary); font-weight:600; font-size:13px; text-transform:uppercase;">
-										<?php esc_html_e( 'Xem chi tiết &rarr;', 'mediora-clinic' ); ?>
-									</a>
-									<a href="#lien-he" class="btn btn-consult btn-gold-pill" data-bs-toggle="modal" data-bs-target="#popupConsult" style="font-size:12px; padding:6px 14px;">
-										<?php esc_html_e( 'Đăng ký', 'mediora-clinic' ); ?>
-									</a>
-								</div>
-							</div>
-						</article>
+					<div class="carousel-item">
+						<div class="ph" data-ph="Mẫu Vi Tường · 791×624">
+							<img src="<?php echo esc_url( $assets_uri . '/imgs/kh-vi-tuong.png' ); ?>" alt="Trước và sau trẻ hóa – chị Vi Tường" width="791" height="624" loading="lazy">
+						</div>
 					</div>
 				</div>
-			<?php endif; ?>
-		</div>
-	</section>
 
-	<!-- 3. Safety Commitment & Transparent Pricing Section -->
-	<section class="services-commitment-section py-5" style="background:var(--bg-secondary); border-top:1px solid rgba(212,175,55,0.15);">
-		<div class="wrap">
-			<div class="text-center mb-5">
-				<span class="mediora-badge-gold mb-2"><?php esc_html_e( 'Cam Kết Vàng', 'mediora-clinic' ); ?></span>
-				<h2 class="gold-text mb-3" style="font-family:var(--font-serif);"><?php esc_html_e( 'An Toàn Y Khoa & Chi Phí Minh Bạch', 'mediora-clinic' ); ?></h2>
-				<p class="text-muted" style="max-width:700px; margin:0 auto;">
-					<?php esc_html_e( 'MEDIORA thiết lập tiêu chuẩn minh bạch cao nhất, tôn trọng quyền lợi và đảm bảo trải nghiệm an tâm trọn vẹn cho từng quý khách hàng.', 'mediora-clinic' ); ?>
-				</p>
+				<button class="cy-arrow cy-arrow-prev" type="button" data-bs-target="#journeyCarousel" data-bs-slide="prev" aria-label="<?php esc_attr_e( 'Ảnh trước', 'mediora-clinic' ); ?>">
+					<img src="<?php echo esc_url( $assets_uri . '/imgs/arrow.png' ); ?>" alt="" width="48" height="48">
+				</button>
+				<button class="cy-arrow cy-arrow-next" type="button" data-bs-target="#journeyCarousel" data-bs-slide="next" aria-label="<?php esc_attr_e( 'Ảnh tiếp', 'mediora-clinic' ); ?>">
+					<img src="<?php echo esc_url( $assets_uri . '/imgs/arrow.png' ); ?>" alt="" width="48" height="48">
+				</button>
 			</div>
 
-			<div class="row g-4">
-				<div class="col-12 col-md-6 col-lg-3">
-					<div class="mediora-card h-100 p-4 text-center">
-						<div class="fs-1 mb-3 text-warning">🛡️</div>
-						<h3 class="h5 text-white mb-2"><?php esc_html_e( 'Vật Liệu Chính Hãng', 'mediora-clinic' ); ?></h3>
-						<p class="text-muted small mb-0" style="line-height:1.7;">
-							<?php esc_html_e( '100% sợi sinh học và tinh chất được cấp phép bởi Bộ Y Tế. Khách hàng được trực tiếp kiểm tra tem niêm phong và mã vạch trước khi thực hiện.', 'mediora-clinic' ); ?>
-						</p>
-					</div>
-				</div>
+			<div class="cy-fig ph" data-ph="MỖI KHÁCH HÀNG MỘT HÀNH TRÌNH TRẺ HÓA RIÊNG · 511×292" style="--x:1136;--y:175;--w:511;--h:292;--o:1">
+				<img src="<?php echo esc_url( $assets_uri . '/img-services/journey-title.png' ); ?>" alt="Mỗi khách hàng – một hành trình trẻ hóa riêng" width="511" height="292" loading="lazy" decoding="async">
+			</div>
 
-				<div class="col-12 col-md-6 col-lg-3">
-					<div class="mediora-card h-100 p-4 text-center">
-						<div class="fs-1 mb-3 text-warning">🏷️</div>
-						<h3 class="h5 text-white mb-2"><?php esc_html_e( 'Bảng Giá Niêm Yết', 'mediora-clinic' ); ?></h3>
-						<p class="text-muted small mb-0" style="line-height:1.7;">
-							<?php esc_html_e( 'Chi phí trọn gói minh bạch, thông báo rõ ràng trước thủ thuật. Cam kết không phát sinh bất kỳ khoản phí phụ thu nào trong suốt liệu trình.', 'mediora-clinic' ); ?>
-						</p>
-					</div>
-				</div>
+			<div class="cy-text is-center is-white" style="--x:1131;--y:498;--w:522;--o:2">
+				<p>Mỗi hành trình là một dấu ấn riêng, được xây dựng từ sự thấu hiểu, chuyên môn và giải pháp trẻ hóa cá nhân hóa tại <?php echo esc_html( $clinic_name ); ?>.</p>
+			</div>
 
-				<div class="col-12 col-md-6 col-lg-3">
-					<div class="mediora-card h-100 p-4 text-center">
-						<div class="fs-1 mb-3 text-warning">👨‍⚕️</div>
-						<h3 class="h5 text-white mb-2"><?php esc_html_e( 'Bác Sĩ Trực Tiếp Làm', 'mediora-clinic' ); ?></h3>
-						<p class="text-muted small mb-0" style="line-height:1.7;">
-							<?php esc_html_e( 'Thăm khám, đo vẽ tỷ lệ và trực tiếp tiến hành thủ thuật bởi Bác sĩ Chuyên khoa có chứng chỉ hành nghề, không giao cho kỹ thuật viên.', 'mediora-clinic' ); ?>
-						</p>
-					</div>
-				</div>
-
-				<div class="col-12 col-md-6 col-lg-3">
-					<div class="mediora-card h-100 p-4 text-center">
-						<div class="fs-1 mb-3 text-warning">📋</div>
-						<h3 class="h5 text-white mb-2"><?php esc_html_e( 'Bảo Hành & Đồng Hành', 'mediora-clinic' ); ?></h3>
-						<p class="text-muted small mb-0" style="line-height:1.7;">
-							<?php esc_html_e( 'Chế độ tái khám và bảo hành kết quả chu đáo. Đội ngũ y tế chăm sóc theo dõi tiến trình hồi phục 1:1 qua hotline và tái khám định kỳ.', 'mediora-clinic' ); ?>
-						</p>
-					</div>
-				</div>
+			<div class="cy-fig ph" data-ph="Btn tư vấn · 379×73" style="--x:1202;--y:600;--w:379;--h:73;--o:3">
+				<a href="#lien-he">
+					<img src="<?php echo esc_url( $assets_uri . '/img-services/btn-consult.png' ); ?>" alt="<?php esc_attr_e( 'Đăng ký nhận tư vấn', 'mediora-clinic' ); ?>" width="379" height="73" loading="lazy">
+				</a>
 			</div>
 		</div>
 	</section>
 
-	<!-- Optional content from editor -->
-	<?php
-	while ( have_posts() ) :
-		the_post();
-		if ( get_the_content() ) :
-			?>
-			<section class="services-custom-content py-5">
-				<div class="wrap">
-					<div class="mediora-card p-4 p-md-5 mediora-prose">
-						<?php the_content(); ?>
-					</div>
-				</div>
-			</section>
-			<?php
-		endif;
-	endwhile;
-	?>
-
-	<!-- 4. Consultation CTA Banner -->
-	<section class="services-cta-section py-5">
-		<div class="wrap">
-			<div class="consultation-cta-banner">
-				<span class="mediora-badge-gold mb-3"><?php esc_html_e( 'Tư Vấn Miễn Phí', 'mediora-clinic' ); ?></span>
-				<h2 class="gold-text mb-3" style="font-family:var(--font-serif); font-size:clamp(1.75rem, 3vw, 2.5rem);">
-					<?php esc_html_e( 'Bạn Chưa Rõ Phương Pháp Nào Phù Hợp Với Mình?', 'mediora-clinic' ); ?>
-				</h2>
-				<p class="text-muted mb-4" style="max-width:650px; margin:0 auto; font-size:1.05rem;">
-					<?php esc_html_e( 'Hãy để đội ngũ bác sĩ chuyên khoa MEDIORA soi da và tư vấn phác đồ thẩm mỹ tối ưu nhất dành riêng cho bạn.', 'mediora-clinic' ); ?>
-				</p>
-				<div class="d-flex flex-wrap justify-content-center gap-3">
-					<a href="<?php echo esc_url( 'tel:' . $hotline_tel ); ?>" class="btn btn-gold-outline">
-						📞 <?php echo esc_html( $hotline ); ?>
-					</a>
-					<a href="<?php echo esc_url( home_url( '/lien-he/' ) ); ?>" class="btn btn-consult btn-gold-pill" data-bs-toggle="modal" data-bs-target="#popupConsult">
-						<?php esc_html_e( 'Đăng Ký Tư Vấn Ngay', 'mediora-clinic' ); ?>
-					</a>
+	<!-- 4. SECTION REGISTRATION FORM (Tech Glow 4-Field UI) -->
+	<section class="sec-register py-5" id="lien-he" aria-label="<?php esc_attr_e( 'Đăng ký tư vấn', 'mediora-clinic' ); ?>">
+		<div class="container">
+			<div class="row justify-content-center">
+				<div class="col-12 col-lg-8 col-xl-6 text-center">
+					<?php
+					get_template_part(
+						'template-parts/booking-form',
+						null,
+						array(
+							'source' => 'page-services',
+						)
+					);
+					?>
 				</div>
 			</div>
 		</div>
 	</section>
-
 </div>
 
 <?php

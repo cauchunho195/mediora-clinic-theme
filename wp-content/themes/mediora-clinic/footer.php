@@ -12,14 +12,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-$hotline       = mediora_get_option( 'hotline', '0945.334.832' );
+$hotline       = mediora_get_option( 'hotline', '0988.226.951' );
 $hotline_tel   = mediora_clean_phone( $hotline );
 $footer_city   = mediora_get_option( 'footer_city', 'Hồ Chí Minh:' );
 $address       = mediora_get_option( 'address', "257 - 259 Nguyễn Đình Chiểu,\nPhường Bàn Cờ, TP. HCM" );
-$license_title = mediora_get_option( 'license_title', 'Giấy cấp phép MEDIORA TP. Hồ Chí Minh' );
+$license_title = mediora_get_option( 'license_title', 'Giấy cấp phép Viện Trẻ Hóa Sejang TP. Hồ Chí Minh' );
 $license_p1    = mediora_get_option(
 	'license_p1',
-	"Phòng khám Chuyên khoa thẩm mỹ MEDIORA<br>Trực thuộc Công ty TNHH Y khoa Mediora<br>MST: 0319600033/ HCM-GPHĐ do SỞ Y TẾ THÀNH PHỐ HỒ CHÍ MINH cấp."
+	"Viện Trẻ Hóa Sejang<br>MST: 0319600033/ HCM-GPHĐ do SỞ Y TẾ THÀNH PHỐ HỒ CHÍ MINH cấp."
 );
 $license_p2    = mediora_get_option(
 	'license_p2',

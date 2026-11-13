@@ -283,7 +283,7 @@ function mediora_ajax_submit_booking() {
 		// Bot caught in honeypot -> return successful response quietly
 		wp_send_json_success(
 			array(
-				'message' => esc_html__( 'Cảm ơn bạn! Bác sĩ chuyên khoa MEDIORA sẽ liên hệ tư vấn trong thời gian sớm nhất.', 'mediora-clinic' ),
+				'message' => esc_html__( 'Cảm ơn bạn! Bác sĩ chuyên khoa Viện Trẻ Hóa Sejang sẽ liên hệ tư vấn trong thời gian sớm nhất.', 'mediora-clinic' ),
 			)
 		);
 	}
@@ -320,19 +320,19 @@ function mediora_ajax_submit_booking() {
 		);
 	}
 
-	$service_raw = wp_unslash( $_POST['service'] ?? '' );
-	$service     = sanitize_text_field( $service_raw );
+	$condition_raw = wp_unslash( $_POST['condition'] ?? $_POST['service'] ?? '' );
+	$service       = sanitize_text_field( $condition_raw );
 	if ( empty( $service ) ) {
-		$service = esc_html__( 'Nâng cơ GMISS & Trẻ hóa đa tầng', 'mediora-clinic' );
+		$service = esc_html__( 'Trẻ hóa chuyên sâu', 'mediora-clinic' );
 	}
 
-	$time_raw     = wp_unslash( $_POST['consult_time'] ?? $_POST['time'] ?? '' );
+	$time_raw     = wp_unslash( $_POST['preferred_time'] ?? $_POST['consult_time'] ?? $_POST['time'] ?? '' );
 	$consult_time = sanitize_text_field( $time_raw );
 	if ( empty( $consult_time ) ) {
-		$consult_time = esc_html__( 'Bất kỳ lúc nào', 'mediora-clinic' );
+		$consult_time = esc_html__( 'Giờ hành chính', 'mediora-clinic' );
 	}
 
-	$note_raw = wp_unslash( $_POST['note'] ?? $_POST['need'] ?? '' );
+	$note_raw = wp_unslash( $_POST['condition'] ?? $_POST['note'] ?? $_POST['need'] ?? '' );
 	$note     = sanitize_textarea_field( $note_raw );
 
 	$source_raw = wp_unslash( $_POST['source'] ?? 'Landing Page' );
@@ -415,7 +415,7 @@ function mediora_ajax_submit_booking() {
 	// F. Standardized JSON Success Response
 	wp_send_json_success(
 		array(
-			'message' => esc_html__( 'Cảm ơn bạn! Bác sĩ chuyên khoa MEDIORA sẽ liên hệ tư vấn trong thời gian sớm nhất.', 'mediora-clinic' ),
+			'message' => esc_html__( 'Cảm ơn bạn! Bác sĩ chuyên khoa Viện Trẻ Hóa Sejang sẽ liên hệ tư vấn trong thời gian sớm nhất.', 'mediora-clinic' ),
 			'lead_id' => $lead_id,
 		)
 	);

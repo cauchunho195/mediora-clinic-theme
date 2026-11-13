@@ -1,0 +1,92 @@
+/* =========================================================
+   MEDIORA – khung dùng chung cho các trang con
+   (Về chúng tôi · Dịch vụ · Câu chuyện khách hàng)
+
+   .cy-stage : khung thiết kế 1920px, co giãn theo bề rộng (tối đa 1920px).
+               Chiều cao = --sh (px Figma). Đơn vị --u = 1px Figma.
+   .cy-fig   : ảnh đặt theo toạ độ Figma: --x --y --w --h
+   .cy-text  : khối chữ đặt theo toạ độ Figma: --x --y --w, cỡ chữ --fs, line-height --lh
+   .cy-bg    : ảnh nền section (--y, --h)
+   Dưới 992px: bỏ toạ độ, xếp dọc (thứ tự chỉnh bằng --o).
+   ========================================================= */
+
+body.cy-page #page { display: block; }
+body.cy-page .site-main { padding: 0; max-width: none; }
+
+.cy-section { position: relative; overflow: hidden; }
+
+.cy-stage {
+  position: relative;
+  width: 100%; max-width: 1920px; margin: 0 auto;
+  aspect-ratio: 1920 / var(--sh, 1000);
+  container-type: inline-size;
+  --u: calc(100cqw / 1920);
+}
+
+
+/* Ảnh / khối đặt theo toạ độ */
+.cy-fig, .cy-box {
+  position: absolute; z-index: 1;
+  left: calc(var(--x) * var(--u));
+  top: calc(var(--y) * var(--u));
+  width: calc(var(--w) * var(--u));
+  aspect-ratio: var(--w) / var(--h);
+  margin: 0; padding: 0; border: 0; background-color: transparent;
+}
+.cy-stage .cy-fig.ph { position: absolute; }
+.cy-fig > img { width: 100%; height: 100%; object-fit: contain; }
+a.cy-fig, button.cy-fig { cursor: pointer; transition: transform .2s ease, filter .2s ease; }
+a.cy-fig:hover, button.cy-fig:hover { filter: brightness(1.06); }
+/*.cy-flip-y > img { transform: scaleY(-1); }*/
+
+/* Ảnh nền section (đặt sau .cy-fig để ghi đè) */
+.cy-stage .cy-fig.cy-bg {
+  z-index: 0;
+  left: 0; width: 100%; aspect-ratio: auto;
+  top: calc(var(--y, 0) * var(--u));
+  height: calc(var(--h, 1000) * var(--u));
+}
+.cy-fig.cy-bg > img { object-fit: cover; object-position: center top; }
+
+/* Khối chữ */
+.cy-text {
+  position: absolute; z-index: 2;
+  left: calc(var(--x) * var(--u));
+  top: calc(var(--y) * var(--u));
+  width: calc(var(--w) * var(--u));
+  margin: 0;
+  font-family: var(--font-body); font-weight: 350;
+  font-size: calc(var(--fs, 32) * var(--u));
+  line-height: var(--lh, 1.3);
+  color: #2C1200;
+  text-align: justify;
+}
+.cy-text p { margin: 0; }
+.cy-text.is-center { text-align: center; }
+.cy-text.is-white  { color: #fff; }
+
+/* Khung giữ chỗ trong stage: chữ nhỏ lại theo khung */
+.cy-stage .ph::before { font-size: clamp(9px, calc(14 * var(--u)), 14px); }
+
+/* ---------- Tablet nhỏ / Mobile: xếp dọc ---------- */
+@media (max-width: 991.98px) {
+  .cy-stage {
+    aspect-ratio: auto;
+    display: flex; flex-direction: column; align-items: center;
+    gap: 20px;
+    padding: 40px 16px;
+  }
+  .cy-stage .cy-fig.ph,
+  .cy-fig, .cy-box, .cy-text {
+    position: relative; left: auto; top: auto;
+    order: var(--o, 0);
+    width: 100%;
+  }
+  .cy-fig, .cy-box { max-width: calc(var(--w) * 1px); }
+  .cy-stage .cy-fig.cy-bg {
+    position: absolute; inset: 0;
+    width: 100%; max-width: none; height: auto;
+  }
+  .cy-text { max-width: 720px; font-size: 16px; line-height: 1.6; }
+  .cy-hide-mb { display: none !important; }
+}

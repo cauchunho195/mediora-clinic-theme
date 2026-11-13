@@ -108,8 +108,8 @@ if ( ! function_exists( 'mediora_render_schema' ) ) {
 	 * @return void
 	 */
 	function mediora_render_schema() {
-		$clinic_name    = mediora_get_option( 'clinic_name', 'Phòng khám Chuyên khoa Thẩm mỹ MEDIORA' );
-		$hotline        = mediora_get_option( 'hotline', '0945.334.832' );
+		$clinic_name    = mediora_get_option( 'clinic_name', 'Viện Trẻ Hóa Sejang' );
+		$hotline        = mediora_get_option( 'hotline', '0988.226.951' );
 		$clean_phone    = mediora_clean_phone( $hotline );
 		$raw_address    = mediora_get_option( 'clinic_address', '257 - 259 Nguyễn Đình Chiểu, Phường Bàn Cờ, TP. HCM' );
 		$clean_address  = trim( preg_replace( '/\s+/', ' ', str_replace( array( "\r", "\n" ), ' ', $raw_address ) ) );
@@ -127,11 +127,11 @@ if ( ! function_exists( 'mediora_render_schema' ) ) {
 		// Social URLs
 		$same_as = array_filter(
 			array(
-				mediora_get_option( 'social_facebook', 'https://www.facebook.com/pkcktmmediora' ),
-				mediora_get_option( 'social_tiktok', 'https://www.tiktok.com/@phongkhammediora' ),
+				mediora_get_option( 'social_facebook', 'https://www.facebook.com/vientrehoasejang' ),
+				mediora_get_option( 'social_tiktok', 'https://www.tiktok.com/@vientrehoasejang' ),
 				mediora_get_option( 'social_youtube', '' ),
-				mediora_get_option( 'social_zalo', 'https://zalo.me/636737550228660397' ),
-				mediora_get_option( 'social_messenger', 'https://m.me/pkcktmmediora' ),
+				mediora_get_option( 'social_zalo', 'https://zalo.me/0988226951' ),
+				mediora_get_option( 'social_messenger', 'https://m.me/vientrehoasejang' ),
 			)
 		);
 
@@ -141,11 +141,11 @@ if ( ! function_exists( 'mediora_render_schema' ) ) {
 			'@type'                     => array( 'MedicalClinic', 'MedicalBusiness' ),
 			'@id'                       => esc_url( $home_url . '#medicalclinic' ),
 			'name'                      => $clinic_name,
-			'legalName'                 => 'Công ty TNHH Y khoa Mediora',
+			'legalName'                 => 'Viện Trẻ Hóa Sejang',
 			'url'                       => esc_url( $home_url ),
 			'logo'                      => esc_url( $logo_url ),
 			'image'                     => esc_url( get_template_directory_uri() . '/assets/imgs/cover.jpg' ),
-			'telephone'                 => $clean_phone ? ( 0 === strpos( $clean_phone, '+' ) ? $clean_phone : '+84' . ltrim( $clean_phone, '0' ) ) : '+84945334832',
+			'telephone'                 => $clean_phone ? ( 0 === strpos( $clean_phone, '+' ) ? $clean_phone : '+84' . ltrim( $clean_phone, '0' ) ) : '+84988226951',
 			'priceRange'                => '$$$$',
 			'currenciesAccepted'        => 'VND',
 			'paymentAccepted'           => 'Cash, Credit Card, Bank Transfer',

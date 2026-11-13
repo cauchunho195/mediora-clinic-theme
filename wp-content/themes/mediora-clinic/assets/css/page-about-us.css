@@ -1,0 +1,33 @@
+/* =========================================================
+   MEDIORA – Về chúng tôi (Figma 4:122)
+   Khung chung: assets/css/pages.css · Ảnh: assets/img-about-us/
+   ========================================================= */
+
+.cy-about-intro { background: #F3E7DA; }
+.cy-about-vision {
+  /* Figma: section 2 bắt đầu ở y=714, chồng 240px lên section 1; nền mờ dần nên không thấy đường nối */
+  position: relative; z-index: 1;
+  margin-top: calc(min(100vw, 1920px) * -240 / 1920);
+  background: transparent;
+}
+
+/* Nhãn "Tầm nhìn / Sứ mệnh / Giá trị cốt lõi" và 6 thẻ giá trị: ảnh PNG nền trong suốt */
+.cy-about .cy-badge > img,
+.cy-about .cy-value > img { object-fit: contain; }
+
+/* Ảnh minh họa cúp hơi nổi khi rê chuột */
+.cy-about .cy-fig[data-ph^="Minh họa"] > img { transition: transform .4s ease; }
+.cy-about .cy-fig[data-ph^="Minh họa"]:hover > img { transform: translateY(-6px); }
+
+@media (max-width: 991.98px) {
+  /* Tiêu đề "VỀ CHÚNG TÔI" nằm sẵn trong ảnh nền → chừa chỗ phía trên */
+  .cy-about-intro .cy-stage { padding-top: 22vw; }
+  .cy-about-intro .cy-fig.cy-bg > img { object-position: center top; }
+  .cy-about-vision { margin-top: 0; background: #F6ECE1; }
+  /* Ảnh nền giữ đúng tỉ lệ theo chiều ngang để tiêu đề "TẦM NHÌN – SỨ MỆNH..." (in sẵn trong ảnh) không bị phóng to */
+  .cy-about-vision .cy-fig.cy-bg > img { height: auto; object-fit: contain; }
+  .cy-about-vision .cy-stage { padding-top: calc(100vw * 440 / 1920 + 12px); }
+  .cy-about .cy-badge { max-width: 200px; }
+  .cy-about .cy-text { text-align: left; }
+  .cy-about .cy-text.is-center { text-align: center; }
+}
