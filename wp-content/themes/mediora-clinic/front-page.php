@@ -204,7 +204,13 @@ $intro_text          = mediora_get_option( 'intro_text', $intro_text_default );
 		<!-- Cột trái: Ảnh bìa cover.jpg -->
 		<div class="col-12 col-lg-8">
 			<div class="ph register-cover" data-ph="<?php esc_attr_e( 'Bìa tư vấn MEDIORA · 1287×724', 'mediora-clinic' ); ?>">
-				<img src="<?php echo esc_url( $theme_uri . '/assets/imgs/cover.jpg' ); ?>" alt="<?php esc_attr_e( 'Phòng khám Thẩm mỹ MEDIORA – Tư vấn nâng cơ trẻ hóa chuyên sâu', 'mediora-clinic' ); ?>" width="1287" height="724" loading="lazy">
+				<?php
+				$register_cover = mediora_get_option( 'register_cover_image', $theme_uri . '/assets/imgs/cover.jpg' );
+				if ( empty( $register_cover ) ) {
+					$register_cover = $theme_uri . '/assets/imgs/cover.jpg';
+				}
+				?>
+				<img src="<?php echo esc_url( $register_cover ); ?>" alt="<?php esc_attr_e( 'Phòng khám Thẩm mỹ MEDIORA – Tư vấn nâng cơ trẻ hóa chuyên sâu', 'mediora-clinic' ); ?>" width="1287" height="724" loading="lazy">
 			</div>
 		</div>
 

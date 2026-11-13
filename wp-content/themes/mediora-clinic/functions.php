@@ -140,36 +140,12 @@ function mediora_resource_hints( $urls, $relation_type ) {
 add_filter( 'wp_resource_hints', 'mediora_resource_hints', 10, 2 );
 
 /**
- * Helper functions & fallbacks.
+ * Include theme modules and helper files.
  */
-if ( ! function_exists( 'mediora_get_option' ) ) {
-	/**
-	 * Retrieve a theme option / customizer setting with fallback.
-	 *
-	 * @param string $key Setting key.
-	 * @param mixed  $default Default value if setting is empty or not set.
-	 * @return mixed
-	 */
-	function mediora_get_option( $key, $default = '' ) {
-		$value = get_theme_mod( $key, $default );
-		if ( false === $value || '' === $value || null === $value ) {
-			return $default;
-		}
-		return $value;
-	}
-}
-
-if ( ! function_exists( 'mediora_clean_phone' ) ) {
-	/**
-	 * Helper function to sanitize phone numbers for tel: links.
-	 *
-	 * @param string $phone Phone number string.
-	 * @return string
-	 */
-	function mediora_clean_phone( $phone ) {
-		return preg_replace( '/[^0-9+]/', '', $phone );
-	}
-}
+require_once MEDIORA_DIR . '/inc/template-tags.php';
+require_once MEDIORA_DIR . '/inc/customizer.php';
+require_once MEDIORA_DIR . '/inc/post-types.php';
+require_once MEDIORA_DIR . '/inc/ajax-booking.php';
 
 if ( ! function_exists( 'mediora_fallback_menu' ) ) {
 	/**
@@ -195,23 +171,5 @@ if ( ! function_exists( 'mediora_fallback_menu' ) ) {
 			echo '<li><a class="nav-link" href="' . esc_url( $url ) . '">' . $label . '</a></li>';
 		}
 		echo '</ul>';
-	}
-}
-
-/**
- * Include helper files and modules.
- */
-require_once MEDIORA_DIR . '/inc/ajax-booking.php';
-
-$mediora_includes = array(
-	'/inc/template-tags.php',
-	'/inc/customizer.php',
-	'/inc/post-types.php',
-);
-
-foreach ( $mediora_includes as $file ) {
-	$filepath = MEDIORA_DIR . $file;
-	if ( file_exists( $filepath ) ) {
-		require_once $filepath;
 	}
 }
