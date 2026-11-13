@@ -201,6 +201,10 @@
           nextEl: '.result-next, .arrow-next',
           prevEl: '.result-prev, .arrow-prev',
         },
+        pagination: {
+          el: '.result-pagination',
+          clickable: true,
+        },
         slidesPerView: 1,
         spaceBetween: 20,
       });

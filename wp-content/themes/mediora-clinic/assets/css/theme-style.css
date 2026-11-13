@@ -794,6 +794,32 @@ h1, h2, h3, h4, h5, h6 {
   transform: rotate(180deg);
 }
 
+.result-pagination {
+  position: relative;
+  margin-top: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  z-index: 10;
+}
+
+.result-pagination .swiper-pagination-bullet {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.35);
+  opacity: 1;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.result-pagination .swiper-pagination-bullet-active {
+  background: var(--gold-gradient);
+  width: 32px;
+  border-radius: 6px;
+}
+
 /* =========================================================
    12. SECTION REGISTER FORM (sec-register)
    ========================================================= */
