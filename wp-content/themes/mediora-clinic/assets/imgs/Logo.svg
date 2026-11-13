@@ -1,24 +1,25 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 382 75" width="382" height="75">
   <defs>
-    <linearGradient id="sejangBlue" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#00d2ff"/>
-      <stop offset="50%" stop-color="#0072f5"/>
-      <stop offset="100%" stop-color="#0047ba"/>
+    <linearGradient id="sejangGold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fff2b2"/>
+      <stop offset="35%" stop-color="#f5d77f"/>
+      <stop offset="70%" stop-color="#d4af37"/>
+      <stop offset="100%" stop-color="#aa771c"/>
     </linearGradient>
     <filter id="sejangGlow" x="-20%" y="-20%" width="140%" height="140%">
       <feGaussianBlur stdDeviation="3" result="blur" />
       <feComposite in="SourceGraphic" in2="blur" operator="over" />
     </filter>
   </defs>
-  <!-- Icon Crown / Lotus / Rejuvenation Diamond -->
+  <!-- Icon Crown / Lotus / Rejuvenation Diamond in Royal Gold -->
   <g transform="translate(15, 12)">
-    <polygon points="25,5 37,28 13,28" fill="url(#sejangBlue)" filter="url(#sejangGlow)"/>
-    <polygon points="5,22 17,45 2,42" fill="#0072f5"/>
-    <polygon points="45,22 48,42 33,45" fill="#0072f5"/>
-    <polygon points="25,50 17,29 33,29" fill="url(#sejangBlue)"/>
+    <polygon points="25,5 37,28 13,28" fill="url(#sejangGold)" filter="url(#sejangGlow)"/>
+    <polygon points="5,22 17,45 2,42" fill="#d4af37"/>
+    <polygon points="45,22 48,42 33,45" fill="#d4af37"/>
+    <polygon points="25,50 17,29 33,29" fill="url(#sejangGold)"/>
     <circle cx="25" cy="27" r="4" fill="#ffffff"/>
   </g>
   <!-- Typography -->
   <text x="82" y="38" font-family="'Montserrat', 'Playfair Display', sans-serif" font-size="25" font-weight="800" letter-spacing="3" fill="#ffffff">SEJANG</text>
-  <text x="82" y="56" font-family="'Be Vietnam Pro', 'Montserrat', sans-serif" font-size="10.5" font-weight="600" letter-spacing="2.5" fill="url(#sejangBlue)">VIỆN TRẺ HÓA CHUYÊN KHOA</text>
+  <text x="82" y="56" font-family="'Be Vietnam Pro', 'Montserrat', sans-serif" font-size="10.5" font-weight="600" letter-spacing="2.5" fill="url(#sejangGold)">VIỆN TRẺ HÓA CHUYÊN KHOA</text>
 </svg>

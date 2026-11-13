@@ -3,12 +3,12 @@
    Khung chung: assets/css/pages.css · Ảnh: assets/img-services/
    ========================================================= */
 
-.cy-services-intro   { background:url(../img-services/bg1.jpg) no-repeat #f0f4f9; background-size: cover; }
-.cy-services-process { background:url(../img-services/bg2.jpg) no-repeat #0a192f; background-size: cover; }
+.cy-services-intro   { background:url(../img-services/bg1.jpg) no-repeat #F4E9DE; background-size: cover; }
+.cy-services-process { background:url(../img-services/bg2.jpg) no-repeat #6E4426; background-size: cover; }
 .cy-services-journey { background: transparent; }
 
 /* Fallback & brand adjustment */
-.cy-services-intro .cy-text { color: #0f2342; }
+.cy-services-intro .cy-text { color: #2C1200; }
 
 /* Modal Popup Consult */
 .popup-consult .modal-dialog {
