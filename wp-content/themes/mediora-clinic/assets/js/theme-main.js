@@ -33,6 +33,7 @@
     initSmoothScroll();
     initImagePlaceholders();
     initBookingForms();
+    initConsultModal();
   });
 
   /**
@@ -220,8 +221,19 @@
         const targetId = this.getAttribute('href');
         if (!targetId || targetId === '#' || targetId === '#0') return;
 
+        // Skip modal toggles, carousel controls, and popup triggers
+        if (
+          this.hasAttribute('data-bs-toggle') ||
+          this.getAttribute('data-bs-toggle') === 'modal' ||
+          this.hasAttribute('data-bs-slide') ||
+          this.hasAttribute('data-bs-target') ||
+          targetId === '#popupConsult'
+        ) {
+          return;
+        }
+
         const targetEl = document.querySelector(targetId);
-        if (targetEl) {
+        if (targetEl && !targetEl.classList.contains('modal')) {
           e.preventDefault();
           const header = document.querySelector('.site-header');
           const headerHeight = header ? header.offsetHeight : 70;
@@ -233,6 +245,76 @@
           });
         }
       });
+    });
+  }
+
+  /**
+   * 6. Consultation Modal Popup (Centered Dialog)
+   */
+  function initConsultModal() {
+    const modalEl = document.getElementById('popupConsult');
+    if (!modalEl) return;
+
+    const openModal = (e) => {
+      if (e) {
+        e.preventDefault();
+        e.stopPropagation();
+      }
+
+      if (typeof bootstrap !== 'undefined' && bootstrap.Modal) {
+        const modal = bootstrap.Modal.getOrCreateInstance(modalEl);
+        modal.show();
+      } else {
+        // Fallback vanilla JS modal handling
+        modalEl.classList.add('show');
+        modalEl.style.display = 'block';
+        document.body.classList.add('modal-open');
+
+        let backdrop = document.querySelector('.modal-backdrop');
+        if (!backdrop) {
+          backdrop = document.createElement('div');
+          backdrop.className = 'modal-backdrop fade show';
+          document.body.appendChild(backdrop);
+          backdrop.addEventListener('click', closeModal);
+        }
+      }
+    };
+
+    const closeModal = (e) => {
+      if (e) e.preventDefault();
+      if (typeof bootstrap !== 'undefined' && bootstrap.Modal) {
+        const modal = bootstrap.Modal.getInstance(modalEl);
+        if (modal) modal.hide();
+      }
+      modalEl.classList.remove('show');
+      modalEl.style.display = 'none';
+      document.body.classList.remove('modal-open');
+      const backdrop = document.querySelector('.modal-backdrop');
+      if (backdrop) backdrop.remove();
+    };
+
+    // Attach to all trigger buttons
+    document.querySelectorAll('[data-bs-target="#popupConsult"], [href="#popupConsult"], .dock-btn--calendar, #btnFloatCalendar').forEach((btn) => {
+      btn.addEventListener('click', openModal);
+    });
+
+    // Close buttons
+    modalEl.querySelectorAll('[data-bs-dismiss="modal"], .btn-close').forEach((btn) => {
+      btn.addEventListener('click', closeModal);
+    });
+
+    // Close on clicking backdrop area
+    modalEl.addEventListener('click', (e) => {
+      if (e.target === modalEl) {
+        closeModal(e);
+      }
+    });
+
+    // Close on Escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && modalEl.classList.contains('show')) {
+        closeModal(e);
+      }
     });
   }
 

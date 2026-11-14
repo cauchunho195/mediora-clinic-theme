@@ -137,7 +137,7 @@ $social_mess   = mediora_get_option( 'social_messenger', 'https://m.me/pkcktmmed
 			</a>
 		<?php endif; ?>
 
-		<a href="#popupConsult" class="fc-item" data-bs-toggle="modal" data-bs-target="#popupConsult" aria-label="<?php esc_attr_e( 'Đặt lịch tư vấn', 'mediora-clinic' ); ?>">
+		<a href="#popupConsult" id="btnFloatCalendar" class="fc-item" data-bs-toggle="modal" data-bs-target="#popupConsult" aria-label="<?php esc_attr_e( 'Đặt lịch tư vấn', 'mediora-clinic' ); ?>" role="button">
 			<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/imgs/ic-calendar.png' ); ?>" alt="<?php esc_attr_e( 'Lịch', 'mediora-clinic' ); ?>" width="39" height="39">
 		</a>
 
@@ -148,21 +148,19 @@ $social_mess   = mediora_get_option( 'social_messenger', 'https://m.me/pkcktmmed
 		</a>
 	</aside>
 
-	<!-- Global Consultation Booking Modal -->
+	<!-- Global Consultation Booking Modal (Popup Centered) -->
 	<div class="modal fade" id="popupConsult" tabindex="-1" aria-labelledby="popupConsultLabel" aria-hidden="true">
 		<div class="modal-dialog modal-dialog-centered">
-			<div class="modal-content modal-booking-dialog position-relative">
-				<button type="button" class="btn-close btn-close-white position-absolute top-0 end-0 m-3 z-3" data-bs-dismiss="modal" aria-label="<?php esc_attr_e( 'Đóng', 'mediora-clinic' ); ?>"></button>
+			<div class="modal-content position-relative p-0 border-0 bg-transparent">
+				<button type="button" class="btn-close position-absolute" data-bs-dismiss="modal" aria-label="<?php esc_attr_e( 'Đóng', 'mediora-clinic' ); ?>" style="top: 8px; right: 8px; z-index: 1060; background-color: rgba(0,0,0,0.65); padding: 8px;"></button>
 				
 				<?php
 				get_template_part(
 					'template-parts/booking-form',
 					null,
 					array(
-						'source'         => 'modal-popup',
-						'show_title_img' => false,
-						'title_text'     => __( 'Đăng Ký Tư Vấn Cùng Bác Sĩ', 'mediora-clinic' ),
-						'subtitle_text'  => __( 'Để lại thông tin, bác sĩ chuyên khoa MEDIORA sẽ liên hệ bảo mật trong 15 phút.', 'mediora-clinic' ),
+						'source'   => 'modal-popup',
+						'is_modal' => true,
 					)
 				);
 				?>

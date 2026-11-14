@@ -186,25 +186,5 @@ $clinic_name = function_exists( 'mediora_get_option' ) ? mediora_get_option( 'cl
 	</section>
 </div>
 
-<!-- 5. MODAL POPUP CONSULT (4 Fields Standard Tech Modal) -->
-<div class="modal fade popup-consult" id="popupConsult" tabindex="-1" aria-hidden="true" aria-label="<?php esc_attr_e( 'Đăng ký nhận tư vấn', 'mediora-clinic' ); ?>">
-	<div class="modal-dialog modal-dialog-centered popup-dialog">
-		<div class="modal-content popup-content tech-glow-popup">
-			<button type="button" class="btn-close btn-close-white popup-close" data-bs-dismiss="modal" aria-label="<?php esc_attr_e( 'Đóng', 'mediora-clinic' ); ?>"></button>
-			<div class="popup-booking-wrapper">
-				<?php
-				get_template_part(
-					'template-parts/booking-form',
-					null,
-					array(
-						'source' => 'popup-services',
-					)
-				);
-				?>
-			</div>
-		</div>
-	</div>
-</div>
-
 <?php
 get_footer();

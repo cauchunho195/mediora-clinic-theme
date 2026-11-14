@@ -30,6 +30,7 @@ if ( ! empty( $custom_shortcode ) ) {
 // 2. Form configuration parameters
 $theme_uri     = get_template_directory_uri();
 $form_source   = ! empty( $args['source'] ) ? esc_attr( $args['source'] ) : 'landing-register';
+$is_modal      = ! empty( $args['is_modal'] ) || 'modal-popup' === $form_source || 'popup-services' === $form_source;
 $hotline       = function_exists( 'mediora_get_option' ) ? mediora_get_option( 'hotline', '0988.226.951' ) : '0988.226.951';
 $hotline_clean = function_exists( 'mediora_clean_phone' ) ? mediora_clean_phone( $hotline ) : '0988226951';
 $zalo_url      = function_exists( 'mediora_get_option' ) ? mediora_get_option( 'social_zalo', 'https://zalo.me/0988226951' ) : 'https://zalo.me/0988226951';
@@ -160,12 +161,13 @@ $unique_id     = 'form-' . esc_attr( $form_source ) . '-' . wp_rand( 100, 999 );
 		</form>
 	</div>
 
+<?php if ( ! $is_modal ) : ?>
 	<!-- Floating Side Action Dock (Zalo, Calendar, Phone, Messenger) -->
 	<aside class="tech-side-dock" aria-label="<?php esc_attr_e( 'Kênh hỗ trợ nhanh', 'mediora-clinic' ); ?>">
 		<a href="<?php echo esc_url( $zalo_url ); ?>" class="dock-btn dock-btn--zalo" target="_blank" rel="noopener noreferrer" title="Chat Zalo">
 			<span class="dock-text">Zalo</span>
 		</a>
-		<a href="#lien-he" class="dock-btn dock-btn--calendar" title="Đặt lịch khám">
+		<a href="#popupConsult" data-bs-toggle="modal" data-bs-target="#popupConsult" class="dock-btn dock-btn--calendar" title="Đặt lịch khám" role="button">
 			<svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
 				<path d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10zm0-12H5V6h14v2zm-7 5h5v5h-5z"/>
 			</svg>
@@ -181,4 +183,5 @@ $unique_id     = 'form-' . esc_attr( $form_source ) . '-' . wp_rand( 100, 999 );
 			</svg>
 		</a>
 	</aside>
+<?php endif; ?>
 </div>
