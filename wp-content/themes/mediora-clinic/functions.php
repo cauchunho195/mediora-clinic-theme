@@ -70,6 +70,9 @@ function mediora_theme_setup() {
 	// Add support for responsive embedded content.
 	add_theme_support( 'responsive-embeds' );
 
+	// Add support for Elementor Page Builder
+	add_theme_support( 'elementor' );
+
 	// Register navigation menus.
 	register_nav_menus(
 		array(

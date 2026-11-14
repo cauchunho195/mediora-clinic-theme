@@ -13,6 +13,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 get_header();
 
+if ( function_exists( 'elementor_load_plugin_textdomain' ) && class_exists( '\Elementor\Plugin' ) && \Elementor\Plugin::$instance->db->is_built_with_elementor( get_the_ID() ) ) :
+	while ( have_posts() ) :
+		the_post();
+		the_content();
+	endwhile;
+else :
+
 $assets_uri = get_template_directory_uri() . '/assets';
 $clinic_name = function_exists( 'mediora_get_option' ) ? mediora_get_option( 'clinic_name', 'Viện Trẻ Hóa Sejang' ) : 'Viện Trẻ Hóa Sejang';
 ?>
@@ -200,4 +207,5 @@ $clinic_name = function_exists( 'mediora_get_option' ) ? mediora_get_option( 'cl
 </div>
 
 <?php
+endif;
 get_footer();
