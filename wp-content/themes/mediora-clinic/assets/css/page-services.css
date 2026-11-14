@@ -53,12 +53,13 @@
 }
 .cy-services-journey .cy-frame { z-index: 1; pointer-events: none; }
 
-.cy-journey-slider { z-index: 2; overflow: hidden; }
+.cy-journey-slider { z-index: 5; overflow: visible !important; }
 .cy-journey-slider .carousel-inner {
   position: relative;
   width: 100%;
   height: 100%;
   overflow: hidden;
+  border-radius: 4px;
 }
 .cy-journey-slider .carousel-item {
   position: relative;
@@ -79,17 +80,19 @@
 
 /* Mũi tên 48×48 – Figma: trước x=248, sau x=1039, y=472 (so với ảnh x=272, y=184) */
 .cy-arrow {
-  position: absolute; z-index: 3;
+  position: absolute; z-index: 20;
   top: calc(288 * var(--u));
-  width: calc(48 * var(--u)); min-width: 28px; aspect-ratio: 1;
+  width: calc(52 * var(--u)); min-width: 32px; aspect-ratio: 1;
   padding: 0; border: 0; background: none; line-height: 0;
-  transition: transform .2s ease;
+  cursor: pointer;
+  filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.45));
+  transition: transform .2s ease, filter .2s ease;
 }
 .cy-arrow img { display: block; width: 100%; height: 100%; }
-.cy-arrow-prev { left: calc(-24 * var(--u)); }
+.cy-arrow-prev { left: calc(-26 * var(--u)); }
 .cy-arrow-prev img { transform: rotate(180deg); }
-.cy-arrow-next { left: calc(767 * var(--u)); }
-.cy-arrow:hover { transform: scale(1.08); }
+.cy-arrow-next { left: calc(765 * var(--u)); }
+.cy-arrow:hover { transform: scale(1.15); filter: drop-shadow(0 6px 14px rgba(212, 175, 55, 0.6)); }
 
 /* Gạch trắng 266×3 dưới đoạn mô tả */
 .cy-rule {
