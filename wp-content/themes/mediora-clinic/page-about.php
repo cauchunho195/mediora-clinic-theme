@@ -13,7 +13,21 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 get_header();
 
-if ( function_exists( 'elementor_load_plugin_textdomain' ) && class_exists( '\Elementor\Plugin' ) && \Elementor\Plugin::$instance->db->is_built_with_elementor( get_the_ID() ) ) :
+$is_elementor_active = false;
+if ( class_exists( '\Elementor\Plugin' ) ) {
+	if ( \Elementor\Plugin::$instance->preview->is_preview_mode()
+		|| \Elementor\Plugin::$instance->editor->is_edit_mode()
+		|| \Elementor\Plugin::$instance->db->is_built_with_elementor( get_the_ID() )
+		|| isset( $_GET['elementor-preview'] )
+		|| isset( $_GET['elementor_library'] ) ) {
+		$is_elementor_active = true;
+	}
+}
+
+$raw_content = get_post_field( 'post_content', get_the_ID() );
+$has_custom_content = $is_elementor_active || ( ! empty( $raw_content ) && strpos( $raw_content, 'cy-stage' ) !== false );
+
+if ( $has_custom_content ) :
 	while ( have_posts() ) :
 		the_post();
 		the_content();
