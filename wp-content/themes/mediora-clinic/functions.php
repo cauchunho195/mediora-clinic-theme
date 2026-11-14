@@ -11,7 +11,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 if ( ! defined( 'MEDIORA_VERSION' ) ) {
-	define( 'MEDIORA_VERSION', '1.0.0' );
+	define( 'MEDIORA_VERSION', '1.3.1' );
 }
 
 if ( ! defined( 'MEDIORA_DIR' ) ) {
