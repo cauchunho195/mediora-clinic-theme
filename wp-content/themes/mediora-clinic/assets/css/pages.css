@@ -10,7 +10,11 @@
    Dưới 992px: bỏ toạ độ, xếp dọc (thứ tự chỉnh bằng --o).
    ========================================================= */
 
-body.cy-page #page { display: block; }
+body.cy-page {
+  background: var(--m-cream, #FBF5EC) !important;
+  color: var(--m-text, #3A2618) !important;
+}
+body.cy-page #page { display: block; background: var(--m-cream, #FBF5EC); }
 body.cy-page .site-main { padding: 0; max-width: none; }
 
 .cy-section { position: relative; overflow: hidden; }

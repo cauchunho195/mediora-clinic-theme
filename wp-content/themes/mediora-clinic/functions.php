@@ -84,18 +84,18 @@ add_action( 'after_setup_theme', 'mediora_theme_setup' );
  * Enqueue scripts and styles.
  */
 function mediora_enqueue_scripts() {
-	// Google Fonts: Montserrat & Playfair Display
-	$fonts_url = 'https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Be+Vietnam+Pro:wght@300;400;500;600;700&display=swap';
+	// Google Fonts: Bebas Neue (Bebas SE equivalent), Plus Jakarta Sans (SVN-Gilroy equivalent) & Montserrat
+	$fonts_url = 'https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap';
 	wp_enqueue_style( 'mediora-fonts', $fonts_url, array(), null );
 
-	// Bootstrap 5 Grid (Lightweight 12 columns)
-	wp_enqueue_style( 'bootstrap-grid', MEDIORA_URI . '/assets/css/bootstrap-grid.min.css', array(), '5.3.3' );
+	// Bootstrap 5.3.3 (Full CSS for Grid, Carousel, Modal, Offcanvas)
+	wp_enqueue_style( 'bootstrap', MEDIORA_URI . '/assets/css/bootstrap.min.css', array(), '5.3.3' );
 
 	// Swiper Slider CSS
 	wp_enqueue_style( 'swiper-bundle', MEDIORA_URI . '/assets/css/swiper-bundle.min.css', array(), '11.0.0' );
 
 	// Mediora Luxury Theme CSS
-	wp_enqueue_style( 'mediora-style', MEDIORA_URI . '/assets/css/theme-style.css', array( 'bootstrap-grid', 'swiper-bundle' ), MEDIORA_VERSION );
+	wp_enqueue_style( 'mediora-style', MEDIORA_URI . '/assets/css/theme-style.css', array( 'bootstrap', 'swiper-bundle' ), MEDIORA_VERSION );
 
 	// Bootstrap 5.3.3 JS Bundle (Carousel, Modal)
 	if ( file_exists( MEDIORA_DIR . '/assets/js/bootstrap.bundle.min.js' ) ) {

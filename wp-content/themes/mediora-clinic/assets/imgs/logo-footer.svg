@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 461 104" width="461" height="104">
+  <defs>
+    <linearGradient id="sejangGoldDark" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#d4af37"/>
+      <stop offset="50%" stop-color="#b8860b"/>
+      <stop offset="100%" stop-color="#704a2f"/>
+    </linearGradient>
+  </defs>
+  <!-- Icon Diamond Emblem -->
+  <g transform="translate(10, 16) scale(1.3)">
+    <polygon points="25,5 37,28 13,28" fill="url(#sejangGoldDark)"/>
+    <polygon points="5,22 17,45 2,42" fill="#aa771c"/>
+    <polygon points="45,22 48,42 33,45" fill="#aa771c"/>
+    <polygon points="25,50 17,29 33,29" fill="url(#sejangGoldDark)"/>
+    <circle cx="25" cy="27" r="4" fill="#d4af37"/>
+  </g>
+  <!-- Typography -->
+  <text x="96" y="52" font-family="'Montserrat', 'Playfair Display', sans-serif" font-size="34" font-weight="800" letter-spacing="4" fill="#704A2F">SEJANG</text>
+  <text x="96" y="76" font-family="'Montserrat', sans-serif" font-size="14" font-weight="700" letter-spacing="2.5" fill="url(#sejangGoldDark)">VIỆN TRẺ HÓA CHUYÊN KHOA</text>
+</svg>

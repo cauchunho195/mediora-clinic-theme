@@ -4,7 +4,7 @@
  * Description: Trang dịch vụ Viện Trẻ Hóa Sejang chuẩn xác theo mẫu phongkhammediora.vn/dich-vu/
  *
  * @package Mediora_Clinic
- * @version 1.1.0
+ * @version 1.2.0
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -14,10 +14,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 get_header();
 
 $assets_uri  = get_template_directory_uri() . '/assets';
-$clinic_name = function_exists( 'mediora_get_option' ) ? mediora_get_option( 'clinic_name', 'Viện Trẻ Hóa Sejang' ) : 'Viện Trẻ Hóa Sejang';
+$clinic_name = function_exists( 'mediora_get_option' ) ? mediora_get_option( 'clinic_name', 'vientrehoaSejang' ) : 'vientrehoaSejang';
 ?>
 
-<div class="subpage-content cy-page-services">
+<div class="subpage-content cy-services">
 	<!-- 1. SECTION SERVICES INTRO -->
 	<section class="cy-section cy-services-intro" aria-labelledby="cy-services-title">
 		<div class="cy-stage" style="--sh:1776">
@@ -110,15 +110,15 @@ $clinic_name = function_exists( 'mediora_get_option' ) ? mediora_get_option( 'cl
 			<h2 id="cy-journey-title" class="screen-reader-text"><?php esc_html_e( 'Mỗi khách hàng một hành trình trẻ hóa riêng', 'mediora-clinic' ); ?></h2>
 			
 			<div class="cy-fig ph cy-bg" data-ph="BG3 m3 · 1920×1000" style="--x:0;--y:38;--w:1920;--h:1000;--o:0">
-				<img src="<?php echo esc_url( $assets_uri . '/img-services/bg-journey.jpg' ); ?>" alt="" width="1920" height="1000" loading="lazy" decoding="async">
+				<img src="<?php echo esc_url( $assets_uri . '/img-services/bg-journey.jpg' ); ?>" alt="" width="1920" height="1000" loading="eager" fetchpriority="high">
 			</div>
 
 			<div class="cy-fig ph cy-frame cy-hide-mb" data-ph="Frame line · 1732×997" style="--x:94;--y:0;--w:1732;--h:997;--o:0">
-				<img src="<?php echo esc_url( $assets_uri . '/img-services/frame-line.png' ); ?>" alt="" width="1732" height="997" loading="lazy" decoding="async">
+				<img src="<?php echo esc_url( $assets_uri . '/img-services/frame-line.png' ); ?>" alt="" width="1732" height="997" loading="eager">
 			</div>
 
 			<!-- Customer Transformation Slider -->
-			<div class="cy-box cy-journey-slider carousel slide" id="journeyCarousel" data-bs-ride="carousel" style="--x:272;--y:184;--w:791;--h:624;--o:4">
+			<div class="cy-box cy-journey-slider carousel slide" id="journeyCarousel" data-bs-ride="carousel" data-bs-interval="5000" style="--x:272;--y:184;--w:791;--h:624;--o:4">
 				<div class="carousel-inner">
 					<div class="carousel-item active">
 						<div class="ph" data-ph="Mẫu Ngân Quỳnh · 791×624">
@@ -128,16 +128,6 @@ $clinic_name = function_exists( 'mediora_get_option' ) ? mediora_get_option( 'cl
 					<div class="carousel-item">
 						<div class="ph" data-ph="Mẫu Thảo · 791×624">
 							<img src="<?php echo esc_url( $assets_uri . '/img-services/ba-thao.png' ); ?>" alt="Trước và sau trẻ hóa – chị Thảo" width="791" height="624" loading="lazy">
-						</div>
-					</div>
-					<div class="carousel-item">
-						<div class="ph" data-ph="Mẫu Hiền Phạm · 791×624">
-							<img src="<?php echo esc_url( $assets_uri . '/imgs/kh-hien-pham.png' ); ?>" alt="Trước và sau trẻ hóa – chị Hiền Phạm" width="791" height="624" loading="lazy">
-						</div>
-					</div>
-					<div class="carousel-item">
-						<div class="ph" data-ph="Mẫu Vi Tường · 791×624">
-							<img src="<?php echo esc_url( $assets_uri . '/imgs/kh-vi-tuong.png' ); ?>" alt="Trước và sau trẻ hóa – chị Vi Tường" width="791" height="624" loading="lazy">
 						</div>
 					</div>
 				</div>
@@ -163,25 +153,6 @@ $clinic_name = function_exists( 'mediora_get_option' ) ? mediora_get_option( 'cl
 			<button class="cy-fig ph cy-btn-consult" data-bs-target="#popupConsult" data-bs-toggle="modal" data-ph="Nhận tư vấn ngay · 365×53" style="--x:1209;--y:755;--w:365;--h:53;--o:3" type="button">
 				<img src="<?php echo esc_url( $assets_uri . '/img-services/btn-consult.png' ); ?>" alt="<?php esc_attr_e( 'Nhận tư vấn ngay', 'mediora-clinic' ); ?>" width="365" height="53" loading="lazy">
 			</button>
-		</div>
-	</section>
-
-	<!-- 4. SECTION REGISTRATION FORM (Tech Glow 4-Field UI) -->
-	<section class="sec-register py-5" id="lien-he" aria-label="<?php esc_attr_e( 'Đăng ký tư vấn', 'mediora-clinic' ); ?>">
-		<div class="container">
-			<div class="row justify-content-center">
-				<div class="col-12 col-lg-8 col-xl-6 text-center">
-					<?php
-					get_template_part(
-						'template-parts/booking-form',
-						null,
-						array(
-							'source' => 'page-services',
-						)
-					);
-					?>
-				</div>
-			</div>
 		</div>
 	</section>
 </div>

@@ -37,11 +37,11 @@
 
   /* Typography */
   --font-serif: "Playfair Display", Georgia, serif;
-  --font-head: "Montserrat", "Be Vietnam Pro", -apple-system, BlinkMacSystemFont, sans-serif;
-  --font-body: "Be Vietnam Pro", "Montserrat", system-ui, -apple-system, sans-serif;
+  --font-head: "Bebas Neue", "Montserrat", Arial, sans-serif;
+  --font-body: "Plus Jakarta Sans", "Montserrat", system-ui, -apple-system, sans-serif;
 
   /* Layout */
-  --header-h: 80px;
+  --header-h: 75px;
   --wrap: 1752px;
   --wrap-wide: 1894px;
   --transition-fast: 0.25s ease;
@@ -247,17 +247,15 @@ h1, h2, h3, h4, h5, h6 {
   top: 0;
   z-index: 1030;
   height: var(--header-h);
-  background: rgba(11, 15, 20, 0.94);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+  background: var(--m-brown, #704a2f) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
   transition: background-color var(--transition-normal), box-shadow var(--transition-normal);
 }
 
 .site-header.is-scrolled {
-  background: rgba(11, 15, 20, 0.98);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
-  border-bottom-color: rgba(212, 175, 55, 0.35);
+  background: var(--m-brown-2, #60381d) !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+  border-bottom-color: rgba(255, 255, 255, 0.2);
 }
 
 .admin-bar .site-header {
@@ -310,15 +308,15 @@ h1, h2, h3, h4, h5, h6 {
 .main-nav .nav-link,
 .main-nav a {
   padding: 6px 0;
-  color: #ffffff;
+  color: #ffffff !important;
   font-family: var(--font-head);
   text-transform: uppercase;
-  font-weight: 600;
-  font-size: 16px;
-  letter-spacing: 0.04em;
+  font-weight: 400;
+  font-size: 24px;
+  letter-spacing: 0.03em;
   white-space: nowrap;
   position: relative;
-  transition: color var(--transition-fast);
+  transition: color var(--transition-fast), opacity var(--transition-fast);
 }
 
 .main-nav .nav-link::after,
@@ -329,7 +327,7 @@ h1, h2, h3, h4, h5, h6 {
   left: 0;
   width: 0;
   height: 2px;
-  background: var(--gold-gradient);
+  background: #ffffff;
   transition: width var(--transition-fast);
 }
 
@@ -337,7 +335,8 @@ h1, h2, h3, h4, h5, h6 {
 .main-nav a:hover,
 .main-nav .nav-link.active,
 .main-nav .current-menu-item > a {
-  color: var(--gold-light);
+  color: #ffffff !important;
+  opacity: 0.9;
 }
 
 .main-nav .nav-link:hover::after,
@@ -358,22 +357,46 @@ h1, h2, h3, h4, h5, h6 {
   display: flex;
   align-items: center;
   gap: 8px;
-  color: #ffffff;
+  color: #ffffff !important;
   font-family: var(--font-head);
-  font-size: 16px;
-  font-weight: 700;
+  font-size: 19px;
+  font-weight: 400;
   white-space: nowrap;
   letter-spacing: 0.02em;
 }
 
 .header-cta .hotline:hover {
-  color: var(--gold-light);
+  color: rgba(255, 255, 255, 0.85) !important;
 }
 
 .header-cta .hotline-icon {
   width: 20px;
   height: 20px;
-  fill: var(--gold-primary);
+  fill: #ffffff;
+}
+
+.site-header .btn-consult,
+.header-cta .btn-consult {
+  background: #ffffff !important;
+  color: var(--m-brown, #704a2f) !important;
+  border: 1px solid #ffffff !important;
+  border-radius: var(--radius-pill) !important;
+  font-family: var(--font-body) !important;
+  font-weight: 600 !important;
+  font-size: 15px !important;
+  padding: 8px 24px !important;
+  line-height: 1.3 !important;
+  animation: none !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1) !important;
+  text-transform: none !important;
+  cursor: pointer;
+}
+
+.site-header .btn-consult:hover,
+.header-cta .btn-consult:hover {
+  background: var(--m-cream, #fbf5ec) !important;
+  color: var(--m-brown, #704a2f) !important;
+  transform: translateY(-1px);
 }
 
 /* Burger Button for Mobile */
@@ -1279,130 +1302,213 @@ select.form-control option {
 }
 
 /* =========================================================
-   14. SITE FOOTER
+   14. SITE FOOTER (Chuẩn tỉ lệ Figma và live site Mediora)
    ========================================================= */
 .site-footer {
-  padding: 60px 0 40px;
-  background: #080c10;
-  border-top: 1px solid rgba(212, 175, 55, 0.2);
-  color: #b0bac5;
+  padding: 30px 0 80px;
+  background: #ffffff !important;
+  color: #000000 !important;
+  border-top: none !important;
 }
 
 .footer-wrap {
-  max-width: 1800px;
-  padding-left: 48px;
-  padding-right: 48px;
+  max-width: 1920px;
+  padding-left: 78px;
+  padding-right: 78px;
+}
+
+.f-tit {
+  font-size: 32px;
+  line-height: 38px;
 }
 
 .footer-logo {
   display: block;
-  width: 380px;
+  width: 461px;
   max-width: 100%;
-  margin-bottom: 36px;
+  aspect-ratio: 461 / 104;
+  margin-left: -19px;
+  margin-bottom: 20px;
+}
+
+.footer-logo > img {
+  object-fit: contain;
 }
 
 .footer-row {
-  margin-top: 24px;
-}
-
-.footer-col {
-  margin-bottom: 24px;
-}
-
-.footer-city {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  font-family: var(--font-head);
-  font-size: 22px;
-  font-weight: 700;
-  color: #ffffff;
-  margin-bottom: 14px;
-  text-transform: uppercase;
-}
-
-.footer-gps {
-  width: 24px;
-  height: 34px;
-  display: inline-block;
-}
-
-.footer-address {
-  font-size: 16px;
-  line-height: 1.6;
-  color: #cfd5db;
-  margin-bottom: 16px;
-}
-
-.footer-phone {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  font-family: var(--font-head);
-  font-size: 20px;
-  font-weight: 700;
-  color: var(--gold-light);
-}
-
-.footer-title {
-  font-family: var(--font-head);
-  font-size: 20px;
-  font-weight: 700;
-  color: #ffffff;
-  text-transform: uppercase;
-  margin-bottom: 14px;
+  margin-top: 36px;
+  --bs-gutter-y: 32px;
 }
 
 .footer-text {
-  font-size: 15px;
-  line-height: 1.7;
-  color: #cfd5db;
-  margin-bottom: 12px;
+  margin: 0 0 10px;
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 34px;
+  color: #000000 !important;
 }
 
+.text-linear {
+  background: -webkit-linear-gradient(#412613, #926544);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Cột 1 – địa chỉ */
+.footer-city {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  font-family: var(--font-body);
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.footer-city > span:last-child {
+  -webkit-text-fill-color: transparent;
+}
+
+.footer-gps {
+  width: 28px;
+  height: 40px;
+  flex: 0 0 28px;
+  -webkit-text-fill-color: initial;
+}
+
+.footer-address {
+  margin-top: 19px;
+  margin-bottom: 0;
+}
+
+.footer-phone {
+  display: inline-block;
+  margin-top: 23px;
+  text-decoration: none;
+}
+
+.footer-phone__btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--m-brown, #704a2f);
+  color: #ffffff !important;
+  padding: 8px 24px;
+  border-radius: 999px;
+  font-family: var(--font-head);
+  font-size: 24px;
+  line-height: 1.2;
+  letter-spacing: 0.04em;
+  box-shadow: 0 4px 14px rgba(112, 74, 47, 0.25);
+  transition: transform var(--transition-fast), background-color var(--transition-fast);
+}
+
+.footer-phone:hover .footer-phone__btn {
+  background: var(--m-brown-2, #60381d);
+  color: var(--m-gold-light, #f1dfc0) !important;
+  transform: translateY(-2px);
+}
+
+.footer-phone__icon {
+  width: 20px;
+  height: 20px;
+  fill: currentColor;
+  flex: 0 0 20px;
+}
+
+/* Cột 2 – giấy phép */
+.footer-title {
+  margin-bottom: 10px !important;
+  font-family: var(--font-body);
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.footer-col--license .footer-text {
+  max-width: 560px;
+}
+
+/* Cột 3 – mạng xã hội */
 .footer-social {
   display: flex;
   flex-direction: column;
-  gap: 18px;
+  gap: 32px;
+  margin-top: -8px !important;
 }
 
 .footer-social__item {
   display: flex;
   align-items: center;
-  gap: 16px;
-  color: #ffffff;
-  transition: transform var(--transition-fast), color var(--transition-fast);
-}
-
-.footer-social__item:hover {
-  transform: translateX(4px);
-  color: var(--gold-light);
+  gap: 26px;
+  text-decoration: none;
 }
 
 .footer-social__icon {
-  width: 48px;
-  height: 48px;
-  flex: 0 0 48px;
-  object-fit: contain;
+  flex: 0 0 72px;
+  width: 72px;
+  height: auto;
+  transition: transform var(--transition-fast);
+}
+
+a.footer-social__item:hover .footer-social__icon {
+  transform: scale(1.06);
 }
 
 .footer-social__text {
-  font-family: var(--font-head);
-  font-weight: 600;
-  font-size: 18px;
-  line-height: 1.3;
+  max-width: 449px;
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 26px;
+  line-height: 32px;
 }
 
-.footer-bottom {
-  margin-top: 48px;
-  padding-top: 24px;
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  font-size: 14px;
-  color: #8c9ba5;
+/* ≥1200: lưới đúng tỉ lệ Figma (410 | 756 | phần còn lại) */
+@media (min-width: 1200px) {
+  .footer-row {
+    display: grid;
+    grid-template-columns: minmax(0, 410fr) minmax(0, 756fr) minmax(0, 548fr);
+    margin-left: 0;
+    margin-right: 0;
+  }
+  .footer-row > .footer-col {
+    width: auto;
+    max-width: none;
+    padding-left: 0;
+    padding-right: 24px;
+    margin-top: 0;
+  }
+}
+
+/* ≥1600: cột cố định đúng toạ độ Figma (x78 | x488 | x1244) */
+@media (min-width: 1600px) {
+  .footer-row {
+    grid-template-columns: 410px 756px minmax(0, 1fr);
+  }
+  .footer-title {
+    white-space: nowrap;
+  }
+}
+
+@media (max-width: 1199.98px) {
+  .site-footer {
+    padding: 32px 0 40px;
+  }
+  .footer-wrap {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+  .footer-logo {
+    margin-left: -10px;
+  }
+  .footer-row {
+    margin-top: 24px;
+  }
+  .footer-social {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 20px 32px;
+    margin-top: 0 !important;
+  }
 }
 
 /* =========================================================

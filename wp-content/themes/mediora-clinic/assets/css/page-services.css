@@ -5,7 +5,7 @@
 
 .cy-services-intro   { background:url(../img-services/bg1.jpg) no-repeat #F4E9DE; background-size: cover; }
 .cy-services-process { background:url(../img-services/bg2.jpg) no-repeat #6E4426; background-size: cover; }
-.cy-services-journey { background: transparent; }
+.cy-services-journey { background: url(../img-services/bg-journey.jpg) no-repeat #6E4426; background-size: cover; }
 
 /* Fallback & brand adjustment */
 .cy-services-intro .cy-text { color: #2C1200; }
@@ -53,10 +53,29 @@
 }
 .cy-services-journey .cy-frame { z-index: 1; pointer-events: none; }
 
-.cy-journey-slider { z-index: 2; }
-.cy-journey-slider .carousel-inner { width: 100%; height: 100%; }
-.cy-journey-slider .carousel-item { height: 100%; }
-.cy-journey-slider .ph { width: 100%; aspect-ratio: 791 / 624; }
+.cy-journey-slider { z-index: 2; overflow: hidden; }
+.cy-journey-slider .carousel-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+.cy-journey-slider .carousel-item {
+  position: relative;
+  display: none;
+  float: left;
+  width: 100%;
+  height: 100%;
+  margin-right: -100%;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  transition: transform .6s ease-in-out;
+}
+.cy-journey-slider .carousel-item.active {
+  display: block;
+}
+.cy-journey-slider .ph { width: 100%; height: 100%; aspect-ratio: 791 / 624; }
+.cy-journey-slider .ph img { width: 100%; height: 100%; object-fit: cover; }
 
 /* Mũi tên 48×48 – Figma: trước x=248, sau x=1039, y=472 (so với ảnh x=272, y=184) */
 .cy-arrow {

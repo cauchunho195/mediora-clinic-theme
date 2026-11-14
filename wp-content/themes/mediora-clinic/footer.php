@@ -43,13 +43,13 @@ $social_mess   = mediora_get_option( 'social_messenger', 'https://m.me/pkcktmmed
 		<div class="container-fluid footer-wrap">
 			<!-- Footer Logo -->
 			<a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="footer-logo" rel="home">
-				<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/imgs/logof.png' ); ?>" alt="<?php bloginfo( 'name' ); ?>" width="461" height="104" loading="lazy">
+				<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/imgs/logo-footer.svg' ); ?>" alt="<?php bloginfo( 'name' ); ?>" width="461" height="104" loading="lazy">
 			</a>
 
-			<div class="row footer-row gy-4">
+			<div class="row footer-row">
 				<!-- Column 1: Address & Hotline -->
 				<div class="col-12 col-md-6 col-xl footer-col footer-col--addr">
-					<h3 class="footer-city text-linear m-0">
+					<h3 class="footer-city f-tit text-linear m-0">
 						<span class="footer-gps">
 							<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/imgs/gps.png' ); ?>" alt="GPS" width="28" height="40" loading="lazy">
 						</span>
@@ -59,13 +59,18 @@ $social_mess   = mediora_get_option( 'social_messenger', 'https://m.me/pkcktmmed
 						<?php echo nl2br( esc_html( $address ) ); ?>
 					</p>
 					<a href="<?php echo esc_url( 'tel:' . $hotline_tel ); ?>" class="footer-phone" aria-label="<?php echo esc_attr( sprintf( __( 'Gọi hotline %s', 'mediora-clinic' ), $hotline ) ); ?>">
-						<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/imgs/fsdt.png' ); ?>" alt="<?php echo esc_attr( sprintf( __( 'Hotline %s', 'mediora-clinic' ), $hotline ) ); ?>" width="253" height="42" loading="lazy">
+						<span class="footer-phone__btn">
+							<svg class="footer-phone__icon" viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+								<path d="M6.62 10.79a15.053 15.053 0 006.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
+							</svg>
+							<span class="footer-phone__number"><?php echo esc_html( $hotline ); ?></span>
+						</span>
 					</a>
 				</div>
 
 				<!-- Column 2: Medical Licensing & Accreditation -->
 				<div class="col-12 col-md-6 col-xl-auto footer-col footer-col--license">
-					<h3 class="footer-title text-linear m-0">
+					<h3 class="footer-title f-tit text-linear m-0">
 						<?php echo esc_html( $license_title ); ?>
 					</h3>
 					<div class="footer-text">
@@ -80,51 +85,32 @@ $social_mess   = mediora_get_option( 'social_messenger', 'https://m.me/pkcktmmed
 					<ul class="footer-social list-unstyled m-0">
 						<?php if ( ! empty( $social_zalo ) ) : ?>
 							<li>
-								<a class="footer-social__item" href="<?php echo esc_url( $social_zalo ); ?>" target="_blank" rel="noopener noreferrer" aria-label="<?php esc_attr_e( 'Zalo Mediora', 'mediora-clinic' ); ?>">
-									<img class="footer-social__icon" src="<?php echo esc_url( get_template_directory_uri() . '/assets/imgs/ic-zalo-footer.png' ); ?>" alt="Zalo" width="48" height="48" loading="lazy">
-									<span class="footer-social__text text-linear"><?php esc_html_e( 'Phòng Khám Mediora', 'mediora-clinic' ); ?></span>
+								<a class="footer-social__item" href="<?php echo esc_url( $social_zalo ); ?>" target="_blank" rel="noopener noreferrer" aria-label="<?php esc_attr_e( 'Zalo Sejang', 'mediora-clinic' ); ?>">
+									<img class="footer-social__icon" src="<?php echo esc_url( get_template_directory_uri() . '/assets/imgs/ic-zalo-footer.png' ); ?>" alt="Zalo" width="72" height="72" loading="lazy">
+									<span class="footer-social__text text-linear"><?php esc_html_e( 'Viện Trẻ Hóa Sejang', 'mediora-clinic' ); ?></span>
 								</a>
 							</li>
 						<?php endif; ?>
 
 						<?php if ( ! empty( $social_fb ) ) : ?>
 							<li>
-								<a class="footer-social__item" href="<?php echo esc_url( $social_fb ); ?>" target="_blank" rel="noopener noreferrer" aria-label="<?php esc_attr_e( 'Facebook Mediora', 'mediora-clinic' ); ?>">
-									<img class="footer-social__icon" src="<?php echo esc_url( get_template_directory_uri() . '/assets/imgs/ic-fb.png' ); ?>" alt="Facebook" width="48" height="48" loading="lazy">
-									<span class="footer-social__text text-linear"><?php esc_html_e( 'Phòng Khám Chuyên Khoa Thẩm Mỹ Mediora', 'mediora-clinic' ); ?></span>
+								<a class="footer-social__item" href="<?php echo esc_url( $social_fb ); ?>" target="_blank" rel="noopener noreferrer" aria-label="<?php esc_attr_e( 'Facebook Sejang', 'mediora-clinic' ); ?>">
+									<img class="footer-social__icon" src="<?php echo esc_url( get_template_directory_uri() . '/assets/imgs/ic-fb.png' ); ?>" alt="Facebook" width="72" height="73" loading="lazy">
+									<span class="footer-social__text text-linear"><?php esc_html_e( 'Viện Trẻ Hóa Chuyên Khoa Sejang', 'mediora-clinic' ); ?></span>
 								</a>
 							</li>
 						<?php endif; ?>
 
 						<?php if ( ! empty( $social_tiktok ) ) : ?>
 							<li>
-								<a class="footer-social__item" href="<?php echo esc_url( $social_tiktok ); ?>" target="_blank" rel="noopener noreferrer" aria-label="<?php esc_attr_e( 'TikTok Mediora', 'mediora-clinic' ); ?>">
-									<img class="footer-social__icon" src="<?php echo esc_url( get_template_directory_uri() . '/assets/imgs/ic-tiktok.png' ); ?>" alt="TikTok" width="48" height="48" loading="lazy">
-									<span class="footer-social__text text-linear"><?php esc_html_e( 'Bác Sĩ Hoàng Tùng - Trẻ Hoá', 'mediora-clinic' ); ?></span>
-								</a>
-							</li>
-						<?php endif; ?>
-
-						<?php if ( ! empty( $social_mess ) ) : ?>
-							<li>
-								<a class="footer-social__item" href="<?php echo esc_url( $social_mess ); ?>" target="_blank" rel="noopener noreferrer" aria-label="<?php esc_attr_e( 'Messenger Mediora', 'mediora-clinic' ); ?>">
-									<img class="footer-social__icon" src="<?php echo esc_url( get_template_directory_uri() . '/assets/imgs/ic-mess.png' ); ?>" alt="Messenger" width="48" height="48" loading="lazy">
-									<span class="footer-social__text text-linear"><?php esc_html_e( 'Messenger Tư Vấn 24/7', 'mediora-clinic' ); ?></span>
+								<a class="footer-social__item" href="<?php echo esc_url( $social_tiktok ); ?>" target="_blank" rel="noopener noreferrer" aria-label="<?php esc_attr_e( 'TikTok Sejang', 'mediora-clinic' ); ?>">
+									<img class="footer-social__icon" src="<?php echo esc_url( get_template_directory_uri() . '/assets/imgs/ic-tiktok.png' ); ?>" alt="TikTok" width="72" height="72" loading="lazy">
+									<span class="footer-social__text text-linear"><?php esc_html_e( 'Bác Sĩ Hoàng Tùng - Trẻ Hóa Sejang', 'mediora-clinic' ); ?></span>
 								</a>
 							</li>
 						<?php endif; ?>
 					</ul>
 				</div>
-			</div>
-
-			<!-- Footer Bottom Copyright -->
-			<div class="footer-bottom">
-				<p class="m-0">
-					&copy; <?php echo esc_html( gmdate( 'Y' ) ); ?> <?php bloginfo( 'name' ); ?>. <?php esc_html_e( 'Bảo lưu mọi quyền.', 'mediora-clinic' ); ?>
-				</p>
-				<p class="m-0">
-					<?php esc_html_e( 'Tiêu chuẩn Y khoa Thẩm mỹ Luxury & An toàn.', 'mediora-clinic' ); ?>
-				</p>
 			</div>
 		</div>
 	</footer><!-- #colophon -->

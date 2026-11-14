@@ -76,14 +76,11 @@ $hotline_tel = mediora_clean_phone( $hotline );
 				<div class="col-auto d-none d-xl-block">
 					<div class="header-cta">
 						<a class="hotline" href="<?php echo esc_url( 'tel:' . $hotline_tel ); ?>">
-							<svg class="hotline-icon" viewBox="0 0 24 24" fill="currentColor" width="20" height="20" aria-hidden="true">
-								<path d="M6.62 10.79a15.053 15.053 0 006.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
-							</svg>
-							<span><?php echo esc_html( $hotline ); ?></span>
+							<?php printf( esc_html__( 'Tổng đài: %s', 'mediora-clinic' ), esc_html( $hotline ) ); ?>
 						</a>
-						<a href="<?php echo esc_url( is_front_page() ? '#lien-he' : home_url( '/#lien-he' ) ); ?>" class="btn btn-consult btn-gold-pill" data-bs-toggle="modal" data-bs-target="#popupConsult">
+						<button type="button" class="btn btn-consult" data-bs-toggle="modal" data-bs-target="#popupConsult">
 							<?php esc_html_e( 'Đăng ký tư vấn', 'mediora-clinic' ); ?>
-						</a>
+						</button>
 					</div>
 				</div>
 
