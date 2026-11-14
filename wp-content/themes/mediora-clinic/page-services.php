@@ -52,12 +52,12 @@ $clinic_name = function_exists( 'mediora_get_option' ) ? mediora_get_option( 'cl
 				<img src="<?php echo esc_url( $assets_uri . '/img-services/maintext.png' ); ?>" alt="Nâng cơ trẻ hóa bằng sợi sinh học GMISS" fetchpriority="high" width="1058" height="110">
 			</div>
 
-			<div class="cy-fig ph cy-hide-mb" data-ph="Mẫu 1 · 619×836" style="--x:0;--y:188;--w:619;--h:836;--o:0">
-				<img src="<?php echo esc_url( $assets_uri . '/img-services/mau-1.png' ); ?>" alt="Khách hàng <?php echo esc_attr( $clinic_name ); ?>" fetchpriority="high" width="619" height="836">
+			<div class="cy-fig ph cy-hide-mb cy-model-col cy-model-left" data-ph="Mẫu 1 · 580×850" style="--x:0;--y:188;--w:580;--h:850;--o:0">
+				<img src="<?php echo esc_url( $assets_uri . '/img-services/mau-1.png' ); ?>" alt="Khách hàng <?php echo esc_attr( $clinic_name ); ?>" fetchpriority="high" width="580" height="850">
 			</div>
 
-			<div class="cy-fig ph cy-hide-mb" data-ph="Mẫu 2 · 774×853" style="--x:1178;--y:188;--w:774;--h:853;--o:0">
-				<img src="<?php echo esc_url( $assets_uri . '/img-services/mau-2.png' ); ?>" alt="Khách hàng <?php echo esc_attr( $clinic_name ); ?>" fetchpriority="high" width="774" height="853">
+			<div class="cy-fig ph cy-hide-mb cy-model-col cy-model-right" data-ph="Mẫu 2 · 580×850" style="--x:1340;--y:188;--w:580;--h:850;--o:0">
+				<img src="<?php echo esc_url( $assets_uri . '/img-services/mau-2.png' ); ?>" alt="Khách hàng <?php echo esc_attr( $clinic_name ); ?>" fetchpriority="high" width="580" height="850">
 			</div>
 
 			<div class="cy-fig ph" data-ph="Subtext 1 · 735×183" style="--x:592;--y:263;--w:735;--h:183;--o:2">

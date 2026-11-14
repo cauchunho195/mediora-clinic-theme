@@ -10,6 +10,70 @@
 /* Fallback & brand adjustment */
 .cy-services-intro .cy-text { color: #2C1200; }
 
+/* ---------- 1. Thiết lập Cân Đối Đối Xứng 2 Bên Cho Ảnh Người Mẫu (Section 1) ---------- */
+.cy-services-intro .cy-model-col,
+.cy-services-intro .cy-model-left,
+.cy-services-intro .cy-model-right,
+.cy-services-intro [data-ph*="Mẫu 1"],
+.cy-services-intro [data-ph*="Mẫu 2"] {
+  position: absolute !important;
+  top: calc(188 * var(--u)) !important;
+  width: calc(580 * var(--u)) !important;
+  height: calc(850 * var(--u)) !important;
+  aspect-ratio: 580 / 850 !important;
+  display: flex !important;
+  align-items: flex-end !important;
+  z-index: 1 !important;
+  pointer-events: none;
+}
+
+.cy-services-intro .cy-model-left,
+.cy-services-intro [data-ph*="Mẫu 1"] {
+  left: 0 !important;
+  right: auto !important;
+  justify-content: flex-start !important;
+}
+
+.cy-services-intro .cy-model-right,
+.cy-services-intro [data-ph*="Mẫu 2"] {
+  left: auto !important;
+  right: 0 !important;
+  justify-content: flex-end !important;
+}
+
+/* Tự động căn đối xứng & giữ đúng tỉ lệ dù tải ảnh kích thước bất kỳ lên */
+.cy-services-intro .cy-model-col img,
+.cy-services-intro .cy-model-left img,
+.cy-services-intro .cy-model-right img,
+.cy-services-intro [data-ph*="Mẫu 1"] img,
+.cy-services-intro [data-ph*="Mẫu 2"] img {
+  width: 100% !important;
+  height: 100% !important;
+  max-width: 100% !important;
+  max-height: 100% !important;
+  object-fit: contain !important;
+  object-position: bottom center !important;
+  display: block !important;
+  pointer-events: auto;
+  transition: transform .3s ease;
+}
+
+.cy-services-intro .cy-model-col:hover img,
+.cy-services-intro .cy-model-left:hover img,
+.cy-services-intro .cy-model-right:hover img {
+  transform: scale(1.02);
+}
+
+/* Trường hợp ảnh tải lên có nền vuông/chữ nhật cần phủ đầy khung */
+.cy-services-intro .cy-model-col.is-cover img,
+.cy-services-intro .cy-model-col img.is-cover,
+.cy-services-intro .cy-model-left.is-cover img,
+.cy-services-intro .cy-model-right.is-cover img {
+  object-fit: cover !important;
+  object-position: center top !important;
+  border-radius: 8px;
+}
+
 /* Modal Popup Consult */
 .popup-consult .modal-dialog {
   max-width: 580px;
