@@ -52,9 +52,30 @@ $customer_2       = mediora_get_image( 'home_customer_2', 'assets/imgs/kh-hien-p
 $customer_3       = mediora_get_image( 'home_customer_3', 'assets/imgs/kh-vi-tuong.png', $front_id );
 
 $step_imgs = array();
+$step_alts = array();
+$default_step_alts = array(
+	1 => 'Bước 1: Thăm khám cùng bác sĩ – thăm khám chuyên sâu cùng bác sĩ chuyên khoa tạo hình thẩm mỹ',
+	2 => 'Bước 2: Quét chỉ số AI Factional – soi da các lớp, xác định mức độ lão hóa, đưa ra phác đồ cá nhân hóa',
+	3 => 'Bước 3: Đo vẽ, xác định vùng can thiệp',
+	4 => 'Bước 4: Sát khuẩn bằng Povidine',
+	5 => 'Bước 5: Sử dụng sợi GMISS nâng kéo toàn bộ vùng cơ, mỡ ở tầng SMAS',
+	6 => 'Bước 6: Dặn dò sau điều trị',
+);
 for ( $s = 1; $s <= 6; $s++ ) {
 	$step_imgs[ $s ] = mediora_get_image( 'home_step_' . $s, 'assets/imgs/step2' . $s . '.png', $front_id );
+	$custom_alt = get_post_meta( $front_id, '_mediora_home_step_' . $s . '_text', true );
+	$step_alts[ $s ] = ! empty( $custom_alt ) ? $custom_alt : $default_step_alts[ $s ];
 }
+
+// Tên & chức danh 3 khách hàng
+$cust_1_name = get_post_meta( $front_id, '_mediora_home_cust_1_name', true );
+$cust_1_name = ! empty( $cust_1_name ) ? $cust_1_name : 'Diễn viên Ngân Quỳnh';
+
+$cust_2_name = get_post_meta( $front_id, '_mediora_home_cust_2_name', true );
+$cust_2_name = ! empty( $cust_2_name ) ? $cust_2_name : 'Khách hàng Hiền Phạm';
+
+$cust_3_name = get_post_meta( $front_id, '_mediora_home_cust_3_name', true );
+$cust_3_name = ! empty( $cust_3_name ) ? $cust_3_name : 'Khách hàng Vi Tường 36 tuổi';
 ?>
 
 <!-- 1. Hero Banner Slider -->
@@ -116,24 +137,11 @@ for ( $s = 1; $s <= 6; $s++ ) {
 				</h2>
 
 				<ol class="row row-cols-1 row-cols-sm-2 g-3 steps list-unstyled m-0">
+					<?php for ( $s = 1; $s <= 6; $s++ ) : ?>
 					<li class="col">
-						<img src="<?php echo esc_url( $step_imgs[1] ); ?>" alt="<?php esc_attr_e( 'Bước 1: Thăm khám cùng bác sĩ – thăm khám chuyên sâu cùng bác sĩ chuyên khoa tạo hình thẩm mỹ', 'mediora-clinic' ); ?>" width="408" height="265" loading="lazy">
+						<img src="<?php echo esc_url( $step_imgs[ $s ] ); ?>" alt="<?php echo esc_attr( $step_alts[ $s ] ); ?>" width="408" height="265" loading="lazy">
 					</li>
-					<li class="col">
-						<img src="<?php echo esc_url( $step_imgs[2] ); ?>" alt="<?php esc_attr_e( 'Bước 2: Quét chỉ số AI Factional – soi da các lớp, xác định mức độ lão hóa, đưa ra phác đồ cá nhân hóa', 'mediora-clinic' ); ?>" width="408" height="265" loading="lazy">
-					</li>
-					<li class="col">
-						<img src="<?php echo esc_url( $step_imgs[3] ); ?>" alt="<?php esc_attr_e( 'Bước 3: Đo vẽ, xác định vùng can thiệp', 'mediora-clinic' ); ?>" width="408" height="265" loading="lazy">
-					</li>
-					<li class="col">
-						<img src="<?php echo esc_url( $step_imgs[4] ); ?>" alt="<?php esc_attr_e( 'Bước 4: Sát khuẩn bằng Povidine', 'mediora-clinic' ); ?>" width="408" height="265" loading="lazy">
-					</li>
-					<li class="col">
-						<img src="<?php echo esc_url( $step_imgs[5] ); ?>" alt="<?php esc_attr_e( 'Bước 5: Sử dụng sợi GMISS nâng kéo toàn bộ vùng cơ, mỡ ở tầng SMAS', 'mediora-clinic' ); ?>" width="408" height="265" loading="lazy">
-					</li>
-					<li class="col">
-						<img src="<?php echo esc_url( $step_imgs[6] ); ?>" alt="<?php esc_attr_e( 'Bước 6: Dặn dò sau điều trị', 'mediora-clinic' ); ?>" width="408" height="265" loading="lazy">
-					</li>
+					<?php endfor; ?>
 				</ol>
 			</div>
 
@@ -191,24 +199,24 @@ for ( $s = 1; $s <= 6; $s++ ) {
 		<h2 class="visually-hidden"><?php esc_html_e( 'Khách hàng thực tế và Người nổi tiếng tại MEDIORA', 'mediora-clinic' ); ?></h2>
 		<div class="swiper result-slider">
 			<div class="swiper-wrapper">
-				<!-- Case 1: Nghệ sĩ Ngân Quỳnh -->
+				<!-- Case 1: Khách hàng 1 -->
 				<div class="swiper-slide">
-					<div class="ph ratio-result" data-ph="<?php esc_attr_e( 'Diễn viên Ngân Quỳnh · 1846×966', 'mediora-clinic' ); ?>">
-						<img src="<?php echo esc_url( $customer_1 ); ?>" alt="<?php esc_attr_e( 'Hiệu quả khách hàng – Nghệ sĩ Ngân Quỳnh trẻ hóa toàn diện tại MEDIORA', 'mediora-clinic' ); ?>" width="1846" height="966" loading="lazy">
+					<div class="ph ratio-result" data-ph="<?php echo esc_attr( $cust_1_name ); ?>">
+						<img src="<?php echo esc_url( $customer_1 ); ?>" alt="<?php echo esc_attr( $cust_1_name ); ?>" width="1846" height="966" loading="lazy">
 					</div>
 				</div>
 
-				<!-- Case 2: Chị Hiền Phạm -->
+				<!-- Case 2: Khách hàng 2 -->
 				<div class="swiper-slide">
-					<div class="ph ratio-result" data-ph="<?php esc_attr_e( 'Khách hàng Hiền Phạm · 1846×966', 'mediora-clinic' ); ?>">
-						<img src="<?php echo esc_url( $customer_2 ); ?>" alt="<?php esc_attr_e( 'Hiệu quả khách hàng – Chị Hiền Phạm tìm lại nét thanh xuân cùng MEDIORA', 'mediora-clinic' ); ?>" width="1846" height="966" loading="lazy">
+					<div class="ph ratio-result" data-ph="<?php echo esc_attr( $cust_2_name ); ?>">
+						<img src="<?php echo esc_url( $customer_2 ); ?>" alt="<?php echo esc_attr( $cust_2_name ); ?>" width="1846" height="966" loading="lazy">
 					</div>
 				</div>
 
-				<!-- Case 3: Chị Vi Tường -->
+				<!-- Case 3: Khách hàng 3 -->
 				<div class="swiper-slide">
-					<div class="ph ratio-result" data-ph="<?php esc_attr_e( 'Khách hàng Vi Tường 36 tuổi · 1846×966', 'mediora-clinic' ); ?>">
-						<img src="<?php echo esc_url( $customer_3 ); ?>" alt="<?php esc_attr_e( 'Hiệu quả khách hàng – Chị Vi Tường 36 tuổi nâng cơ trẻ hóa GMISS', 'mediora-clinic' ); ?>" width="1846" height="966" loading="lazy">
+					<div class="ph ratio-result" data-ph="<?php echo esc_attr( $cust_3_name ); ?>">
+						<img src="<?php echo esc_url( $customer_3 ); ?>" alt="<?php echo esc_attr( $cust_3_name ); ?>" width="1846" height="966" loading="lazy">
 					</div>
 				</div>
 			</div>
