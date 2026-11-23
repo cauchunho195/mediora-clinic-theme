@@ -21,39 +21,58 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 get_header();
 
-$theme_uri           = get_template_directory_uri();
-$facility_video_url  = mediora_get_option( 'facility_video_url', 'https://d1b6kbmv97kzjg.cloudfront.net/wp-content/uploads/2026/11/CSVC.mp4' );
-$gmiss_video_url     = mediora_get_option( 'gmiss_video_url', 'https://d1b6kbmv97kzjg.cloudfront.net/wp-content/uploads/2026/11/tvc.mp4' );
+$theme_uri  = get_template_directory_uri();
+$front_id   = (int) get_option( 'page_on_front', get_the_ID() );
+
+// Lấy dữ liệu video từ Meta Box hoặc fallback
+$custom_facility_vid = get_post_meta( $front_id, '_mediora_home_facility_video', true );
+$facility_video_url  = ! empty( $custom_facility_vid ) ? $custom_facility_vid : mediora_get_option( 'facility_video_url', 'https://d1b6kbmv97kzjg.cloudfront.net/wp-content/uploads/2026/11/CSVC.mp4' );
+
+$custom_gmiss_vid    = get_post_meta( $front_id, '_mediora_home_gmiss_video', true );
+$gmiss_video_url     = ! empty( $custom_gmiss_vid ) ? $custom_gmiss_vid : mediora_get_option( 'gmiss_video_url', 'https://d1b6kbmv97kzjg.cloudfront.net/wp-content/uploads/2026/11/tvc.mp4' );
+
+// Lấy đoạn văn bản triết lý thẩm mỹ
+$custom_intro        = get_post_meta( $front_id, '_mediora_home_intro_text', true );
 $intro_text_default  = 'Viện Trẻ Hóa Sejang (vientrehoaSejang) định hướng phát triển theo tiêu chuẩn thẩm mỹ chuyên nghiệp, kết hợp nền tảng chuyên môn y khoa, công nghệ hiện đại và chiến lược cá nhân hóa trong từng chỉ định. Điểm khác biệt của Sejang nằm ở tư duy thẩm mỹ tổng thể, quy trình thực hiện chuẩn hóa và sự theo sát xuyên suốt hành trình khách hàng, hướng đến kết quả hài hòa, tự nhiên và tôn vinh vẻ đẹp thanh xuân của mỗi người.';
-$intro_text          = mediora_get_option( 'intro_text', $intro_text_default );
+$intro_text          = ! empty( $custom_intro ) ? $custom_intro : mediora_get_option( 'intro_text', $intro_text_default );
+
+// Lấy 4 banner
+$banners = array();
+for ( $b = 1; $b <= 4; $b++ ) {
+	$c_b = get_post_meta( $front_id, '_mediora_home_banner_' . $b, true );
+	$banners[ $b ] = ! empty( $c_b ) ? $c_b : $theme_uri . '/assets/imgs/m1-' . $b . '-1.png';
+}
+
+$custom_cover = get_post_meta( $front_id, '_mediora_home_register_cover', true );
+$register_cover = ! empty( $custom_cover ) ? $custom_cover : $theme_uri . '/assets/imgs/cover.jpg';
 ?>
 
 <!-- 1. Hero Banner Slider -->
-<section class="sec-hero hero" aria-label="<?php esc_attr_e( 'Banner MEDIORA', 'mediora-clinic' ); ?>">
+<section class="sec-hero hero" aria-label="<?php esc_attr_e( 'Banner vientrehoaSejang', 'mediora-clinic' ); ?>">
 	<div class="swiper hero-slider">
 		<div class="swiper-wrapper">
 			<div class="swiper-slide">
 				<picture>
-					<source media="(max-width: 767.98px)" srcset="<?php echo esc_url( $theme_uri . '/assets/imgs/m1-1-1.png' ); ?>">
-					<img src="<?php echo esc_url( $theme_uri . '/assets/imgs/m1-1-1.png' ); ?>" alt="<?php esc_attr_e( 'Phòng khám Chuyên khoa Thẩm mỹ MEDIORA - Định chuẩn vẻ đẹp thanh xuân', 'mediora-clinic' ); ?>" width="1920" height="800" fetchpriority="high">
+					<source media="(max-width: 767.98px)" srcset="<?php echo esc_url( $banners[1] ); ?>">
+					<img src="<?php echo esc_url( $banners[1] ); ?>" alt="<?php esc_attr_e( 'Viện Trẻ Hóa Sejang - Định chuẩn vẻ đẹp thanh xuân', 'mediora-clinic' ); ?>" width="1920" height="800" fetchpriority="high">
 				</picture>
 			</div>
 			<div class="swiper-slide">
 				<picture>
-					<source media="(max-width: 767.98px)" srcset="<?php echo esc_url( $theme_uri . '/assets/imgs/m1-2-1.png' ); ?>">
-					<img src="<?php echo esc_url( $theme_uri . '/assets/imgs/m1-2-1.png' ); ?>" alt="<?php esc_attr_e( 'Công nghệ nâng cơ trẻ hóa bằng sợi sinh học GMISS độc quyền', 'mediora-clinic' ); ?>" width="1920" height="800" loading="lazy">
+					<source media="(max-width: 767.98px)" srcset="<?php echo esc_url( $banners[2] ); ?>">
+					<img src="<?php echo esc_url( $banners[2] ); ?>" alt="<?php esc_attr_e( 'Công nghệ nâng cơ trẻ hóa bằng sợi sinh học GMISS độc quyền', 'mediora-clinic' ); ?>" width="1920" height="800" loading="lazy">
 				</picture>
 			</div>
 			<div class="swiper-slide">
 				<picture>
-					<source media="(max-width: 767.98px)" srcset="<?php echo esc_url( $theme_uri . '/assets/imgs/m1-3-1.png' ); ?>">
-					<img src="<?php echo esc_url( $theme_uri . '/assets/imgs/m1-3-1.png' ); ?>" alt="<?php esc_attr_e( 'Không gian phòng khám thẩm mỹ 5 sao chuẩn y khoa', 'mediora-clinic' ); ?>" width="1920" height="800" loading="lazy">
+					<source media="(max-width: 767.98px)" srcset="<?php echo esc_url( $banners[3] ); ?>">
+					<img src="<?php echo esc_url( $banners[3] ); ?>" alt="<?php esc_attr_e( 'Không gian phòng khám thẩm mỹ 5 sao chuẩn y khoa', 'mediora-clinic' ); ?>" width="1920" height="800" loading="lazy">
 				</picture>
 			</div>
 			<div class="swiper-slide">
 				<picture>
-					<source media="(max-width: 767.98px)" srcset="<?php echo esc_url( $theme_uri . '/assets/imgs/m1-4-1.png' ); ?>">
-					<img src="<?php echo esc_url( $theme_uri . '/assets/imgs/m1-4-1.png' ); ?>" alt="<?php esc_attr_e( 'Đội ngũ bác sĩ chuyên khoa phẫu thuật tạo hình thẩm mỹ', 'mediora-clinic' ); ?>" width="1920" height="800" loading="lazy">
+					<source media="(max-width: 767.98px)" srcset="<?php echo esc_url( $banners[4] ); ?>">
+					<img src="<?php echo esc_url( $banners[4] ); ?>" alt="<?php esc_attr_e( 'Đội ngũ bác sĩ chuyên khoa phẫu thuật tạo hình thẩm mỹ', 'mediora-clinic' ); ?>" width="1920" height="800" loading="lazy">
 				</picture>
 			</div>
 		</div>
@@ -203,14 +222,8 @@ $intro_text          = mediora_get_option( 'intro_text', $intro_text_default );
 	<div class="row g-0">
 		<!-- Cột trái: Ảnh bìa cover.jpg -->
 		<div class="col-12 col-lg-8">
-			<div class="ph register-cover" data-ph="<?php esc_attr_e( 'Bìa tư vấn MEDIORA · 1287×724', 'mediora-clinic' ); ?>">
-				<?php
-				$register_cover = mediora_get_option( 'register_cover_image', $theme_uri . '/assets/imgs/cover.jpg' );
-				if ( empty( $register_cover ) ) {
-					$register_cover = $theme_uri . '/assets/imgs/cover.jpg';
-				}
-				?>
-				<img src="<?php echo esc_url( $register_cover ); ?>" alt="<?php esc_attr_e( 'Phòng khám Thẩm mỹ MEDIORA – Tư vấn nâng cơ trẻ hóa chuyên sâu', 'mediora-clinic' ); ?>" width="1287" height="724" loading="lazy">
+			<div class="ph register-cover" data-ph="<?php esc_attr_e( 'Bìa tư vấn vientrehoaSejang · 1287×724', 'mediora-clinic' ); ?>">
+				<img src="<?php echo esc_url( $register_cover ); ?>" alt="<?php esc_attr_e( 'Viện Trẻ Hóa Sejang – Tư vấn nâng cơ trẻ hóa chuyên sâu', 'mediora-clinic' ); ?>" width="1287" height="724" loading="lazy">
 			</div>
 		</div>
 

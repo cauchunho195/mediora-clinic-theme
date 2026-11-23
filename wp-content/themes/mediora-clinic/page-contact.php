@@ -15,26 +15,40 @@ if ( ! defined( 'ABSPATH' ) ) {
 get_header();
 
 $theme_uri       = get_template_directory_uri();
-$clinic_name     = mediora_get_option( 'clinic_name', 'Phòng khám Chuyên khoa Thẩm mỹ MEDIORA' );
-$clinic_address  = mediora_get_option( 'clinic_address', '257 - 259 Nguyễn Đình Chiểu, Phường Bàn Cờ, Quận 3, TP. Hồ Chí Minh' );
-$hotline         = mediora_get_option( 'hotline', '0945.334.832' );
+$page_id         = get_the_ID();
+
+// Lấy thông tin từ Meta Box hoặc fallback Sejang chuẩn
+$custom_cname    = get_post_meta( $page_id, '_mediora_contact_clinic_name', true );
+$clinic_name     = ! empty( $custom_cname ) ? $custom_cname : mediora_get_option( 'clinic_name', 'Viện Trẻ Hóa Chuyên Khoa vientrehoaSejang' );
+
+$custom_addr     = get_post_meta( $page_id, '_mediora_contact_address', true );
+$clinic_address  = ! empty( $custom_addr ) ? $custom_addr : mediora_get_option( 'clinic_address', '257 - 259 Nguyễn Đình Chiểu, Phường Bàn Cờ, Quận 3, TP. Hồ Chí Minh' );
+
+$custom_phone    = get_post_meta( $page_id, '_mediora_contact_hotline', true );
+$hotline         = ! empty( $custom_phone ) ? $custom_phone : mediora_get_option( 'hotline', '0988.226.951' );
 $hotline_tel     = mediora_clean_phone( $hotline );
+
+$custom_hours    = get_post_meta( $page_id, '_mediora_contact_hours', true );
+$hours           = ! empty( $custom_hours ) ? $custom_hours : '08:00 - 20:00 hằng ngày';
+
 $zalo_url        = mediora_get_option( 'social_zalo', 'https://zalo.me/636737550228660397' );
 $fb_url          = mediora_get_option( 'social_facebook', 'https://www.facebook.com/pkcktmmediora' );
 $tiktok_url      = mediora_get_option( 'social_tiktok', 'https://www.tiktok.com/@phongkhammediora' );
-$gmaps_embed_url = mediora_get_option( 'google_maps_embed', 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.4975619551465!2d106.6853637!3d10.7719712!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752f2324905155%3A0xe54ef99eb24a7cf5!2zMjU3IC0gMjU5IE5ndXnhu4VuIMSQw6xuaCBDaGnhu4N1LCBQaMaw4budbmcgNSwgUXXhuq1uIDMsIEjhu5MgQ2jDrSBNaW5o!5e0!3m2!1svi!2svn!4v1715000000000!5m2!1svi!2svn' );
+
+$custom_maps     = get_post_meta( $page_id, '_mediora_contact_maps_url', true );
+$gmaps_embed_url = ! empty( $custom_maps ) ? $custom_maps : mediora_get_option( 'google_maps_embed', 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.4975619551465!2d106.6853637!3d10.7719712!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752f2324905155%3A0xe54ef99eb24a7cf5!2zMjU3IC0gMjU5IE5ndXnhu4VuIMSQw6xuaCBDaGnhu4N1LCBQaMaw4budbmcgNSwgUXXhuq1uIDMsIEjhu5MgQ2jDrSBNaW5o!5e0!3m2!1svi!2svn!4v1715000000000!5m2!1svi!2svn' );
 ?>
 
 <div class="subpage-content contact-page-main">
 
 	<!-- 1. Hero Subpage Banner -->
-	<section class="subpage-banner" aria-label="<?php esc_attr_e( 'Liên hệ MEDIORA', 'mediora-clinic' ); ?>">
+	<section class="subpage-banner" aria-label="<?php esc_attr_e( 'Liên hệ vientrehoaSejang', 'mediora-clinic' ); ?>">
 		<div class="wrap text-center">
 			<?php mediora_breadcrumbs(); ?>
-			<span class="mediora-badge-gold mb-3"><?php esc_html_e( 'Kết Nối Cùng MEDIORA', 'mediora-clinic' ); ?></span>
+			<span class="mediora-badge-gold mb-3"><?php esc_html_e( 'Kết Nối Cùng vientrehoaSejang', 'mediora-clinic' ); ?></span>
 			<h1 class="subpage-banner__title gold-text"><?php esc_html_e( 'Liên Hệ & Đặt Lịch Thăm Khám', 'mediora-clinic' ); ?></h1>
 			<p class="subpage-banner__desc">
-				<?php esc_html_e( 'Đội ngũ chuyên viên y tế và bác sĩ chuyên khoa MEDIORA luôn sẵn sàng lắng nghe, tư vấn phác đồ và phục vụ quý khách chu đáo nhất.', 'mediora-clinic' ); ?>
+				<?php esc_html_e( 'Đội ngũ chuyên viên y tế và bác sĩ chuyên khoa Sejang luôn sẵn sàng lắng nghe, tư vấn phác đồ và phục vụ quý khách chu đáo nhất.', 'mediora-clinic' ); ?>
 			</p>
 		</div>
 	</section>
@@ -60,7 +74,7 @@ $gmaps_embed_url = mediora_get_option( 'google_maps_embed', 'https://www.google.
 								</div>
 								<div>
 									<strong class="text-white d-block mb-1 fs-6"><?php esc_html_e( 'Địa chỉ cơ sở:', 'mediora-clinic' ); ?></strong>
-									<p class="text-muted mb-0" style="line-height:1.6;"><?php echo esc_html( $clinic_address ); ?></p>
+									<p class="mb-0" style="line-height:1.6; color:#e2d9cf !important;"><?php echo esc_html( $clinic_address ); ?></p>
 									<span class="badge bg-dark border border-warning text-warning mt-1" style="font-size:11px;">
 										<?php esc_html_e( 'Vị trí đắc địa trung tâm Quận 3', 'mediora-clinic' ); ?>
 									</span>
@@ -77,7 +91,7 @@ $gmaps_embed_url = mediora_get_option( 'google_maps_embed', 'https://www.google.
 									<a href="<?php echo esc_url( 'tel:' . $hotline_tel ); ?>" class="gold-text fs-5 fw-bold text-decoration-none">
 										<?php echo esc_html( $hotline ); ?>
 									</a>
-									<p class="text-muted small mb-0"><?php esc_html_e( 'Hỗ trợ đặt lịch hẹn khám ưu tiên không phải chờ đợi', 'mediora-clinic' ); ?></p>
+									<p class="small mb-0" style="color:#bdaea0 !important;"><?php esc_html_e( 'Hỗ trợ đặt lịch hẹn khám ưu tiên không phải chờ đợi', 'mediora-clinic' ); ?></p>
 								</div>
 							</div>
 
@@ -88,7 +102,7 @@ $gmaps_embed_url = mediora_get_option( 'google_maps_embed', 'https://www.google.
 								</div>
 								<div>
 									<strong class="text-white d-block mb-1 fs-6"><?php esc_html_e( 'Giờ tiếp đón & thăm khám:', 'mediora-clinic' ); ?></strong>
-									<p class="text-muted mb-0"><?php esc_html_e( '08:00 - 20:00 hằng ngày', 'mediora-clinic' ); ?></p>
+									<p class="mb-0" style="color:#e2d9cf !important;"><?php echo esc_html( $hours ); ?></p>
 									<span class="text-warning small"><?php esc_html_e( 'Làm việc tất cả các ngày trong tuần (Cả Thứ 7, Chủ Nhật & Lễ Tết)', 'mediora-clinic' ); ?></span>
 								</div>
 							</div>
@@ -100,7 +114,7 @@ $gmaps_embed_url = mediora_get_option( 'google_maps_embed', 'https://www.google.
 								</div>
 								<div>
 									<strong class="text-white d-block mb-1 fs-6"><?php esc_html_e( 'Hướng dẫn bãi đỗ xe ô tô & xe máy:', 'mediora-clinic' ); ?></strong>
-									<p class="text-muted small mb-0" style="line-height:1.6;">
+									<p class="small mb-0" style="line-height:1.6; color:#bdaea0 !important;">
 										<?php esc_html_e( 'Có chỗ đỗ ô tô và xe máy rộng rãi ngay trước cửa phòng khám. Đội ngũ nhân viên bảo vệ chuyên nghiệp hướng dẫn và hỗ trợ đỗ xe an toàn 24/7.', 'mediora-clinic' ); ?>
 									</p>
 								</div>

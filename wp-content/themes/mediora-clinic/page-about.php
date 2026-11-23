@@ -13,29 +13,22 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 get_header();
 
-$is_elementor_active = false;
-if ( class_exists( '\Elementor\Plugin' ) ) {
-	if ( \Elementor\Plugin::$instance->preview->is_preview_mode()
-		|| \Elementor\Plugin::$instance->editor->is_edit_mode()
-		|| \Elementor\Plugin::$instance->db->is_built_with_elementor( get_the_ID() )
-		|| isset( $_GET['elementor-preview'] )
-		|| isset( $_GET['elementor_library'] ) ) {
-		$is_elementor_active = true;
-	}
-}
-
-$raw_content = get_post_field( 'post_content', get_the_ID() );
-$has_custom_content = $is_elementor_active || ( ! empty( $raw_content ) && strpos( $raw_content, 'cy-stage' ) !== false );
-
-if ( $has_custom_content ) :
-	while ( have_posts() ) :
-		the_post();
-		the_content();
-	endwhile;
-else :
-
-$assets_uri = get_template_directory_uri() . '/assets';
+$page_id     = get_the_ID();
+$assets_uri  = get_template_directory_uri() . '/assets';
 $clinic_name = function_exists( 'mediora_get_option' ) ? mediora_get_option( 'clinic_name', 'Viện Trẻ Hóa Sejang' ) : 'Viện Trẻ Hóa Sejang';
+
+// Lấy dữ liệu tùy chỉnh từ Meta Box
+$custom_p1 = get_post_meta( $page_id, '_mediora_about_p1', true );
+$p1_text   = ! empty( $custom_p1 ) ? $custom_p1 : sprintf( '%s định hướng chuyên sâu trong lĩnh vực trẻ hóa, ứng dụng các giải pháp thẩm mỹ dựa trên nền tảng y khoa và cá nhân hóa theo tình trạng của từng khách hàng. Mỗi liệu trình được xây dựng trên cơ sở thăm khám, đánh giá chuyên môn và chỉ định phù hợp, nhằm tối ưu hiệu quả cải thiện, đồng thời chú trọng an toàn trong quá trình thực hiện.', esc_html( $clinic_name ) );
+
+$custom_p2 = get_post_meta( $page_id, '_mediora_about_p2', true );
+$p2_text   = ! empty( $custom_p2 ) ? $custom_p2 : 'Sejang đề cao quy trình chuyên môn chặt chẽ, tư vấn minh bạch và theo dõi sau dịch vụ, hướng đến kết quả trẻ hóa hài hòa, tự nhiên và phù hợp với đặc điểm riêng của mỗi khách hàng.';
+
+$custom_vision = get_post_meta( $page_id, '_mediora_about_vision', true );
+$vision_text   = ! empty( $custom_vision ) ? $custom_vision : sprintf( 'Trở thành viện chuyên khoa thẩm mỹ định hướng chuyên sâu về trẻ hóa, phát triển trên nền tảng y khoa, công nghệ hiện đại và tư duy thẩm mỹ tiên tiến. %s hướng đến xây dựng chuẩn mực chăm sóc sắc đẹp chuyên nghiệp, đề cao tính an toàn, minh bạch và chất lượng dịch vụ, đồng hành cùng khách hàng trên hành trình gìn giữ nét thanh xuân và tôn vinh vẻ đẹp tự nhiên.', esc_html( $clinic_name ) );
+
+$custom_mission = get_post_meta( $page_id, '_mediora_about_mission', true );
+$mission_text   = ! empty( $custom_mission ) ? $custom_mission : sprintf( 'Mang đến các giải pháp thẩm mỹ và trẻ hóa được cá nhân hóa dựa trên tình trạng thực tế, đặc điểm riêng và nhu cầu của từng khách hàng. %s chú trọng quy trình thăm khám, đánh giá chuyên môn, tư vấn minh bạch và theo dõi sau dịch vụ, giúp khách hàng hiểu rõ lựa chọn, an tâm trong quá trình chăm sóc và hướng đến kết quả hài hòa, phù hợp với nét đẹp riêng.', esc_html( $clinic_name ) );
 ?>
 
 <div class="subpage-content cy-page-about">
@@ -53,8 +46,8 @@ $clinic_name = function_exists( 'mediora_get_option' ) ? mediora_get_option( 'cl
 			</div>
 
 			<div class="cy-text is-center" style="--x:191;--y:202;--w:1537;--o:1">
-				<p><?php echo esc_html( $clinic_name ); ?> định hướng chuyên sâu trong lĩnh vực trẻ hóa, ứng dụng các giải pháp thẩm mỹ dựa trên nền tảng y khoa và cá nhân hóa theo tình trạng của từng khách hàng. Mỗi liệu trình được xây dựng trên cơ sở thăm khám, đánh giá chuyên môn và chỉ định phù hợp, nhằm tối ưu hiệu quả cải thiện, đồng thời chú trọng an toàn trong quá trình thực hiện.</p>
-				<p>Sejang đề cao quy trình chuyên môn chặt chẽ, tư vấn minh bạch và theo dõi sau dịch vụ, hướng đến kết quả trẻ hóa hài hòa, tự nhiên và phù hợp với đặc điểm riêng của mỗi khách hàng.</p>
+				<p><?php echo wp_kses_post( nl2br( $p1_text ) ); ?></p>
+				<p class="mt-3"><?php echo wp_kses_post( nl2br( $p2_text ) ); ?></p>
 			</div>
 
 			<div class="cy-fig ph" data-ph="Text 2 · 1374×160" style="--x:273;--y:520;--w:1374;--h:160;--o:2">
@@ -102,7 +95,7 @@ $clinic_name = function_exists( 'mediora_get_option' ) ? mediora_get_option( 'cl
 					decoding="async">
 			</div>
 			<div class="cy-text cy-vision-text" style="--x:835;--y:574;--w:959;--fs:30;--lh:1.1;--o:3">
-				<p>Trở thành viện chuyên khoa thẩm mỹ định hướng chuyên sâu về trẻ hóa, phát triển trên nền tảng y khoa, công nghệ hiện đại và tư duy thẩm mỹ tiên tiến. <?php echo esc_html( $clinic_name ); ?> hướng đến xây dựng chuẩn mực chăm sóc sắc đẹp chuyên nghiệp, đề cao tính an toàn, minh bạch và chất lượng dịch vụ, đồng hành cùng khách hàng trên hành trình gìn giữ nét thanh xuân và tôn vinh vẻ đẹp tự nhiên.</p>
+				<p><?php echo wp_kses_post( nl2br( $vision_text ) ); ?></p>
 			</div>
 
 			<!-- Mission Badge & Text -->
@@ -115,7 +108,7 @@ $clinic_name = function_exists( 'mediora_get_option' ) ? mediora_get_option( 'cl
 					decoding="async">
 			</div>
 			<div class="cy-text cy-vision-text" style="--x:835;--y:884;--w:959;--fs:30;--lh:1.1;--o:5">
-				<p>Mang đến các giải pháp thẩm mỹ và trẻ hóa được cá nhân hóa dựa trên tình trạng thực tế, đặc điểm riêng và nhu cầu của từng khách hàng. <?php echo esc_html( $clinic_name ); ?> chú trọng quy trình thăm khám, đánh giá chuyên môn, tư vấn minh bạch và theo dõi sau dịch vụ, giúp khách hàng hiểu rõ lựa chọn, an tâm trong quá trình chăm sóc và hướng đến kết quả hài hòa, phù hợp với nét đẹp riêng.</p>
+				<p><?php echo wp_kses_post( nl2br( $mission_text ) ); ?></p>
 			</div>
 
 			<!-- Separator Line -->
@@ -221,5 +214,4 @@ $clinic_name = function_exists( 'mediora_get_option' ) ? mediora_get_option( 'cl
 </div>
 
 <?php
-endif;
 get_footer();
