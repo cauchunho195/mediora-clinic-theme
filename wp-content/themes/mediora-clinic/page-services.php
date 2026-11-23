@@ -13,29 +13,39 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 get_header();
 
-$is_elementor_active = false;
-if ( class_exists( '\Elementor\Plugin' ) ) {
-	if ( \Elementor\Plugin::$instance->preview->is_preview_mode()
-		|| \Elementor\Plugin::$instance->editor->is_edit_mode()
-		|| \Elementor\Plugin::$instance->db->is_built_with_elementor( get_the_ID() )
-		|| isset( $_GET['elementor-preview'] )
-		|| isset( $_GET['elementor_library'] ) ) {
-		$is_elementor_active = true;
-	}
-}
-
-$raw_content = get_post_field( 'post_content', get_the_ID() );
-$has_custom_content = $is_elementor_active || ( ! empty( $raw_content ) && strpos( $raw_content, 'cy-stage' ) !== false );
-
-if ( $has_custom_content ) :
-	while ( have_posts() ) :
-		the_post();
-		the_content();
-	endwhile;
-else :
-
+$page_id     = get_the_ID();
 $assets_uri  = get_template_directory_uri() . '/assets';
 $clinic_name = function_exists( 'mediora_get_option' ) ? mediora_get_option( 'clinic_name', 'vientrehoaSejang' ) : 'vientrehoaSejang';
+
+// 1. Dữ liệu hình ảnh & mô tả tùy chỉnh từ Meta Box
+$custom_m1   = get_post_meta( $page_id, '_mediora_services_model_1', true );
+$model_1_url = ! empty( $custom_m1 ) ? $custom_m1 : $assets_uri . '/img-services/mau-1.png';
+
+$custom_m2   = get_post_meta( $page_id, '_mediora_services_model_2', true );
+$model_2_url = ! empty( $custom_m2 ) ? $custom_m2 : $assets_uri . '/img-services/mau-2.png';
+
+$custom_desc   = get_post_meta( $page_id, '_mediora_services_desc', true );
+$services_desc = ! empty( $custom_desc ) ? $custom_desc : sprintf( 'Nâng cơ trẻ hóa bằng sợi sinh học GMISS là giải pháp thẩm mỹ hướng đến cải thiện tình trạng mô mềm sa trễ, hỗ trợ nâng đỡ đường nét và cải thiện độ săn chắc của làn da. Tại %s, mỗi liệu trình được xây dựng dựa trên tình trạng lão hóa, cấu trúc khuôn mặt và nhu cầu riêng của khách hàng, với định hướng trẻ hóa hài hòa, tự nhiên.', esc_html( $clinic_name ) );
+
+// 2. Dữ liệu bác sĩ & 6 bước
+$custom_doctor = get_post_meta( $page_id, '_mediora_services_doctor', true );
+$doctor_url    = ! empty( $custom_doctor ) ? $custom_doctor : $assets_uri . '/img-services/podium-bs.png';
+
+$step_urls = array();
+for ( $i = 1; $i <= 6; $i++ ) {
+	$custom_s = get_post_meta( $page_id, '_mediora_services_step_' . $i, true );
+	$step_urls[ $i ] = ! empty( $custom_s ) ? $custom_s : $assets_uri . '/img-services/step-0' . $i . '.png';
+}
+
+// 3. Dữ liệu slider khách hàng
+$custom_j1     = get_post_meta( $page_id, '_mediora_services_journey_1', true );
+$journey_1_url = ! empty( $custom_j1 ) ? $custom_j1 : $assets_uri . '/img-services/ba-ngan-quynh.png';
+
+$custom_j2     = get_post_meta( $page_id, '_mediora_services_journey_2', true );
+$journey_2_url = ! empty( $custom_j2 ) ? $custom_j2 : $assets_uri . '/img-services/ba-thao.png';
+
+$custom_j_desc = get_post_meta( $page_id, '_mediora_services_journey_desc', true );
+$journey_desc  = ! empty( $custom_j_desc ) ? $custom_j_desc : sprintf( 'Mỗi hành trình là một dấu ấn riêng, được xây dựng từ sự thấu hiểu, chuyên môn và giải pháp trẻ hóa cá nhân hóa tại %s.', esc_html( $clinic_name ) );
 ?>
 
 <div class="subpage-content cy-services">
@@ -53,11 +63,11 @@ $clinic_name = function_exists( 'mediora_get_option' ) ? mediora_get_option( 'cl
 			</div>
 
 			<div class="cy-fig ph cy-hide-mb cy-model-col cy-model-left" data-ph="Mẫu 1 · 580×850" style="--x:0;--y:188;--w:580;--h:850;--o:0">
-				<img src="<?php echo esc_url( $assets_uri . '/img-services/mau-1.png' ); ?>" alt="Khách hàng <?php echo esc_attr( $clinic_name ); ?>" fetchpriority="high" width="580" height="850">
+				<img src="<?php echo esc_url( $model_1_url ); ?>" alt="Khách hàng <?php echo esc_attr( $clinic_name ); ?>" fetchpriority="high" width="580" height="850">
 			</div>
 
 			<div class="cy-fig ph cy-hide-mb cy-model-col cy-model-right" data-ph="Mẫu 2 · 580×850" style="--x:1340;--y:188;--w:580;--h:850;--o:0">
-				<img src="<?php echo esc_url( $assets_uri . '/img-services/mau-2.png' ); ?>" alt="Khách hàng <?php echo esc_attr( $clinic_name ); ?>" fetchpriority="high" width="580" height="850">
+				<img src="<?php echo esc_url( $model_2_url ); ?>" alt="Khách hàng <?php echo esc_attr( $clinic_name ); ?>" fetchpriority="high" width="580" height="850">
 			</div>
 
 			<div class="cy-fig ph" data-ph="Subtext 1 · 735×183" style="--x:592;--y:263;--w:735;--h:183;--o:2">
@@ -65,7 +75,7 @@ $clinic_name = function_exists( 'mediora_get_option' ) ? mediora_get_option( 'cl
 			</div>
 
 			<div class="cy-text" style="--x:617;--y:468;--w:685;--o:3">
-				<p>Nâng cơ trẻ hóa bằng sợi sinh học GMISS là giải pháp thẩm mỹ hướng đến cải thiện tình trạng mô mềm sa trễ, hỗ trợ nâng đỡ đường nét và cải thiện độ săn chắc của làn da. Tại <?php echo esc_html( $clinic_name ); ?>, mỗi liệu trình được xây dựng dựa trên tình trạng lão hóa, cấu trúc khuôn mặt và nhu cầu riêng của khách hàng, với định hướng trẻ hóa hài hòa, tự nhiên.</p>
+				<p><?php echo wp_kses_post( nl2br( $services_desc ) ); ?></p>
 			</div>
 
 			<div class="cy-fig ph" data-ph="NÂNG ĐỠ MÔ MỀM – CẢI THIỆN TÌNH TRẠNG SA TRỄ · 1101×267" style="--x:409;--y:857;--w:1101;--h:267;--o:4">
@@ -96,31 +106,31 @@ $clinic_name = function_exists( 'mediora_get_option' ) ? mediora_get_option( 'cl
 			</div>
 
 			<div class="cy-fig ph cy-doctor" data-ph="podium BS · 722×881" style="--x:573;--y:409;--w:722;--h:881;--o:2">
-				<img src="<?php echo esc_url( $assets_uri . '/img-services/podium-bs.png' ); ?>" alt="Bác sĩ chuyên khoa tạo hình thẩm mỹ – <?php echo esc_attr( $clinic_name ); ?>" width="722" height="881" loading="lazy" decoding="async">
+				<img src="<?php echo esc_url( $doctor_url ); ?>" alt="Bác sĩ chuyên khoa tạo hình thẩm mỹ – <?php echo esc_attr( $clinic_name ); ?>" width="722" height="881" loading="lazy" decoding="async">
 			</div>
 
 			<div class="cy-fig ph cy-step" data-ph="B1 · 626×391" style="--x:141;--y:337;--w:626;--h:391;--o:3">
-				<img src="<?php echo esc_url( $assets_uri . '/img-services/step-01.png' ); ?>" alt="Bước 1: Thăm khám chuyên sâu cùng bác sĩ chuyên khoa tạo hình thẩm mỹ" width="626" height="391" loading="lazy" decoding="async">
+				<img src="<?php echo esc_url( $step_urls[1] ); ?>" alt="Bước 1: Thăm khám chuyên sâu cùng bác sĩ chuyên khoa tạo hình thẩm mỹ" width="626" height="391" loading="lazy" decoding="async">
 			</div>
 
 			<div class="cy-fig ph cy-step" data-ph="B2 · 626×391" style="--x:29;--y:677;--w:626;--h:391;--o:4">
-				<img src="<?php echo esc_url( $assets_uri . '/img-services/step-02.png' ); ?>" alt="Bước 2: Soi da các lớp, xác định mức độ lão hóa theo cấp độ tuổi và đưa ra phác đồ cá nhân hóa" width="626" height="391" loading="lazy" decoding="async">
+				<img src="<?php echo esc_url( $step_urls[2] ); ?>" alt="Bước 2: Soi da các lớp, xác định mức độ lão hóa theo cấp độ tuổi và đưa ra phác đồ cá nhân hóa" width="626" height="391" loading="lazy" decoding="async">
 			</div>
 
 			<div class="cy-fig ph cy-step" data-ph="B3 · 626×391" style="--x:141;--y:1012;--w:626;--h:391;--o:5">
-				<img src="<?php echo esc_url( $assets_uri . '/img-services/step-03.png' ); ?>" alt="Bước 3: Bác sĩ đo vẽ, đánh dấu chính xác vị trí cần can thiệp" width="626" height="391" loading="lazy" decoding="async">
+				<img src="<?php echo esc_url( $step_urls[3] ); ?>" alt="Bước 3: Bác sĩ đo vẽ, đánh dấu chính xác vị trí cần can thiệp" width="626" height="391" loading="lazy" decoding="async">
 			</div>
 
 			<div class="cy-fig ph cy-step is-under" data-ph="B4 · 626×391" style="--x:1127;--y:337;--w:626;--h:391;--o:6">
-				<img src="<?php echo esc_url( $assets_uri . '/img-services/step-04.png' ); ?>" alt="Bước 4: Làm sạch, sát khuẩn vùng can thiệp vô trùng 1 chiều" width="626" height="391" loading="lazy" decoding="async">
+				<img src="<?php echo esc_url( $step_urls[4] ); ?>" alt="Bước 4: Làm sạch, sát khuẩn vùng can thiệp vô trùng 1 chiều" width="626" height="391" loading="lazy" decoding="async">
 			</div>
 
 			<div class="cy-fig ph cy-step" data-ph="B5 · 626×391" style="--x:1265;--y:677;--w:626;--h:391;--o:7">
-				<img src="<?php echo esc_url( $assets_uri . '/img-services/step-05.png' ); ?>" alt="Bước 5: Bác sĩ tiến hành sử dụng sợi GMISS nâng kéo toàn bộ vùng cơ" width="626" height="391" loading="lazy" decoding="async">
+				<img src="<?php echo esc_url( $step_urls[5] ); ?>" alt="Bước 5: Bác sĩ tiến hành sử dụng sợi GMISS nâng kéo toàn bộ vùng cơ" width="626" height="391" loading="lazy" decoding="async">
 			</div>
 
 			<div class="cy-fig ph cy-step" data-ph="B6 · 626×391" style="--x:1127;--y:1012;--w:626;--h:391;--o:8">
-				<img src="<?php echo esc_url( $assets_uri . '/img-services/step-06.png' ); ?>" alt="Bước 6: Khách hàng nghe dặn dò từ bác sĩ và theo dõi hậu phẫu" width="626" height="391" loading="lazy" decoding="async">
+				<img src="<?php echo esc_url( $step_urls[6] ); ?>" alt="Bước 6: Khách hàng nghe dặn dò từ bác sĩ và theo dõi hậu phẫu" width="626" height="391" loading="lazy" decoding="async">
 			</div>
 		</div>
 	</section>
@@ -143,12 +153,12 @@ $clinic_name = function_exists( 'mediora_get_option' ) ? mediora_get_option( 'cl
 				<div class="carousel-inner">
 					<div class="carousel-item active">
 						<div class="ph" data-ph="Mẫu Ngân Quỳnh · 791×624">
-							<img src="<?php echo esc_url( $assets_uri . '/img-services/ba-ngan-quynh.png' ); ?>" alt="Trước và sau trẻ hóa – nghệ sĩ Ngân Quỳnh" width="791" height="624" loading="lazy">
+							<img src="<?php echo esc_url( $journey_1_url ); ?>" alt="Trước và sau trẻ hóa – nghệ sĩ Ngân Quỳnh" width="791" height="624" loading="lazy">
 						</div>
 					</div>
 					<div class="carousel-item">
 						<div class="ph" data-ph="Mẫu Thảo · 791×624">
-							<img src="<?php echo esc_url( $assets_uri . '/img-services/ba-thao.png' ); ?>" alt="Trước và sau trẻ hóa – chị Thảo" width="791" height="624" loading="lazy">
+							<img src="<?php echo esc_url( $journey_2_url ); ?>" alt="Trước và sau trẻ hóa – chị Thảo" width="791" height="624" loading="lazy">
 						</div>
 					</div>
 				</div>
@@ -166,7 +176,7 @@ $clinic_name = function_exists( 'mediora_get_option' ) ? mediora_get_option( 'cl
 			</div>
 
 			<div class="cy-text is-center is-white" style="--x:1131;--y:498;--w:522;--o:2">
-				<p>Mỗi hành trình là một dấu ấn riêng, được xây dựng từ sự thấu hiểu, chuyên môn và giải pháp trẻ hóa cá nhân hóa tại <?php echo esc_html( $clinic_name ); ?>.</p>
+				<p><?php echo wp_kses_post( nl2br( $journey_desc ) ); ?></p>
 			</div>
 
 			<span aria-hidden="true" class="cy-rule cy-hide-mb" style="--x:1259;--y:705;--w:266"></span>
@@ -179,5 +189,4 @@ $clinic_name = function_exists( 'mediora_get_option' ) ? mediora_get_option( 'cl
 </div>
 
 <?php
-endif;
 get_footer();

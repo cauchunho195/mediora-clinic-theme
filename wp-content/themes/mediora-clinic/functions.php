@@ -168,6 +168,7 @@ require_once MEDIORA_DIR . '/inc/template-tags.php';
 require_once MEDIORA_DIR . '/inc/customizer.php';
 require_once MEDIORA_DIR . '/inc/post-types.php';
 require_once MEDIORA_DIR . '/inc/ajax-booking.php';
+require_once MEDIORA_DIR . '/inc/meta-boxes-services.php';
 
 if ( ! function_exists( 'mediora_fallback_menu' ) ) {
 	/**
