@@ -41,13 +41,15 @@ $hotline_tel = mediora_clean_phone( $hotline );
 			<div class="row h-100 align-items-center g-0">
 				<!-- Brand Logo -->
 				<div class="col-auto">
-					<?php if ( has_custom_logo() ) : ?>
+					<?php 
+					$custom_site_logo = function_exists( 'mediora_get_image' ) ? mediora_get_image( 'site_logo', 'assets/imgs/Logo.svg' ) : get_template_directory_uri() . '/assets/imgs/Logo.svg';
+					if ( has_custom_logo() && empty( get_option( 'mediora_theme_images' )['site_logo'] ) ) : ?>
 						<div class="logo">
 							<?php the_custom_logo(); ?>
 						</div>
 					<?php else : ?>
 						<a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="logo" rel="home">
-							<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/imgs/Logo.svg' ); ?>" alt="<?php bloginfo( 'name' ); ?>" width="382" height="75">
+							<img src="<?php echo esc_url( $custom_site_logo ); ?>" alt="<?php bloginfo( 'name' ); ?>" width="382" height="75">
 						</a>
 					<?php endif; ?>
 				</div>

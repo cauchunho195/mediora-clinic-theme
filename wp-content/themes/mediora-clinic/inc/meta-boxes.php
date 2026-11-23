@@ -7,7 +7,7 @@
  * 4. Trang Liên Hệ (page-contact.php / post 104)
  *
  * @package Mediora_Clinic
- * @version 1.5.0
+ * @version 2.0.0
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -98,48 +98,152 @@ add_action( 'admin_enqueue_scripts', 'mediora_all_admin_scripts' );
 function mediora_render_mb_styles() {
 	?>
 	<style>
-		.mediora-mb-wrap { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; margin: 10px 0; }
-		.mediora-mb-section { background: #ffffff; border: 1px solid #e2d9cf; border-left: 4px solid #704A2F; border-radius: 6px; padding: 16px 20px; margin-bottom: 20px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
-		.mediora-mb-title { font-size: 15px; font-weight: 700; color: #704A2F; margin: 0 0 14px 0; padding-bottom: 8px; border-bottom: 1px dashed #e5dacd; }
-		.mediora-mb-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; margin-bottom: 15px; }
-		.mediora-img-box { background: #faf6f0; border: 1px solid #ebd9c8; border-radius: 6px; padding: 12px; text-align: center; }
-		.mediora-img-box label { display: block; font-weight: 600; color: #3A2618; margin-bottom: 6px; text-align: left; font-size: 13px; }
-		.mediora-img-preview { width: 100%; height: 160px; background: #efe7dc; border-radius: 4px; overflow: hidden; display: flex; align-items: center; justify-content: center; margin-bottom: 10px; border: 1px dashed #cbb69d; }
-		.mediora-img-preview img { max-width: 100%; max-height: 100%; object-fit: contain; display: block; }
-		.mediora-btn-upload { background: #704A2F !important; color: #ffffff !important; border-color: #55341c !important; font-weight: 600 !important; margin-right: 6px !important; }
-		.mediora-btn-upload:hover { background: #875b3b !important; color: #ffffff !important; }
-		.mediora-btn-remove { color: #a00 !important; border-color: #ccc !important; }
-		.mediora-field-text { margin-top: 12px; text-align: left; }
-		.mediora-field-text label { display: block; font-weight: 600; margin-bottom: 5px; color: #3A2618; font-size: 13px; }
-		.mediora-field-text textarea, .mediora-field-text input[type="text"], .mediora-field-text input[type="url"] { width: 100%; border: 1px solid #d0c2b2; border-radius: 4px; padding: 8px 10px; background: #fff; box-sizing: border-box; }
-		.mediora-hint { font-size: 12px; color: #776251; margin-top: 5px; line-height: 1.4; }
+		.mediora-mb-banner {
+			background: #111722;
+			color: #fff;
+			border: 1px solid #d4af37;
+			border-radius: 6px;
+			padding: 14px 18px;
+			margin-bottom: 20px;
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			gap: 15px;
+		}
+		.mediora-mb-banner a.button {
+			background: #d4af37 !important;
+			border-color: #b38b22 !important;
+			color: #111722 !important;
+			font-weight: 700 !important;
+			white-space: nowrap;
+		}
+		.mediora-mb-banner a.button:hover {
+			background: #f5cf6d !important;
+			color: #000 !important;
+		}
+		.mediora-mb-wrap {
+			font-family: inherit;
+		}
+		.mediora-mb-section {
+			background: #fff;
+			border: 1px solid #ccd0d4;
+			border-radius: 6px;
+			padding: 16px 20px;
+			margin-bottom: 20px;
+		}
+		.mediora-mb-title {
+			font-size: 15px;
+			font-weight: 700;
+			color: #1d2327;
+			margin: 0 0 14px 0;
+			padding-bottom: 8px;
+			border-bottom: 2px solid #d4af37;
+		}
+		.mediora-mb-grid {
+			display: grid;
+			grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+			gap: 16px;
+			margin-bottom: 16px;
+		}
+		.mediora-img-box {
+			background: #f8f9fa;
+			border: 1px solid #e2e4e7;
+			border-radius: 6px;
+			padding: 12px;
+			display: flex;
+			flex-direction: column;
+			justify-content: space-between;
+		}
+		.mediora-img-box label {
+			font-weight: 600;
+			font-size: 13px;
+			color: #2c3338;
+			margin-bottom: 6px;
+			display: block;
+		}
+		.mediora-img-box .img-hint {
+			font-size: 11px;
+			color: #8c8f94;
+			margin-bottom: 8px;
+			display: block;
+		}
+		.mediora-img-preview {
+			width: 100%;
+			height: 140px;
+			background: #111722;
+			border: 1px dashed #c3c4c7;
+			border-radius: 4px;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			margin-bottom: 10px;
+			overflow: hidden;
+		}
+		.mediora-img-preview img {
+			max-width: 100%;
+			max-height: 100%;
+			object-fit: contain;
+		}
+		.mediora-field-text {
+			margin-top: 12px;
+		}
+		.mediora-field-text label {
+			font-weight: 600;
+			display: block;
+			margin-bottom: 4px;
+			font-size: 13px;
+		}
+		.mediora-field-text textarea,
+		.mediora-field-text input {
+			width: 100%;
+			border: 1px solid #8c8f94;
+			border-radius: 4px;
+			padding: 6px 10px;
+		}
+		.mediora-btn-upload {
+			background: #d4af37 !important;
+			color: #111722 !important;
+			border-color: #b38b22 !important;
+			font-weight: 600 !important;
+			margin-top: 4px;
+		}
+		.mediora-btn-upload:hover {
+			background: #f5cf6d !important;
+			color: #000 !important;
+		}
+		.mediora-btn-remove {
+			background: #f6f7f7 !important;
+			color: #d63638 !important;
+			border-color: #dcdcde !important;
+			margin-top: 4px;
+		}
 	</style>
 	<script>
 	jQuery(document).ready(function($){
-		$(document).on('click', '.mediora-btn-upload', function(e){
+		$('.mediora-btn-upload').on('click', function(e){
 			e.preventDefault();
-			var target = $(this).data('target');
-			var frame = wp.media({
+			var btn = $(this);
+			var target = btn.data('target');
+			var customUploader = wp.media({
 				title: 'Chọn hoặc tải ảnh lên',
 				button: { text: 'Sử dụng ảnh này' },
 				multiple: false
-			});
-			frame.on('select', function(){
-				var attachment = frame.state().get('selection').first().toJSON();
+			}).on('select', function(){
+				var attachment = customUploader.state().get('selection').first().toJSON();
 				$('#input_' + target).val(attachment.url);
 				$('#preview_' + target + ' img').attr('src', attachment.url);
-				$('.mediora-btn-remove[data-target="' + target + '"]').show();
-			});
-			frame.open();
+				btn.siblings('.mediora-btn-remove').show();
+			}).open();
 		});
 
-		$(document).on('click', '.mediora-btn-remove', function(e){
+		$('.mediora-btn-remove').on('click', function(e){
 			e.preventDefault();
-			var target = $(this).data('target');
-			var def = $(this).data('default') || '';
+			var btn = $(this);
+			var target = btn.data('target');
+			var defaultImg = btn.data('default');
 			$('#input_' + target).val('');
-			$('#preview_' + target + ' img').attr('src', def);
-			$(this).hide();
+			$('#preview_' + target + ' img').attr('src', defaultImg);
+			btn.hide();
 		});
 	});
 	</script>
@@ -147,48 +251,59 @@ function mediora_render_mb_styles() {
 }
 
 /* ==========================================================================
-   1. GIAO DIỆN META BOX TRANG DỊCH VỤ
+   1. GIAO DIỆN META BOX TRANG DỊCH VỤ (post 103)
    ========================================================================== */
 function mediora_render_services_meta_box( $post ) {
 	wp_nonce_field( 'mediora_save_page_meta', 'mediora_page_meta_nonce' );
 	mediora_render_mb_styles();
-	$assets_uri = get_template_directory_uri() . '/assets/img-services';
+	$theme_uri  = get_template_directory_uri();
+	$assets_uri = $theme_uri . '/assets/img-services';
 
-	$m1 = get_post_meta( $post->ID, '_mediora_services_model_1', true );
-	$m2 = get_post_meta( $post->ID, '_mediora_services_model_2', true );
 	$desc = get_post_meta( $post->ID, '_mediora_services_desc', true );
 	if ( empty( $desc ) ) {
 		$desc = 'Nâng cơ trẻ hóa bằng sợi sinh học GMISS là giải pháp thẩm mỹ hướng đến cải thiện tình trạng mô mềm sa trễ, hỗ trợ nâng đỡ đường nét và cải thiện độ săn chắc của làn da. Tại vientrehoaSejang, mỗi liệu trình được xây dựng dựa trên tình trạng lão hóa, cấu trúc khuôn mặt và nhu cầu riêng của khách hàng, với định hướng trẻ hóa hài hòa, tự nhiên.';
 	}
-	$bs = get_post_meta( $post->ID, '_mediora_services_doctor', true );
-	$j1 = get_post_meta( $post->ID, '_mediora_services_journey_1', true );
-	$j2 = get_post_meta( $post->ID, '_mediora_services_journey_2', true );
 	$j_desc = get_post_meta( $post->ID, '_mediora_services_journey_desc', true );
 	if ( empty( $j_desc ) ) {
 		$j_desc = 'Mỗi hành trình là một dấu ấn riêng, được xây dựng từ sự thấu hiểu, chuyên môn và giải pháp trẻ hóa cá nhân hóa tại vientrehoaSejang.';
 	}
 	?>
 	<div class="mediora-mb-wrap">
+		<div class="mediora-mb-banner">
+			<div>
+				<strong style="color:#f5cf6d; font-size:14px;">🖼️ Quản Lý Hình Ảnh Website Tập Trung:</strong>
+				<p style="margin:4px 0 0; color:#dcdcdc; font-size:13px;">Bạn cũng có thể xem và chỉnh sửa tất cả hình ảnh toàn trang tại trang <strong>Quản Lý Hình Ảnh</strong>.</p>
+			</div>
+			<a href="<?php echo esc_url( admin_url( 'admin.php?page=mediora-images&tab=services' ) ); ?>" class="button">Mở Quản Lý Hình Ảnh Dịch Vụ ➔</a>
+		</div>
+
+		<!-- Section 1 -->
 		<div class="mediora-mb-section">
-			<h3 class="mediora-mb-title">🌟 PHẦN 1: HÌNH ẢNH NGƯỜI MẪU 2 BÊN & MÔ TẢ GIỚI THIỆU</h3>
+			<h3 class="mediora-mb-title">🌟 PHẦN 1: HÌNH ẢNH NGƯỜI MẪU 2 BÊN & NỘI DUNG GIỚI THIỆU</h3>
 			<div class="mediora-mb-grid">
+				<?php 
+				$m1 = mediora_get_image( 'services_model_1', 'assets/img-services/mau-1.png', $post->ID );
+				$m2 = mediora_get_image( 'services_model_2', 'assets/img-services/mau-2.png', $post->ID );
+				?>
 				<div class="mediora-img-box">
-					<label>Ảnh Người Mẫu Bên Trái (Model Left):</label>
-					<div class="mediora-img-preview" id="preview_model_1">
-						<img src="<?php echo esc_url( $m1 ? $m1 : $assets_uri . '/mau-1.png' ); ?>" alt="Mẫu 1">
+					<label>Ảnh Người Mẫu Trái (Model Left):</label>
+					<span class="img-hint">Kích thước chuẩn: 580 × 850 px (Tự cân đối 2 bên)</span>
+					<div class="mediora-img-preview" id="preview_services_model_1">
+						<img src="<?php echo esc_url( $m1 ); ?>" alt="Mẫu 1">
 					</div>
-					<input type="hidden" name="mediora_services_model_1" id="input_model_1" value="<?php echo esc_attr( $m1 ); ?>">
-					<button type="button" class="button mediora-btn-upload" data-target="model_1">📷 Chọn ảnh / Tải lên</button>
-					<button type="button" class="button mediora-btn-remove" data-target="model_1" data-default="<?php echo esc_url( $assets_uri . '/mau-1.png' ); ?>" <?php echo empty( $m1 ) ? 'style="display:none;"' : ''; ?>>Khôi phục mặc định</button>
+					<input type="hidden" name="mediora_services_model_1" id="input_services_model_1" value="<?php echo esc_attr( get_post_meta( $post->ID, '_mediora_services_model_1', true ) ); ?>">
+					<button type="button" class="button mediora-btn-upload" data-target="services_model_1">📁 Chọn / Tải ảnh lên</button>
+					<button type="button" class="button mediora-btn-remove" data-target="services_model_1" data-default="<?php echo esc_url( $assets_uri . '/mau-1.png' ); ?>">↺ Mặc định</button>
 				</div>
 				<div class="mediora-img-box">
-					<label>Ảnh Người Mẫu Bên Phải (Model Right):</label>
-					<div class="mediora-img-preview" id="preview_model_2">
-						<img src="<?php echo esc_url( $m2 ? $m2 : $assets_uri . '/mau-2.png' ); ?>" alt="Mẫu 2">
+					<label>Ảnh Người Mẫu Phải (Model Right):</label>
+					<span class="img-hint">Kích thước chuẩn: 580 × 850 px (Tự cân đối 2 bên)</span>
+					<div class="mediora-img-preview" id="preview_services_model_2">
+						<img src="<?php echo esc_url( $m2 ); ?>" alt="Mẫu 2">
 					</div>
-					<input type="hidden" name="mediora_services_model_2" id="input_model_2" value="<?php echo esc_attr( $m2 ); ?>">
-					<button type="button" class="button mediora-btn-upload" data-target="model_2">📷 Chọn ảnh / Tải lên</button>
-					<button type="button" class="button mediora-btn-remove" data-target="model_2" data-default="<?php echo esc_url( $assets_uri . '/mau-2.png' ); ?>" <?php echo empty( $m2 ) ? 'style="display:none;"' : ''; ?>>Khôi phục mặc định</button>
+					<input type="hidden" name="mediora_services_model_2" id="input_services_model_2" value="<?php echo esc_attr( get_post_meta( $post->ID, '_mediora_services_model_2', true ) ); ?>">
+					<button type="button" class="button mediora-btn-upload" data-target="services_model_2">📁 Chọn / Tải ảnh lên</button>
+					<button type="button" class="button mediora-btn-remove" data-target="services_model_2" data-default="<?php echo esc_url( $assets_uri . '/mau-2.png' ); ?>">↺ Mặc định</button>
 				</div>
 			</div>
 			<div class="mediora-field-text">
@@ -197,51 +312,69 @@ function mediora_render_services_meta_box( $post ) {
 			</div>
 		</div>
 
+		<!-- Section 2: Quy trình & Bác sĩ -->
 		<div class="mediora-mb-section">
 			<h3 class="mediora-mb-title">🩺 PHẦN 2: QUY TRÌNH 6 BƯỚC & BÁC SĨ</h3>
-			<div class="mediora-mb-grid" style="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));">
+			<div class="mediora-mb-grid">
+				<?php 
+				$bs = mediora_get_image( 'services_doctor', 'assets/img-services/podium-bs.png', $post->ID );
+				?>
 				<div class="mediora-img-box">
-					<label>Ảnh Bác Sĩ:</label>
-					<div class="mediora-img-preview" id="preview_doctor">
-						<img src="<?php echo esc_url( $bs ? $bs : $assets_uri . '/podium-bs.png' ); ?>" alt="Bác sĩ">
+					<label>Ảnh Bác Sĩ (Podium đứng bục):</label>
+					<span class="img-hint">722 × 881 px (PNG tách nền)</span>
+					<div class="mediora-img-preview" id="preview_services_doctor">
+						<img src="<?php echo esc_url( $bs ); ?>" alt="Bác sĩ">
 					</div>
-					<input type="hidden" name="mediora_services_doctor" id="input_doctor" value="<?php echo esc_attr( $bs ); ?>">
-					<button type="button" class="button mediora-btn-upload" data-target="doctor">📷 Chọn ảnh</button>
+					<input type="hidden" name="mediora_services_doctor" id="input_services_doctor" value="<?php echo esc_attr( get_post_meta( $post->ID, '_mediora_services_doctor', true ) ); ?>">
+					<button type="button" class="button mediora-btn-upload" data-target="services_doctor">📁 Chọn ảnh</button>
+					<button type="button" class="button mediora-btn-remove" data-target="services_doctor" data-default="<?php echo esc_url( $assets_uri . '/podium-bs.png' ); ?>">↺ Mặc định</button>
 				</div>
 				<?php for ( $i = 1; $i <= 6; $i++ ) : 
-					$step_v = get_post_meta( $post->ID, '_mediora_services_step_' . $i, true );
+					$s_key = 'services_step_' . $i;
+					$s_url = mediora_get_image( $s_key, 'assets/img-services/step-0' . $i . '.png', $post->ID );
 					$def_s = $assets_uri . '/step-0' . $i . '.png';
 				?>
 				<div class="mediora-img-box">
-					<label>Bước <?php echo $i; ?>:</label>
-					<div class="mediora-img-preview" id="preview_step_<?php echo $i; ?>">
-						<img src="<?php echo esc_url( $step_v ? $step_v : $def_s ); ?>" alt="Bước <?php echo $i; ?>">
+					<label>Bước <?php echo $i; ?> dịch vụ:</label>
+					<span class="img-hint">626 × 391 px</span>
+					<div class="mediora-img-preview" id="preview_<?php echo $s_key; ?>">
+						<img src="<?php echo esc_url( $s_url ); ?>" alt="Bước <?php echo $i; ?>">
 					</div>
-					<input type="hidden" name="mediora_services_step_<?php echo $i; ?>" id="input_step_<?php echo $i; ?>" value="<?php echo esc_attr( $step_v ); ?>">
-					<button type="button" class="button mediora-btn-upload" data-target="step_<?php echo $i; ?>">📷 Thay ảnh</button>
+					<input type="hidden" name="mediora_<?php echo $s_key; ?>" id="input_<?php echo $s_key; ?>" value="<?php echo esc_attr( get_post_meta( $post->ID, '_mediora_' . $s_key, true ) ); ?>">
+					<button type="button" class="button mediora-btn-upload" data-target="<?php echo $s_key; ?>">📁 Thay ảnh</button>
+					<button type="button" class="button mediora-btn-remove" data-target="<?php echo $s_key; ?>" data-default="<?php echo esc_url( $def_s ); ?>">↺ Mặc định</button>
 				</div>
 				<?php endfor; ?>
 			</div>
 		</div>
 
+		<!-- Section 3: Slider khách hàng -->
 		<div class="mediora-mb-section">
 			<h3 class="mediora-mb-title">✨ PHẦN 3: HÀNH TRÌNH KHÁCH HÀNG (SLIDER TRƯỚC / SAU)</h3>
 			<div class="mediora-mb-grid">
+				<?php 
+				$j1 = mediora_get_image( 'services_journey_1', 'assets/img-services/ba-ngan-quynh.png', $post->ID );
+				$j2 = mediora_get_image( 'services_journey_2', 'assets/img-services/ba-thao.png', $post->ID );
+				?>
 				<div class="mediora-img-box">
 					<label>Khách Hàng 1 (Nghệ sĩ Ngân Quỳnh):</label>
-					<div class="mediora-img-preview" id="preview_j1">
-						<img src="<?php echo esc_url( $j1 ? $j1 : $assets_uri . '/ba-ngan-quynh.png' ); ?>" alt="Khách 1">
+					<span class="img-hint">791 × 624 px</span>
+					<div class="mediora-img-preview" id="preview_services_journey_1">
+						<img src="<?php echo esc_url( $j1 ); ?>" alt="Khách 1">
 					</div>
-					<input type="hidden" name="mediora_services_journey_1" id="input_j1" value="<?php echo esc_attr( $j1 ); ?>">
-					<button type="button" class="button mediora-btn-upload" data-target="j1">📷 Thay ảnh</button>
+					<input type="hidden" name="mediora_services_journey_1" id="input_services_journey_1" value="<?php echo esc_attr( get_post_meta( $post->ID, '_mediora_services_journey_1', true ) ); ?>">
+					<button type="button" class="button mediora-btn-upload" data-target="services_journey_1">📁 Thay ảnh</button>
+					<button type="button" class="button mediora-btn-remove" data-target="services_journey_1" data-default="<?php echo esc_url( $assets_uri . '/ba-ngan-quynh.png' ); ?>">↺ Mặc định</button>
 				</div>
 				<div class="mediora-img-box">
 					<label>Khách Hàng 2 (Chị Thảo):</label>
-					<div class="mediora-img-preview" id="preview_j2">
-						<img src="<?php echo esc_url( $j2 ? $j2 : $assets_uri . '/ba-thao.png' ); ?>" alt="Khách 2">
+					<span class="img-hint">791 × 624 px</span>
+					<div class="mediora-img-preview" id="preview_services_journey_2">
+						<img src="<?php echo esc_url( $j2 ); ?>" alt="Khách 2">
 					</div>
-					<input type="hidden" name="mediora_services_journey_2" id="input_j2" value="<?php echo esc_attr( $j2 ); ?>">
-					<button type="button" class="button mediora-btn-upload" data-target="j2">📷 Thay ảnh</button>
+					<input type="hidden" name="mediora_services_journey_2" id="input_services_journey_2" value="<?php echo esc_attr( get_post_meta( $post->ID, '_mediora_services_journey_2', true ) ); ?>">
+					<button type="button" class="button mediora-btn-upload" data-target="services_journey_2">📁 Thay ảnh</button>
+					<button type="button" class="button mediora-btn-remove" data-target="services_journey_2" data-default="<?php echo esc_url( $assets_uri . '/ba-thao.png' ); ?>">↺ Mặc định</button>
 				</div>
 			</div>
 			<div class="mediora-field-text">
@@ -254,17 +387,12 @@ function mediora_render_services_meta_box( $post ) {
 }
 
 /* ==========================================================================
-   2. GIAO DIỆN META BOX TRANG CHỦ
+   2. GIAO DIỆN META BOX TRANG CHỦ (post 101)
    ========================================================================== */
 function mediora_render_home_meta_box( $post ) {
 	wp_nonce_field( 'mediora_save_page_meta', 'mediora_page_meta_nonce' );
 	mediora_render_mb_styles();
 	$theme_uri = get_template_directory_uri();
-
-	$banner1 = get_post_meta( $post->ID, '_mediora_home_banner_1', true );
-	$banner2 = get_post_meta( $post->ID, '_mediora_home_banner_2', true );
-	$banner3 = get_post_meta( $post->ID, '_mediora_home_banner_3', true );
-	$banner4 = get_post_meta( $post->ID, '_mediora_home_banner_4', true );
 
 	$intro = get_post_meta( $post->ID, '_mediora_home_intro_text', true );
 	if ( empty( $intro ) ) {
@@ -280,25 +408,34 @@ function mediora_render_home_meta_box( $post ) {
 	if ( empty( $vid_facility ) ) {
 		$vid_facility = mediora_get_option( 'facility_video_url', 'https://d1b6kbmv97kzjg.cloudfront.net/wp-content/uploads/2026/11/CSVC.mp4' );
 	}
-
-	$cover = get_post_meta( $post->ID, '_mediora_home_register_cover', true );
 	?>
 	<div class="mediora-mb-wrap">
+		<div class="mediora-mb-banner">
+			<div>
+				<strong style="color:#f5cf6d; font-size:14px;">🖼️ Quản Lý Hình Ảnh Website Tập Trung:</strong>
+				<p style="margin:4px 0 0; color:#dcdcdc; font-size:13px;">Bạn cũng có thể xem và chỉnh sửa tất cả hình ảnh toàn trang tại trang <strong>Quản Lý Hình Ảnh</strong>.</p>
+			</div>
+			<a href="<?php echo esc_url( admin_url( 'admin.php?page=mediora-images&tab=home' ) ); ?>" class="button">Mở Quản Lý Hình Ảnh Trang Chủ ➔</a>
+		</div>
+
 		<!-- Hero Banners -->
 		<div class="mediora-mb-section">
 			<h3 class="mediora-mb-title">🖼️ PHẦN 1: BANNER SLIDER ĐẦU TRANG CHỦ</h3>
-			<div class="mediora-mb-grid" style="grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));">
+			<div class="mediora-mb-grid">
 				<?php for ( $b = 1; $b <= 4; $b++ ) : 
-					$b_val = ${'banner' . $b};
+					$b_key = 'home_banner_' . $b;
+					$b_val = mediora_get_image( $b_key, 'assets/imgs/m1-' . $b . '-1.png', $post->ID );
 					$b_def = $theme_uri . '/assets/imgs/m1-' . $b . '-1.png';
 				?>
 				<div class="mediora-img-box">
 					<label>Banner Slide <?php echo $b; ?>:</label>
-					<div class="mediora-img-preview" id="preview_banner_<?php echo $b; ?>">
-						<img src="<?php echo esc_url( $b_val ? $b_val : $b_def ); ?>" alt="Banner <?php echo $b; ?>">
+					<span class="img-hint">1920 × 1080 px</span>
+					<div class="mediora-img-preview" id="preview_<?php echo $b_key; ?>">
+						<img src="<?php echo esc_url( $b_val ); ?>" alt="Banner <?php echo $b; ?>">
 					</div>
-					<input type="hidden" name="mediora_home_banner_<?php echo $b; ?>" id="input_banner_<?php echo $b; ?>" value="<?php echo esc_attr( $b_val ); ?>">
-					<button type="button" class="button mediora-btn-upload" data-target="banner_<?php echo $b; ?>">📷 Thay banner</button>
+					<input type="hidden" name="mediora_<?php echo $b_key; ?>" id="input_<?php echo $b_key; ?>" value="<?php echo esc_attr( get_post_meta( $post->ID, '_mediora_' . $b_key, true ) ); ?>">
+					<button type="button" class="button mediora-btn-upload" data-target="<?php echo $b_key; ?>">📁 Thay banner</button>
+					<button type="button" class="button mediora-btn-remove" data-target="<?php echo $b_key; ?>" data-default="<?php echo esc_url( $b_def ); ?>">↺ Mặc định</button>
 				</div>
 				<?php endfor; ?>
 			</div>
@@ -312,9 +449,62 @@ function mediora_render_home_meta_box( $post ) {
 			</div>
 		</div>
 
+		<!-- Doctor & Customers -->
+		<div class="mediora-mb-section">
+			<h3 class="mediora-mb-title">👨‍⚕️ PHẦN 3: ĐỘI NGŨ BÁC SĨ & KHÁCH HÀNG THỰC TẾ</h3>
+			<div class="mediora-mb-grid">
+				<?php 
+				$doc = mediora_get_image( 'home_doctor', 'assets/imgs/doctor1.png', $post->ID );
+				$c1  = mediora_get_image( 'home_customer_1', 'assets/imgs/kh-ngan-quynh.png', $post->ID );
+				$c2  = mediora_get_image( 'home_customer_2', 'assets/imgs/kh-hien-pham.png', $post->ID );
+				$c3  = mediora_get_image( 'home_customer_3', 'assets/imgs/kh-vi-tuong.png', $post->ID );
+				?>
+				<div class="mediora-img-box">
+					<label>Ảnh Đội ngũ Bác sĩ chuyên khoa:</label>
+					<span class="img-hint">1583 × 762 px</span>
+					<div class="mediora-img-preview" id="preview_home_doctor">
+						<img src="<?php echo esc_url( $doc ); ?>" alt="Bác sĩ">
+					</div>
+					<input type="hidden" name="mediora_home_doctor" id="input_home_doctor" value="<?php echo esc_attr( get_post_meta( $post->ID, '_mediora_home_doctor', true ) ); ?>">
+					<button type="button" class="button mediora-btn-upload" data-target="home_doctor">📁 Thay ảnh</button>
+					<button type="button" class="button mediora-btn-remove" data-target="home_doctor" data-default="<?php echo esc_url( $theme_uri . '/assets/imgs/doctor1.png' ); ?>">↺ Mặc định</button>
+				</div>
+				<div class="mediora-img-box">
+					<label>Khách hàng 1 (Nghệ sĩ Ngân Quỳnh):</label>
+					<span class="img-hint">1846 × 966 px</span>
+					<div class="mediora-img-preview" id="preview_home_customer_1">
+						<img src="<?php echo esc_url( $c1 ); ?>" alt="Khách 1">
+					</div>
+					<input type="hidden" name="mediora_home_customer_1" id="input_home_customer_1" value="<?php echo esc_attr( get_post_meta( $post->ID, '_mediora_home_customer_1', true ) ); ?>">
+					<button type="button" class="button mediora-btn-upload" data-target="home_customer_1">📁 Thay ảnh</button>
+					<button type="button" class="button mediora-btn-remove" data-target="home_customer_1" data-default="<?php echo esc_url( $theme_uri . '/assets/imgs/kh-ngan-quynh.png' ); ?>">↺ Mặc định</button>
+				</div>
+				<div class="mediora-img-box">
+					<label>Khách hàng 2 (Chị Hiền Phạm):</label>
+					<span class="img-hint">1846 × 966 px</span>
+					<div class="mediora-img-preview" id="preview_home_customer_2">
+						<img src="<?php echo esc_url( $c2 ); ?>" alt="Khách 2">
+					</div>
+					<input type="hidden" name="mediora_home_customer_2" id="input_home_customer_2" value="<?php echo esc_attr( get_post_meta( $post->ID, '_mediora_home_customer_2', true ) ); ?>">
+					<button type="button" class="button mediora-btn-upload" data-target="home_customer_2">📁 Thay ảnh</button>
+					<button type="button" class="button mediora-btn-remove" data-target="home_customer_2" data-default="<?php echo esc_url( $theme_uri . '/assets/imgs/kh-hien-pham.png' ); ?>">↺ Mặc định</button>
+				</div>
+				<div class="mediora-img-box">
+					<label>Khách hàng 3 (Chị Vi Tường):</label>
+					<span class="img-hint">1846 × 966 px</span>
+					<div class="mediora-img-preview" id="preview_home_customer_3">
+						<img src="<?php echo esc_url( $c3 ); ?>" alt="Khách 3">
+					</div>
+					<input type="hidden" name="mediora_home_customer_3" id="input_home_customer_3" value="<?php echo esc_attr( get_post_meta( $post->ID, '_mediora_home_customer_3', true ) ); ?>">
+					<button type="button" class="button mediora-btn-upload" data-target="home_customer_3">📁 Thay ảnh</button>
+					<button type="button" class="button mediora-btn-remove" data-target="home_customer_3" data-default="<?php echo esc_url( $theme_uri . '/assets/imgs/kh-vi-tuong.png' ); ?>">↺ Mặc định</button>
+				</div>
+			</div>
+		</div>
+
 		<!-- Videos & Cover -->
 		<div class="mediora-mb-section">
-			<h3 class="mediora-mb-title">🎬 PHẦN 3: VIDEO & ẢNH BÌA ĐĂNG KÝ TƯ VẤN</h3>
+			<h3 class="mediora-mb-title">🎬 PHẦN 4: VIDEO & ẢNH BÌA ĐĂNG KÝ TƯ VẤN</h3>
 			<div class="mediora-field-text mb-3">
 				<label>Link Video TVC GMISS (file .mp4):</label>
 				<input type="url" name="mediora_home_gmiss_video" value="<?php echo esc_attr( $vid_gmiss ); ?>">
@@ -324,12 +514,17 @@ function mediora_render_home_meta_box( $post ) {
 				<input type="url" name="mediora_home_facility_video" value="<?php echo esc_attr( $vid_facility ); ?>">
 			</div>
 			<div class="mediora-img-box mt-3" style="max-width: 400px;">
+				<?php 
+				$cov = mediora_get_image( 'home_cover', 'assets/imgs/cover.jpg', $post->ID );
+				?>
 				<label>Ảnh bìa khung Đăng ký tư vấn:</label>
-				<div class="mediora-img-preview" id="preview_reg_cover">
-					<img src="<?php echo esc_url( $cover ? $cover : $theme_uri . '/assets/imgs/cover.jpg' ); ?>" alt="Ảnh bìa tư vấn">
+				<span class="img-hint">1287 × 724 px</span>
+				<div class="mediora-img-preview" id="preview_home_cover">
+					<img src="<?php echo esc_url( $cov ); ?>" alt="Ảnh bìa tư vấn">
 				</div>
-				<input type="hidden" name="mediora_home_register_cover" id="input_reg_cover" value="<?php echo esc_attr( $cover ); ?>">
-				<button type="button" class="button mediora-btn-upload" data-target="reg_cover">📷 Thay ảnh bìa</button>
+				<input type="hidden" name="mediora_home_cover" id="input_home_cover" value="<?php echo esc_attr( get_post_meta( $post->ID, '_mediora_home_cover', true ) ); ?>">
+				<button type="button" class="button mediora-btn-upload" data-target="home_cover">📁 Thay ảnh bìa</button>
+				<button type="button" class="button mediora-btn-remove" data-target="home_cover" data-default="<?php echo esc_url( $theme_uri . '/assets/imgs/cover.jpg' ); ?>">↺ Mặc định</button>
 			</div>
 		</div>
 	</div>
@@ -337,55 +532,94 @@ function mediora_render_home_meta_box( $post ) {
 }
 
 /* ==========================================================================
-   3. GIAO DIỆN META BOX TRANG VỀ CHÚNG TÔI
+   3. GIAO DIỆN META BOX TRANG VỀ CHÚNG TÔI (post 102)
    ========================================================================== */
 function mediora_render_about_meta_box( $post ) {
 	wp_nonce_field( 'mediora_save_page_meta', 'mediora_page_meta_nonce' );
 	mediora_render_mb_styles();
-	$theme_uri = get_template_directory_uri();
+	$theme_uri  = get_template_directory_uri();
+	$assets_uri = $theme_uri . '/assets/img-about-us';
 
 	$p1 = get_post_meta( $post->ID, '_mediora_about_p1', true );
 	if ( empty( $p1 ) ) {
 		$p1 = 'vientrehoaSejang định hướng chuyên sâu trong lĩnh vực trẻ hóa, ứng dụng các giải pháp thẩm mỹ dựa trên nền tảng y khoa và cá nhân hóa theo tình trạng của từng khách hàng. Mỗi liệu trình được xây dựng trên cơ sở thăm khám, đánh giá chuyên môn và chỉ định phù hợp, nhằm tối ưu hiệu quả cải thiện, đồng thời chú trọng an toàn trong quá trình thực hiện.';
 	}
-
 	$p2 = get_post_meta( $post->ID, '_mediora_about_p2', true );
 	if ( empty( $p2 ) ) {
 		$p2 = 'Sejang đề cao quy trình chuyên môn chặt chẽ, tư vấn minh bạch và theo dõi sau dịch vụ, hướng đến kết quả trẻ hóa hài hòa, tự nhiên và phù hợp với đặc điểm riêng của mỗi khách hàng.';
 	}
-
 	$vision = get_post_meta( $post->ID, '_mediora_about_vision', true );
 	if ( empty( $vision ) ) {
-		$vision = 'Trở thành hệ thống viện trẻ hóa hàng đầu, định hình chuẩn mực thẩm mỹ y khoa an toàn, bền vững và tôn vinh vẻ đẹp tự nhiên của phụ nữ Á Đông.';
+		$vision = 'Trở thành viện chuyên khoa thẩm mỹ định hướng chuyên sâu về trẻ hóa, phát triển trên nền tảng y khoa, công nghệ hiện đại và tư duy thẩm mỹ tiên tiến. vientrehoaSejang hướng đến xây dựng chuẩn mực chăm sóc sắc đẹp chuyên nghiệp, đề cao tính an toàn, minh bạch và chất lượng dịch vụ, đồng hành cùng khách hàng trên hành trình gìn giữ nét thanh xuân và tôn vinh vẻ đẹp tự nhiên.';
 	}
-
 	$mission = get_post_meta( $post->ID, '_mediora_about_mission', true );
 	if ( empty( $mission ) ) {
-		$mission = 'Cung cấp các giải pháp trẻ hóa cá nhân hóa, kết hợp công nghệ y khoa tối tân và y đức chuẩn mực để đồng hành cùng thanh xuân của khách hàng.';
+		$mission = 'Mang đến các giải pháp thẩm mỹ và trẻ hóa được cá nhân hóa dựa trên tình trạng thực tế, đặc điểm riêng và nhu cầu của từng khách hàng. vientrehoaSejang chú trọng quy trình thăm khám, đánh giá chuyên môn, tư vấn minh bạch và theo dõi sau dịch vụ, giúp khách hàng hiểu rõ lựa chọn, an tâm trong quá trình chăm sóc và hướng đến kết quả hài hòa, phù hợp với nét đẹp riêng.';
 	}
 	?>
 	<div class="mediora-mb-wrap">
+		<div class="mediora-mb-banner">
+			<div>
+				<strong style="color:#f5cf6d; font-size:14px;">🖼️ Quản Lý Hình Ảnh Website Tập Trung:</strong>
+				<p style="margin:4px 0 0; color:#dcdcdc; font-size:13px;">Bạn cũng có thể xem và chỉnh sửa tất cả hình ảnh toàn trang tại trang <strong>Quản Lý Hình Ảnh</strong>.</p>
+			</div>
+			<a href="<?php echo esc_url( admin_url( 'admin.php?page=mediora-images&tab=about' ) ); ?>" class="button">Mở Quản Lý Hình Ảnh Giới Thiệu ➔</a>
+		</div>
+
+		<!-- Văn bản giới thiệu -->
 		<div class="mediora-mb-section">
-			<h3 class="mediora-mb-title">🌟 PHẦN 1: ĐOẠN VĂN BẢN GIỚI THIỆU CHUNG (ĐẦU TRANG)</h3>
+			<h3 class="mediora-mb-title">👑 PHẦN 1: ĐOẠN VĂN BẢN GIỚI THIỆU VIỆN TRẺ HÓA SEJANG</h3>
 			<div class="mediora-field-text mb-3">
-				<label>Đoạn văn 1:</label>
+				<label>Đoạn văn bản 1 (Mở đầu triết lý y khoa):</label>
 				<textarea name="mediora_about_p1" rows="3"><?php echo esc_textarea( $p1 ); ?></textarea>
 			</div>
 			<div class="mediora-field-text">
-				<label>Đoạn văn 2:</label>
+				<label>Đoạn văn bản 2 (Quy trình chuyên môn & cam kết):</label>
 				<textarea name="mediora_about_p2" rows="3"><?php echo esc_textarea( $p2 ); ?></textarea>
 			</div>
 		</div>
 
+		<!-- Tầm nhìn & Sứ mệnh -->
 		<div class="mediora-mb-section">
 			<h3 class="mediora-mb-title">🎯 PHẦN 2: TẦM NHÌN & SỨ MỆNH</h3>
 			<div class="mediora-field-text mb-3">
-				<label>Tầm nhìn (Vision):</label>
-				<textarea name="mediora_about_vision" rows="2"><?php echo esc_textarea( $vision ); ?></textarea>
+				<label>Nội dung Tầm Nhìn:</label>
+				<textarea name="mediora_about_vision" rows="3"><?php echo esc_textarea( $vision ); ?></textarea>
 			</div>
 			<div class="mediora-field-text">
-				<label>Sứ mệnh (Mission):</label>
-				<textarea name="mediora_about_mission" rows="2"><?php echo esc_textarea( $mission ); ?></textarea>
+				<label>Nội dung Sứ Mệnh:</label>
+				<textarea name="mediora_about_mission" rows="3"><?php echo esc_textarea( $mission ); ?></textarea>
+			</div>
+		</div>
+
+		<!-- Hình ảnh minh họa CSVC -->
+		<div class="mediora-mb-section">
+			<h3 class="mediora-mb-title">🏛️ PHẦN 3: HÌNH ẢNH MINH HỌA & NỀN HERO</h3>
+			<div class="mediora-mb-grid">
+				<?php 
+				$ab_hero = mediora_get_image( 'about_bg_hero', 'assets/img-about-us/bg-hero.jpg', $post->ID );
+				$ab_mh   = mediora_get_image( 'about_minh_hoa', 'assets/img-about-us/minh-hoa.png', $post->ID );
+				?>
+				<div class="mediora-img-box">
+					<label>Ảnh nền Hero Banner:</label>
+					<span class="img-hint">1920 × 840 px</span>
+					<div class="mediora-img-preview" id="preview_about_bg_hero">
+						<img src="<?php echo esc_url( $ab_hero ); ?>" alt="Hero BG">
+					</div>
+					<input type="hidden" name="mediora_about_bg_hero" id="input_about_bg_hero" value="<?php echo esc_attr( get_post_meta( $post->ID, '_mediora_about_bg_hero', true ) ); ?>">
+					<button type="button" class="button mediora-btn-upload" data-target="about_bg_hero">📁 Thay ảnh</button>
+					<button type="button" class="button mediora-btn-remove" data-target="about_bg_hero" data-default="<?php echo esc_url( $assets_uri . '/bg-hero.jpg' ); ?>">↺ Mặc định</button>
+				</div>
+				<div class="mediora-img-box">
+					<label>Ảnh Minh Họa Cơ Sở Vật Chất:</label>
+					<span class="img-hint">657 × 653 px (PNG tách nền)</span>
+					<div class="mediora-img-preview" id="preview_about_minh_hoa">
+						<img src="<?php echo esc_url( $ab_mh ); ?>" alt="Minh họa CSVC">
+					</div>
+					<input type="hidden" name="mediora_about_minh_hoa" id="input_about_minh_hoa" value="<?php echo esc_attr( get_post_meta( $post->ID, '_mediora_about_minh_hoa', true ) ); ?>">
+					<button type="button" class="button mediora-btn-upload" data-target="about_minh_hoa">📁 Thay ảnh</button>
+					<button type="button" class="button mediora-btn-remove" data-target="about_minh_hoa" data-default="<?php echo esc_url( $assets_uri . '/minh-hoa.png' ); ?>">↺ Mặc định</button>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -393,7 +627,7 @@ function mediora_render_about_meta_box( $post ) {
 }
 
 /* ==========================================================================
-   4. GIAO DIỆN META BOX TRANG LIÊN HỆ
+   4. GIAO DIỆN META BOX TRANG LIÊN HỆ (post 104)
    ========================================================================== */
 function mediora_render_contact_meta_box( $post ) {
 	wp_nonce_field( 'mediora_save_page_meta', 'mediora_page_meta_nonce' );
@@ -416,7 +650,7 @@ function mediora_render_contact_meta_box( $post ) {
 
 	$hours = get_post_meta( $post->ID, '_mediora_contact_hours', true );
 	if ( empty( $hours ) ) {
-		$hours = '08:00 - 20:00 hàng ngày (Cả Thứ 7, Chủ Nhật & Lễ Tết)';
+		$hours = '08:00 - 20:00 hằng ngày';
 	}
 
 	$maps = get_post_meta( $post->ID, '_mediora_contact_maps_url', true );
@@ -453,7 +687,7 @@ function mediora_render_contact_meta_box( $post ) {
 }
 
 /* ==========================================================================
-   LƯU DỮ LIỆU TẤT CẢ CÁC META BOX
+   LƯU DỮ LIỆU TẤT CẢ CÁC META BOX (VÀ ĐỒNG BỘ VỚI THEME OPTIONS TẬP TRUNG)
    ========================================================================== */
 function mediora_save_all_page_meta( $post_id ) {
 	if ( ! isset( $_POST['mediora_page_meta_nonce'] ) || ! wp_verify_nonce( $_POST['mediora_page_meta_nonce'], 'mediora_save_page_meta' ) ) {
@@ -487,16 +721,22 @@ function mediora_save_all_page_meta( $post_id ) {
 		'_mediora_home_banner_2'          => 'mediora_home_banner_2',
 		'_mediora_home_banner_3'          => 'mediora_home_banner_3',
 		'_mediora_home_banner_4'          => 'mediora_home_banner_4',
+		'_mediora_home_doctor'            => 'mediora_home_doctor',
+		'_mediora_home_customer_1'        => 'mediora_home_customer_1',
+		'_mediora_home_customer_2'        => 'mediora_home_customer_2',
+		'_mediora_home_customer_3'        => 'mediora_home_customer_3',
 		'_mediora_home_intro_text'        => 'mediora_home_intro_text',
 		'_mediora_home_gmiss_video'       => 'mediora_home_gmiss_video',
 		'_mediora_home_facility_video'    => 'mediora_home_facility_video',
-		'_mediora_home_register_cover'    => 'mediora_home_register_cover',
+		'_mediora_home_cover'             => 'mediora_home_cover',
 
 		// Về Chúng Tôi
 		'_mediora_about_p1'               => 'mediora_about_p1',
 		'_mediora_about_p2'               => 'mediora_about_p2',
 		'_mediora_about_vision'           => 'mediora_about_vision',
 		'_mediora_about_mission'          => 'mediora_about_mission',
+		'_mediora_about_bg_hero'          => 'mediora_about_bg_hero',
+		'_mediora_about_minh_hoa'         => 'mediora_about_minh_hoa',
 
 		// Liên Hệ
 		'_mediora_contact_clinic_name'    => 'mediora_contact_clinic_name',
@@ -506,16 +746,33 @@ function mediora_save_all_page_meta( $post_id ) {
 		'_mediora_contact_maps_url'       => 'mediora_contact_maps_url',
 	);
 
+	$theme_images = get_option( 'mediora_theme_images', array() );
+	if ( ! is_array( $theme_images ) ) {
+		$theme_images = array();
+	}
+
 	foreach ( $all_fields as $meta_key => $post_key ) {
 		if ( isset( $_POST[ $post_key ] ) ) {
+			$val = wp_unslash( $_POST[ $post_key ] );
 			if ( strpos( $meta_key, 'desc' ) !== false || strpos( $meta_key, 'intro' ) !== false || strpos( $meta_key, 'p1' ) !== false || strpos( $meta_key, 'p2' ) !== false || strpos( $meta_key, 'vision' ) !== false || strpos( $meta_key, 'mission' ) !== false ) {
-				update_post_meta( $post_id, $meta_key, sanitize_textarea_field( wp_unslash( $_POST[ $post_key ] ) ) );
-			} elseif ( strpos( $meta_key, 'url' ) !== false || strpos( $meta_key, 'video' ) !== false || strpos( $meta_key, 'banner' ) !== false || strpos( $meta_key, 'cover' ) !== false || strpos( $meta_key, 'model' ) !== false || strpos( $meta_key, 'step' ) !== false || strpos( $meta_key, 'journey' ) !== false || strpos( $meta_key, 'doctor' ) !== false ) {
-				update_post_meta( $post_id, $meta_key, esc_url_raw( wp_unslash( $_POST[ $post_key ] ) ) );
+				update_post_meta( $post_id, $meta_key, sanitize_textarea_field( $val ) );
+			} elseif ( strpos( $meta_key, 'url' ) !== false || strpos( $meta_key, 'video' ) !== false || strpos( $meta_key, 'banner' ) !== false || strpos( $meta_key, 'cover' ) !== false || strpos( $meta_key, 'model' ) !== false || strpos( $meta_key, 'step' ) !== false || strpos( $meta_key, 'journey' ) !== false || strpos( $meta_key, 'doctor' ) !== false || strpos( $meta_key, 'customer' ) !== false || strpos( $meta_key, 'minh_hoa' ) !== false || strpos( $meta_key, 'hero' ) !== false ) {
+				$clean_url = esc_url_raw( trim( $val ) );
+				if ( ! empty( $clean_url ) ) {
+					update_post_meta( $post_id, $meta_key, $clean_url );
+				} else {
+					delete_post_meta( $post_id, $meta_key );
+				}
+				// Đồng bộ đồng thời vào option tập trung
+				$opt_key = ltrim( $meta_key, '_' );
+				$opt_key = preg_replace( '/^mediora_/', '', $opt_key );
+				$theme_images[ $opt_key ] = $clean_url;
 			} else {
-				update_post_meta( $post_id, $meta_key, sanitize_text_field( wp_unslash( $_POST[ $post_key ] ) ) );
+				update_post_meta( $post_id, $meta_key, sanitize_text_field( $val ) );
 			}
 		}
 	}
+
+	update_option( 'mediora_theme_images', $theme_images );
 }
 add_action( 'save_post', 'mediora_save_all_page_meta' );

@@ -17,32 +17,36 @@ $page_id     = get_the_ID();
 $assets_uri  = get_template_directory_uri() . '/assets';
 $clinic_name = function_exists( 'mediora_get_option' ) ? mediora_get_option( 'clinic_name', 'vientrehoaSejang' ) : 'vientrehoaSejang';
 
-// 1. Dữ liệu hình ảnh & mô tả tùy chỉnh từ Meta Box
-$custom_m1   = get_post_meta( $page_id, '_mediora_services_model_1', true );
-$model_1_url = ! empty( $custom_m1 ) ? $custom_m1 : $assets_uri . '/img-services/mau-1.png';
-
-$custom_m2   = get_post_meta( $page_id, '_mediora_services_model_2', true );
-$model_2_url = ! empty( $custom_m2 ) ? $custom_m2 : $assets_uri . '/img-services/mau-2.png';
+// 1. Dữ liệu hình ảnh & mô tả tùy chỉnh
+$bg_1_url        = mediora_get_image( 'services_bg_1', 'assets/img-services/bg1.jpg', $page_id );
+$maintext_url    = mediora_get_image( 'services_maintext', 'assets/img-services/maintext.png', $page_id );
+$subtext_url     = mediora_get_image( 'services_subtext', 'assets/img-services/subtext.png', $page_id );
+$model_1_url     = mediora_get_image( 'services_model_1', 'assets/img-services/mau-1.png', $page_id );
+$model_2_url     = mediora_get_image( 'services_model_2', 'assets/img-services/mau-2.png', $page_id );
+$benefit_1_url   = mediora_get_image( 'services_benefit_1', 'assets/img-services/benefit-01.png', $page_id );
+$benefit_2_url   = mediora_get_image( 'services_benefit_2', 'assets/img-services/benefit-02.png', $page_id );
+$benefit_3_url   = mediora_get_image( 'services_benefit_3', 'assets/img-services/benefit-03.png', $page_id );
 
 $custom_desc   = get_post_meta( $page_id, '_mediora_services_desc', true );
 $services_desc = ! empty( $custom_desc ) ? $custom_desc : sprintf( 'Nâng cơ trẻ hóa bằng sợi sinh học GMISS là giải pháp thẩm mỹ hướng đến cải thiện tình trạng mô mềm sa trễ, hỗ trợ nâng đỡ đường nét và cải thiện độ săn chắc của làn da. Tại %s, mỗi liệu trình được xây dựng dựa trên tình trạng lão hóa, cấu trúc khuôn mặt và nhu cầu riêng của khách hàng, với định hướng trẻ hóa hài hòa, tự nhiên.', esc_html( $clinic_name ) );
 
 // 2. Dữ liệu bác sĩ & 6 bước
-$custom_doctor = get_post_meta( $page_id, '_mediora_services_doctor', true );
-$doctor_url    = ! empty( $custom_doctor ) ? $custom_doctor : $assets_uri . '/img-services/podium-bs.png';
+$bg_2_url        = mediora_get_image( 'services_bg_2', 'assets/img-services/bg2.jpg', $page_id );
+$process_tit_url = mediora_get_image( 'services_process_title', 'assets/img-services/process-title.png', $page_id );
+$doctor_url      = mediora_get_image( 'services_doctor', 'assets/img-services/podium-bs.png', $page_id );
 
 $step_urls = array();
 for ( $i = 1; $i <= 6; $i++ ) {
-	$custom_s = get_post_meta( $page_id, '_mediora_services_step_' . $i, true );
-	$step_urls[ $i ] = ! empty( $custom_s ) ? $custom_s : $assets_uri . '/img-services/step-0' . $i . '.png';
+	$step_urls[ $i ] = mediora_get_image( 'services_step_' . $i, 'assets/img-services/step-0' . $i . '.png', $page_id );
 }
 
 // 3. Dữ liệu slider khách hàng
-$custom_j1     = get_post_meta( $page_id, '_mediora_services_journey_1', true );
-$journey_1_url = ! empty( $custom_j1 ) ? $custom_j1 : $assets_uri . '/img-services/ba-ngan-quynh.png';
-
-$custom_j2     = get_post_meta( $page_id, '_mediora_services_journey_2', true );
-$journey_2_url = ! empty( $custom_j2 ) ? $custom_j2 : $assets_uri . '/img-services/ba-thao.png';
+$bg_journey_url  = mediora_get_image( 'services_bg_journey', 'assets/img-services/bg-journey.jpg', $page_id );
+$frame_line_url  = mediora_get_image( 'services_frame_line', 'assets/img-services/frame-line.png', $page_id );
+$journey_tit_url = mediora_get_image( 'services_journey_title', 'assets/img-services/journey-title.png', $page_id );
+$journey_1_url   = mediora_get_image( 'services_journey_1', 'assets/img-services/ba-ngan-quynh.png', $page_id );
+$journey_2_url   = mediora_get_image( 'services_journey_2', 'assets/img-services/ba-thao.png', $page_id );
+$btn_consult_url = mediora_get_image( 'services_btn_consult', 'assets/img-services/btn-consult.png', $page_id );
 
 $custom_j_desc = get_post_meta( $page_id, '_mediora_services_journey_desc', true );
 $journey_desc  = ! empty( $custom_j_desc ) ? $custom_j_desc : sprintf( 'Mỗi hành trình là một dấu ấn riêng, được xây dựng từ sự thấu hiểu, chuyên môn và giải pháp trẻ hóa cá nhân hóa tại %s.', esc_html( $clinic_name ) );
@@ -55,11 +59,11 @@ $journey_desc  = ! empty( $custom_j_desc ) ? $custom_j_desc : sprintf( 'Mỗi h�
 			<h1 id="cy-services-title" class="screen-reader-text"><?php esc_html_e( 'Nâng cơ trẻ hóa bằng sợi sinh học GMISS', 'mediora-clinic' ); ?></h1>
 			
 			<div class="cy-fig ph cy-bg" data-ph="BG3 m1 · 1920×1776" style="--x:0;--y:0;--w:1920;--h:1776;--o:0">
-				<img src="<?php echo esc_url( $assets_uri . '/img-services/bg1.jpg' ); ?>" alt="" width="1920" height="1776" fetchpriority="high">
+				<img src="<?php echo esc_url( $bg_1_url ); ?>" alt="" width="1920" height="1776" fetchpriority="high">
 			</div>
 
 			<div class="cy-fig ph" data-ph="Maintext · 1058×110" style="--x:431;--y:78;--w:1058;--h:110;--o:1">
-				<img src="<?php echo esc_url( $assets_uri . '/img-services/maintext.png' ); ?>" alt="Nâng cơ trẻ hóa bằng sợi sinh học GMISS" fetchpriority="high" width="1058" height="110">
+				<img src="<?php echo esc_url( $maintext_url ); ?>" alt="Nâng cơ trẻ hóa bằng sợi sinh học GMISS" fetchpriority="high" width="1058" height="110">
 			</div>
 
 			<div class="cy-fig ph cy-hide-mb cy-model-col cy-model-left" data-ph="Mẫu 1 · 580×850" style="--x:0;--y:188;--w:580;--h:850;--o:0">
@@ -71,7 +75,7 @@ $journey_desc  = ! empty( $custom_j_desc ) ? $custom_j_desc : sprintf( 'Mỗi h�
 			</div>
 
 			<div class="cy-fig ph" data-ph="Subtext 1 · 735×183" style="--x:592;--y:263;--w:735;--h:183;--o:2">
-				<img src="<?php echo esc_url( $assets_uri . '/img-services/subtext.png' ); ?>" alt="Nâng đỡ đường nét – Tôn vinh vẻ đẹp tự nhiên" width="735" height="183" loading="lazy" decoding="async">
+				<img src="<?php echo esc_url( $subtext_url ); ?>" alt="Nâng đỡ đường nét – Tôn vinh vẻ đẹp tự nhiên" width="735" height="183" loading="lazy" decoding="async">
 			</div>
 
 			<div class="cy-text" style="--x:617;--y:468;--w:685;--o:3">
@@ -79,15 +83,15 @@ $journey_desc  = ! empty( $custom_j_desc ) ? $custom_j_desc : sprintf( 'Mỗi h�
 			</div>
 
 			<div class="cy-fig ph" data-ph="NÂNG ĐỠ MÔ MỀM – CẢI THIỆN TÌNH TRẠNG SA TRỄ · 1101×267" style="--x:409;--y:857;--w:1101;--h:267;--o:4">
-				<img src="<?php echo esc_url( $assets_uri . '/img-services/benefit-01.png' ); ?>" alt="Nâng đỡ mô mềm – cải thiện tình trạng sa trễ" width="1101" height="267" loading="lazy" decoding="async">
+				<img src="<?php echo esc_url( $benefit_1_url ); ?>" alt="Nâng đỡ mô mềm – cải thiện tình trạng sa trễ" width="1101" height="267" loading="lazy" decoding="async">
 			</div>
 
 			<div class="cy-fig ph" data-ph="HỖ TRỢ CẢI THIỆN ĐỘ SĂN CHẮC CỦA DA · 1101×267" style="--x:409;--y:1146;--w:1101;--h:267;--o:5">
-				<img src="<?php echo esc_url( $assets_uri . '/img-services/benefit-02.png' ); ?>" alt="Hỗ trợ cải thiện độ săn chắc của da" width="1101" height="267" loading="lazy" decoding="async">
+				<img src="<?php echo esc_url( $benefit_2_url ); ?>" alt="Hỗ trợ cải thiện độ săn chắc của da" width="1101" height="267" loading="lazy" decoding="async">
 			</div>
 
 			<div class="cy-fig ph" data-ph="CÁ NHÂN HÓA GIẢI PHÁP TRẺ HÓA · 1101×267" style="--x:409;--y:1435;--w:1101;--h:267;--o:6">
-				<img src="<?php echo esc_url( $assets_uri . '/img-services/benefit-03.png' ); ?>" alt="Cá nhân hóa giải pháp trẻ hóa" width="1101" height="267" loading="lazy" decoding="async">
+				<img src="<?php echo esc_url( $benefit_3_url ); ?>" alt="Cá nhân hóa giải pháp trẻ hóa" width="1101" height="267" loading="lazy" decoding="async">
 			</div>
 		</div>
 	</section>
@@ -98,11 +102,11 @@ $journey_desc  = ! empty( $custom_j_desc ) ? $custom_j_desc : sprintf( 'Mỗi h�
 			<h2 id="cy-process-title" class="screen-reader-text"><?php esc_html_e( 'Quy trình nâng cơ trẻ hóa bằng sợi sinh học GMISS', 'mediora-clinic' ); ?></h2>
 			
 			<div class="cy-fig ph cy-bg" data-ph="BG3 m2 · 1920×1458" style="--x:0;--y:0;--w:1920;--h:1458;--o:0">
-				<img src="<?php echo esc_url( $assets_uri . '/img-services/bg2.jpg' ); ?>" alt="" width="1920" height="1458" loading="lazy" decoding="async">
+				<img src="<?php echo esc_url( $bg_2_url ); ?>" alt="" width="1920" height="1458" loading="lazy" decoding="async">
 			</div>
 
 			<div class="cy-fig ph" data-ph="NÂNG CƠ TRẺ HÓA BẰNG SỢI SINH HỌC GMISS · 1216×253" style="--x:352;--y:65;--w:1216;--h:253;--o:1">
-				<img src="<?php echo esc_url( $assets_uri . '/img-services/process-title.png' ); ?>" alt="Quy trình nâng cơ trẻ hóa bằng sợi sinh học GMISS" width="1216" height="253" loading="lazy" decoding="async">
+				<img src="<?php echo esc_url( $process_tit_url ); ?>" alt="Quy trình nâng cơ trẻ hóa bằng sợi sinh học GMISS" width="1216" height="253" loading="lazy" decoding="async">
 			</div>
 
 			<div class="cy-fig ph cy-doctor" data-ph="podium BS · 722×881" style="--x:573;--y:409;--w:722;--h:881;--o:2">
@@ -141,11 +145,11 @@ $journey_desc  = ! empty( $custom_j_desc ) ? $custom_j_desc : sprintf( 'Mỗi h�
 			<h2 id="cy-journey-title" class="screen-reader-text"><?php esc_html_e( 'Mỗi khách hàng một hành trình trẻ hóa riêng', 'mediora-clinic' ); ?></h2>
 			
 			<div class="cy-fig ph cy-bg" data-ph="BG3 m3 · 1920×1000" style="--x:0;--y:38;--w:1920;--h:1000;--o:0">
-				<img src="<?php echo esc_url( $assets_uri . '/img-services/bg-journey.jpg' ); ?>" alt="" width="1920" height="1000" loading="eager" fetchpriority="high">
+				<img src="<?php echo esc_url( $bg_journey_url ); ?>" alt="" width="1920" height="1000" loading="eager" fetchpriority="high">
 			</div>
 
 			<div class="cy-fig ph cy-frame cy-hide-mb" data-ph="Frame line · 1732×997" style="--x:94;--y:0;--w:1732;--h:997;--o:0">
-				<img src="<?php echo esc_url( $assets_uri . '/img-services/frame-line.png' ); ?>" alt="" width="1732" height="997" loading="eager">
+				<img src="<?php echo esc_url( $frame_line_url ); ?>" alt="" width="1732" height="997" loading="eager">
 			</div>
 
 			<!-- Customer Transformation Slider -->
@@ -172,7 +176,7 @@ $journey_desc  = ! empty( $custom_j_desc ) ? $custom_j_desc : sprintf( 'Mỗi h�
 			</div>
 
 			<div class="cy-fig ph" data-ph="MỖI KHÁCH HÀNG MỘT HÀNH TRÌNH TRẺ HÓA RIÊNG · 511×292" style="--x:1136;--y:175;--w:511;--h:292;--o:1">
-				<img src="<?php echo esc_url( $assets_uri . '/img-services/journey-title.png' ); ?>" alt="Mỗi khách hàng – một hành trình trẻ hóa riêng" width="511" height="292" loading="lazy" decoding="async">
+				<img src="<?php echo esc_url( $journey_tit_url ); ?>" alt="Mỗi khách hàng – một hành trình trẻ hóa riêng" width="511" height="292" loading="lazy" decoding="async">
 			</div>
 
 			<div class="cy-text is-center is-white" style="--x:1131;--y:498;--w:522;--o:2">
@@ -182,7 +186,7 @@ $journey_desc  = ! empty( $custom_j_desc ) ? $custom_j_desc : sprintf( 'Mỗi h�
 			<span aria-hidden="true" class="cy-rule cy-hide-mb" style="--x:1259;--y:705;--w:266"></span>
 
 			<button class="cy-fig ph cy-btn-consult" data-bs-target="#popupConsult" data-bs-toggle="modal" data-ph="Nhận tư vấn ngay · 365×53" style="--x:1209;--y:755;--w:365;--h:53;--o:3" type="button">
-				<img src="<?php echo esc_url( $assets_uri . '/img-services/btn-consult.png' ); ?>" alt="<?php esc_attr_e( 'Nhận tư vấn ngay', 'mediora-clinic' ); ?>" width="365" height="53" loading="lazy">
+				<img src="<?php echo esc_url( $btn_consult_url ); ?>" alt="<?php esc_attr_e( 'Nhận tư vấn ngay', 'mediora-clinic' ); ?>" width="365" height="53" loading="lazy">
 			</button>
 		</div>
 	</section>

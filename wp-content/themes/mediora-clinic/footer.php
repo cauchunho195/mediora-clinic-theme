@@ -42,8 +42,11 @@ $social_mess   = mediora_get_option( 'social_messenger', 'https://m.me/pkcktmmed
 	<footer id="colophon" class="site-footer">
 		<div class="container-fluid footer-wrap">
 			<!-- Footer Logo -->
+			<?php
+			$footer_logo_url = function_exists( 'mediora_get_image' ) ? mediora_get_image( 'footer_logo', 'assets/imgs/logo-footer.svg' ) : get_template_directory_uri() . '/assets/imgs/logo-footer.svg';
+			?>
 			<a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="footer-logo" rel="home">
-				<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/imgs/logo-footer.svg' ); ?>" alt="<?php bloginfo( 'name' ); ?>" width="461" height="104" loading="lazy">
+				<img src="<?php echo esc_url( $footer_logo_url ); ?>" alt="<?php bloginfo( 'name' ); ?>" width="461" height="104" loading="lazy">
 			</a>
 
 			<div class="row footer-row">

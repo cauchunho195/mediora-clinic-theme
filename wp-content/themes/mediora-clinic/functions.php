@@ -11,7 +11,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 if ( ! defined( 'MEDIORA_VERSION' ) ) {
-	define( 'MEDIORA_VERSION', '1.4.0' );
+	define( 'MEDIORA_VERSION', '1.5.0' );
 }
 
 if ( ! defined( 'MEDIORA_DIR' ) ) {
@@ -168,6 +168,7 @@ require_once MEDIORA_DIR . '/inc/template-tags.php';
 require_once MEDIORA_DIR . '/inc/customizer.php';
 require_once MEDIORA_DIR . '/inc/post-types.php';
 require_once MEDIORA_DIR . '/inc/ajax-booking.php';
+require_once MEDIORA_DIR . '/inc/image-options.php';
 require_once MEDIORA_DIR . '/inc/meta-boxes.php';
 
 if ( ! function_exists( 'mediora_fallback_menu' ) ) {

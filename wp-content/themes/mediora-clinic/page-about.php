@@ -29,6 +29,20 @@ $vision_text   = ! empty( $custom_vision ) ? $custom_vision : sprintf( 'Trở th
 
 $custom_mission = get_post_meta( $page_id, '_mediora_about_mission', true );
 $mission_text   = ! empty( $custom_mission ) ? $custom_mission : sprintf( 'Mang đến các giải pháp thẩm mỹ và trẻ hóa được cá nhân hóa dựa trên tình trạng thực tế, đặc điểm riêng và nhu cầu của từng khách hàng. %s chú trọng quy trình thăm khám, đánh giá chuyên môn, tư vấn minh bạch và theo dõi sau dịch vụ, giúp khách hàng hiểu rõ lựa chọn, an tâm trong quá trình chăm sóc và hướng đến kết quả hài hòa, phù hợp với nét đẹp riêng.', esc_html( $clinic_name ) );
+
+// Hình ảnh động Về Chúng Tôi
+$bg_hero_url     = mediora_get_image( 'about_bg_hero', 'assets/img-about-us/bg-hero.jpg', $page_id );
+$text_hero_url   = mediora_get_image( 'about_text_hero', 'assets/img-about-us/text-hero.png', $page_id );
+$bg_vision_url   = mediora_get_image( 'about_bg_vision', 'assets/img-about-us/bg-vision.webp', $page_id );
+$minh_hoa_url    = mediora_get_image( 'about_minh_hoa', 'assets/img-about-us/minh-hoa.png', $page_id );
+$tam_nhin_url    = mediora_get_image( 'about_tam_nhin', 'assets/img-about-us/tam-nhin.png', $page_id );
+$su_menh_url     = mediora_get_image( 'about_su_menh', 'assets/img-about-us/su-menh.png', $page_id );
+$gt_cot_loi_url  = mediora_get_image( 'about_gia_tri_cot_loi', 'assets/img-about-us/gia-tri-cot-loi.png', $page_id );
+
+$value_urls = array();
+for ( $v = 1; $v <= 6; $v++ ) {
+	$value_urls[ $v ] = mediora_get_image( 'about_value_' . $v, 'assets/img-about-us/value-0' . $v . '.png', $page_id );
+}
 ?>
 
 <div class="subpage-content cy-page-about">
@@ -38,7 +52,7 @@ $mission_text   = ! empty( $custom_mission ) ? $custom_mission : sprintf( 'Mang 
 			<h1 id="cy-about-title" class="screen-reader-text"><?php esc_html_e( 'Về chúng tôi', 'mediora-clinic' ); ?></h1>
 			
 			<div class="cy-fig ph cy-bg" data-ph="BG2 m1 · 1920×840" style="--x:0;--y:0;--w:1920;--h:840;--o:0">
-				<img src="<?php echo esc_url( $assets_uri . '/img-about-us/bg-hero.jpg' ); ?>" 
+				<img src="<?php echo esc_url( $bg_hero_url ); ?>" 
 					alt="<?php echo esc_attr( $clinic_name ); ?>" 
 					width="1920" 
 					height="840" 
@@ -51,7 +65,7 @@ $mission_text   = ! empty( $custom_mission ) ? $custom_mission : sprintf( 'Mang 
 			</div>
 
 			<div class="cy-fig ph" data-ph="Text 2 · 1374×160" style="--x:273;--y:520;--w:1374;--h:160;--o:2">
-				<img src="<?php echo esc_url( $assets_uri . '/img-about-us/text-hero.png' ); ?>" 
+				<img src="<?php echo esc_url( $text_hero_url ); ?>" 
 					alt="Trẻ hóa tự nhiên – Chuẩn mực an toàn, tối ưu hiệu quả – Cá nhân hóa trong từng giải pháp" 
 					width="1374" 
 					height="160" 
@@ -67,7 +81,7 @@ $mission_text   = ! empty( $custom_mission ) ? $custom_mission : sprintf( 'Mang 
 			<h2 id="cy-vision-title" class="screen-reader-text"><?php esc_html_e( 'Tầm nhìn – Sứ mệnh và giá trị cốt lõi', 'mediora-clinic' ); ?></h2>
 			
 			<div class="cy-fig ph cy-bg" data-ph="BG2 m2 · 1920×2029" style="--x:0;--y:0;--w:1920;--h:2029;--o:0">
-				<img src="<?php echo esc_url( $assets_uri . '/img-about-us/bg-vision.webp' ); ?>" 
+				<img src="<?php echo esc_url( $bg_vision_url ); ?>" 
 					alt="" 
 					width="1920" 
 					height="2029" 
@@ -77,7 +91,7 @@ $mission_text   = ! empty( $custom_mission ) ? $custom_mission : sprintf( 'Mang 
 
 			<!-- Image Illustration -->
 			<div class="cy-fig ph" data-ph="Minh họa · 657×653" style="--x:70;--y:433;--w:657;--h:653;--o:1">
-				<img src="<?php echo esc_url( $assets_uri . '/img-about-us/minh-hoa.png' ); ?>" 
+				<img src="<?php echo esc_url( $minh_hoa_url ); ?>" 
 					alt="<?php echo esc_attr( $clinic_name ); ?> – cơ sở vật chất và thiết bị hiện đại" 
 					width="657" 
 					height="653" 
@@ -87,7 +101,7 @@ $mission_text   = ! empty( $custom_mission ) ? $custom_mission : sprintf( 'Mang 
 
 			<!-- Vision Badge & Text -->
 			<div class="cy-fig ph cy-badge" data-ph="Tầm nhìn · 249×55" style="--x:835;--y:491;--w:249;--h:55;--o:2">
-				<img src="<?php echo esc_url( $assets_uri . '/img-about-us/tam-nhin.png' ); ?>" 
+				<img src="<?php echo esc_url( $tam_nhin_url ); ?>" 
 					alt="<?php esc_attr_e( 'Tầm nhìn', 'mediora-clinic' ); ?>" 
 					width="249" 
 					height="55" 
@@ -100,7 +114,7 @@ $mission_text   = ! empty( $custom_mission ) ? $custom_mission : sprintf( 'Mang 
 
 			<!-- Mission Badge & Text -->
 			<div class="cy-fig ph cy-badge" data-ph="Sứ mệnh · 249×55" style="--x:835;--y:801;--w:249;--h:55;--o:4">
-				<img src="<?php echo esc_url( $assets_uri . '/img-about-us/su-menh.png' ); ?>" 
+				<img src="<?php echo esc_url( $su_menh_url ); ?>" 
 					alt="<?php esc_attr_e( 'Sứ mệnh', 'mediora-clinic' ); ?>" 
 					width="249" 
 					height="55" 
@@ -123,7 +137,7 @@ $mission_text   = ! empty( $custom_mission ) ? $custom_mission : sprintf( 'Mang 
 
 			<!-- Core Values Badge -->
 			<div class="cy-fig ph cy-badge" data-ph="Giá trị cốt lõi · 317×55" style="--x:801;--y:1145;--w:317;--h:55;--o:6">
-				<img src="<?php echo esc_url( $assets_uri . '/img-about-us/gia-tri-cot-loi.png' ); ?>" 
+				<img src="<?php echo esc_url( $gt_cot_loi_url ); ?>" 
 					alt="<?php esc_attr_e( 'Giá trị cốt lõi', 'mediora-clinic' ); ?>" 
 					width="317" 
 					height="55" 
@@ -133,7 +147,7 @@ $mission_text   = ! empty( $custom_mission ) ? $custom_mission : sprintf( 'Mang 
 
 			<!-- 6 Value Cards -->
 			<div class="cy-fig ph cy-value" data-ph="01 CHUẨN MỰC Y KHOA · 505×213" style="--x:153;--y:1283;--w:505;--h:213;--o:7">
-				<img src="<?php echo esc_url( $assets_uri . '/img-about-us/value-01.png' ); ?>" 
+				<img src="<?php echo esc_url( $value_urls[1] ); ?>" 
 					alt="Chuẩn mực y khoa – Mọi giải pháp bắt đầu từ thăm khám, đánh giá chuyên môn và chỉ định phù hợp." 
 					width="505" 
 					height="213" 
@@ -141,7 +155,7 @@ $mission_text   = ! empty( $custom_mission ) ? $custom_mission : sprintf( 'Mang 
 					decoding="async">
 			</div>
 			<div class="cy-fig ph cy-value" data-ph="02 CÁ NHÂN HÓA GIẢI PHÁP · 517×243" style="--x:701;--y:1283;--w:517;--h:243;--o:8">
-				<img src="<?php echo esc_url( $assets_uri . '/img-about-us/value-02.png' ); ?>" 
+				<img src="<?php echo esc_url( $value_urls[2] ); ?>" 
 					alt="Cá nhân hóa giải pháp – Thấu hiểu đặc điểm riêng, nhu cầu và tình trạng của từng khách hàng để xây dựng liệu trình phù hợp." 
 					width="517" 
 					height="243" 
@@ -149,7 +163,7 @@ $mission_text   = ! empty( $custom_mission ) ? $custom_mission : sprintf( 'Mang 
 					decoding="async">
 			</div>
 			<div class="cy-fig ph cy-value" data-ph="03 MINH BẠCH TRONG TƯ VẤN · 545×242" style="--x:1231;--y:1283;--w:545;--h:242;--o:9">
-				<img src="<?php echo esc_url( $assets_uri . '/img-about-us/value-03.png' ); ?>" 
+				<img src="<?php echo esc_url( $value_urls[3] ); ?>" 
 					alt="Minh bạch trong tư vấn – Thông tin rõ ràng về phương pháp, quy trình, kỳ vọng và các lưu ý liên quan đến dịch vụ." 
 					width="545" 
 					height="242" 
@@ -157,7 +171,7 @@ $mission_text   = ! empty( $custom_mission ) ? $custom_mission : sprintf( 'Mang 
 					decoding="async">
 			</div>
 			<div class="cy-fig ph cy-value" data-ph="04 AN TOÀN VÀ TRÁCH NHIỆM · 523×242" style="--x:153;--y:1600;--w:523;--h:242;--o:10">
-				<img src="<?php echo esc_url( $assets_uri . '/img-about-us/value-04.png' ); ?>" 
+				<img src="<?php echo esc_url( $value_urls[4] ); ?>" 
 					alt="An toàn & trách nhiệm – Đề cao kiểm soát rủi ro, tuân thủ quy trình chuyên môn và theo dõi trong suốt quá trình chăm sóc." 
 					width="523" 
 					height="242" 
@@ -165,7 +179,7 @@ $mission_text   = ! empty( $custom_mission ) ? $custom_mission : sprintf( 'Mang 
 					decoding="async">
 			</div>
 			<div class="cy-fig ph cy-value" data-ph="05 THẨM MỸ TINH TẾ · 505×243" style="--x:701;--y:1599;--w:505;--h:243;--o:11">
-				<img src="<?php echo esc_url( $assets_uri . '/img-about-us/value-05.png' ); ?>" 
+				<img src="<?php echo esc_url( $value_urls[5] ); ?>" 
 					alt="Thẩm mỹ tinh tế – Hướng đến vẻ đẹp hài hòa, tự nhiên, tôn trọng đường nét và nét riêng của mỗi người." 
 					width="505" 
 					height="243" 
@@ -173,7 +187,7 @@ $mission_text   = ! empty( $custom_mission ) ? $custom_mission : sprintf( 'Mang 
 					decoding="async">
 			</div>
 			<div class="cy-fig ph cy-value" data-ph="06 ĐỒNG HÀNH TẬN TÂM · 505×243" style="--x:1231;--y:1599;--w:505;--h:243;--o:12">
-				<img src="<?php echo esc_url( $assets_uri . '/img-about-us/value-06.png' ); ?>" 
+				<img src="<?php echo esc_url( $value_urls[6] ); ?>" 
 					alt="Đồng hành tận tâm – Chú trọng trải nghiệm khách hàng, theo dõi sau dịch vụ và đồng hành trong hành trình chăm sóc sắc đẹp." 
 					width="505" 
 					height="243" 
